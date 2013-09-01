@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style parent="@android:style/TextAppearance.Large" name="MyMenuStyle">
+        <item name="android:textColor">#FF00FF</item>
+        <item name="android:textSize">30sp</item>
+    	<item name="android:typeface">monospace</item>
+    </style>
+    
+    <style name="ColoremMaze">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">#FF11EE11</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clickable">false</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+     <style name="MenuFont">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableBottom">#FF555555</item>
+        
+    </style>
+    
+    <style name="ExitFont">  
+        <item name="android:textSize">45sp</item>
+        <item name="android:textColor">#FFAABBCC</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">right|center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="Version">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#BBEEEEEE</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clickable">false</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>
