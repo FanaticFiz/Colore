@@ -26,7 +26,7 @@ public class game_gameActivity extends Activity {
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(10);
         mGrid.setEnabled(true);
-        mAdapter = new game_gridadapter(this, 10, 20);
+        mAdapter = new game_gridadapter(this, 10, 10);
         mGrid.setAdapter(mAdapter);
 			
         
