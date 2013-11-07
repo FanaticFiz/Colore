@@ -34,9 +34,11 @@
         </activity>
         <activity
             android:name="com.example.test1.game_gameActivity"
-            android:label="@string/title_activity_game" 
+            android:label="@string/title_activity_game"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
+       
     </application>
 
 </manifest>
+

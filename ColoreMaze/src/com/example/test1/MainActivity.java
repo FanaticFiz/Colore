@@ -44,6 +44,8 @@ public class MainActivity extends Activity {
 		textStartGame3.setShadowLayer(8f,4f,4f,0xFF000000);
 		textStartGame4.setShadowLayer(8f,4f,4f,0xFF000000);
 		
+			
+		
 		// подключаем файл анимации для меню
 		menu_animation = AnimationUtils.loadAnimation(this, R.anim.menuanimation);
 	}
@@ -62,6 +64,8 @@ public class MainActivity extends Activity {
 		textStartGame.startAnimation(menu_animation);
 		Intent intentG = new Intent();
 		intentG.setClass(MainActivity.this, game_gameActivity.class);
+		// передаем в активность параметр уровня в виде названия файла 
+		//intentG.putExtra("FileXML", "level1.xml");
 		startActivity(intentG);
 	}
 	

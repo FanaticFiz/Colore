@@ -14,5 +14,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_typesof_game">TypesofGameActivity</string>
+    <string name="title_activity_tof_game">TofGameActivity</string>
 
 </resources>
