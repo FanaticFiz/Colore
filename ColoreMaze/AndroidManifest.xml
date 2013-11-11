@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name="com.example.test1.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.example.test1.AboutActivity"
@@ -37,8 +38,16 @@
             android:label="@string/title_activity_game"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
-       
+        <activity
+            android:name="com.example.test1.Type"
+            android:label="@string/title_activity_typeof_game" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.example.test1.Levels"
+            android:label="@string/title_activity_levels" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
     </application>
 
 </manifest>
-

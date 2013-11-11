@@ -12,9 +12,11 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Select level</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_typesof_game">TypesofGameActivity</string>
     <string name="title_activity_tof_game">TofGameActivity</string>
+    <string name="title_activity_typeof_game">TypeofGame</string>
+    <string name="title_activity_levels">Levels</string>
 
 </resources>

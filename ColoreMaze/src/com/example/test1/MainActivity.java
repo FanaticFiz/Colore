@@ -61,11 +61,12 @@ public class MainActivity extends Activity {
 
 	public void OnClickPlay(View v) 
 	{
+		// нимируем меню
 		textStartGame.startAnimation(menu_animation);
+		
+		// отсюда идем в окно выбора типа игры
 		Intent intentG = new Intent();
-		intentG.setClass(MainActivity.this, game_gameActivity.class);
-		// передаем в активность параметр уровня в виде названия файла 
-		//intentG.putExtra("FileXML", "level1.xml");
+		intentG.setClass(MainActivity.this, Type.class);
 		startActivity(intentG);
 	}
 	

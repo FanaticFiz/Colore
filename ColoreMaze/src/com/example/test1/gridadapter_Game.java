@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class game_gridadapter extends BaseAdapter 
+public class gridadapter_Game extends BaseAdapter 
 {
 	private Context mContext;
 	private Integer mCols, mRows;
@@ -18,7 +18,7 @@ public class game_gridadapter extends BaseAdapter
 	private Resources mRes; 		   		// Ресурсы приложени
 	
 	
-	public game_gridadapter(Context context, int cols, int rows) 
+	public gridadapter_Game(Context context, int cols, int rows) 
 	{
 		mContext = context;
 		mCols = cols;
