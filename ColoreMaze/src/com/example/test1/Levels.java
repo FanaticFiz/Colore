@@ -1,10 +1,7 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
-import org.xml.sax.Parser;
 import org.xmlpull.v1.XmlPullParser;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +33,10 @@ public class Levels extends Activity {
 	        	// Прыгаем в Игру
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
-	    		startActivity(intentG);	  
+	    		intentG.putExtra("FromLeveltogame", list);
+	    		startActivity(intentG);
+	    		
+	    		
 	        }
 	    });			
 	}
@@ -79,7 +79,8 @@ public class Levels extends Activity {
 		
 		// Получаем ID нужного файла исполльзуя название файла
 	    int XMLFileID = getResources().getIdentifier(Name_of_XML_file,"xml",getPackageName());
-			    
+		list.clear();
+		
         try 
         {
         XmlPullParser parser = getResources().getXml(XMLFileID);
@@ -100,7 +101,7 @@ public class Levels extends Activity {
         
         catch (Throwable t) 
         {
-            Toast.makeText(this,"Ошибка при загрузке XML-документа: " + t.toString(), 4000).show();
+            Toast.makeText(this,"Ошибка при загрузке XML-документа: " + t.toString(), Toast.LENGTH_SHORT).show();
         }
 	    // ------------------- Достаем из XML уровень -------------------------    
 	    

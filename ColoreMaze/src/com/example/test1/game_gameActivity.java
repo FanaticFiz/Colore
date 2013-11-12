@@ -1,5 +1,7 @@
 package com.example.test1;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -15,19 +17,22 @@ public class game_gameActivity extends Activity {
 	//private TextView mSelectText;
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
-		
+			
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-	
-	
+		
+		// Получаем массив из предыдущей активити 
+		ArrayList<String> arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
+				
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(10);
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, 10, 10);
+        mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);
 	
         // Обработчик нажатий
