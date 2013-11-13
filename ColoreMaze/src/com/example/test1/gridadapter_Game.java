@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -11,10 +12,8 @@ import android.widget.ImageView;
 public class gridadapter_Game extends BaseAdapter 
 {
 	private Context mContext;
-	private Integer mCols, mRows;
-
+	
 	private ArrayList<String> arrayPicture; // массив картинок
-	//private String PictureCollection; 		// Префикс набора картинок
 	private Resources mRes; 		   		// Ресурсы приложени
 	private int SizeArray;
 	
@@ -24,8 +23,7 @@ public class gridadapter_Game extends BaseAdapter
 				
 		arrayPicture = arrayfromXML;
 		SizeArray = arrayPicture.size();
-		// Пока определяем префикс так, позже он будет браться из настроек
-	    //PictureCollection = "ball";
+		
 	    // Получаем все ресурсы приложения
 	    mRes = mContext.getResources();
 	 
@@ -35,60 +33,58 @@ public class gridadapter_Game extends BaseAdapter
 	}
 
 	
-	private void makePictArray () 
+	private void makePictArray() 
 	{  	   
 	    // добавляем
 	    for (int i = 0; i<SizeArray; i++)
 	    {
 	    	int j = Integer.parseInt(arrayPicture.get(i));
 	    	// j это содержимае i ячейки массива
-	    	j++;
-	    	j--;
 	    	switch (j) 
 	    	{
 	    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
 			case 0:
-				arrayPicture.set(j, "ball0.png");	
+				arrayPicture.set(i, "ball0");
 				break;
 				
 			case 1:
-				arrayPicture.set(j, "ball10.png");	
+				arrayPicture.set(i, "ball10");	
 				break;
 				
 			case 2:
-				arrayPicture.set(j, "ball20.png");	
+				arrayPicture.set(i, "ball20");	
 				break;
 				
 			case 3:
-				arrayPicture.set(j, "ball30.png");	
+				arrayPicture.set(i, "ball30");	
 				break;
 
 			case 4:
-				arrayPicture.set(j, "ball40.png");	
+				arrayPicture.set(i, "ball40");	
 				break;
 				
 			case 5:
-				arrayPicture.set(j, "ball50.png");	
+				arrayPicture.set(i, "ball50");	
 				break;
 
 			case 6:
-				arrayPicture.set(j, "ball60.png");	
+				arrayPicture.set(i, "ball60");	
 				break;
 				
 			case 7:
-				arrayPicture.set(j, "ball70.png");	
+				arrayPicture.set(i, "ball70");	
 				break;
 
 			case 8:
-				arrayPicture.set(j, "ball80.png");	
+				arrayPicture.set(i, "ball80");	
 				break;
 				
 			case 9:
-				arrayPicture.set(j, "ball90.png");	
+				arrayPicture.set(i, "ball90");	
 				break;
 
 			default:
-				arrayPicture.set(j, "ball1.png");
+				arrayPicture.set(i, "ball1");
 				break;
 			}
 	    }
@@ -96,24 +92,11 @@ public class gridadapter_Game extends BaseAdapter
 	
 	
 	@Override
-	public int getCount() 
-	{
-		return mCols * mRows;
-	}
-
-	
+	public 	int 	getCount()				{	return arrayPicture.size();	}
 	@Override
-	public Object getItem(int position) 
-	{
-		return null;
-	}
-
-	
+	public 	Object 	getItem(int position) 	{	return null;				}
 	@Override
-	public long getItemId(int position) 
-	{
-		return 0;
-	}
+	public 	long 	getItemId(int position)	{	return 0;					}
 
 	
 	@Override
@@ -126,11 +109,12 @@ public class gridadapter_Game extends BaseAdapter
 		else
 			view = (ImageView) convertView;
 
+
 		// Получаем идентификатор ресурса для картинки,
 	    // которая находится в векторе arrayPicture на позиции position
 		Integer drawableId = mRes.getIdentifier(arrayPicture.get(position), "drawable", mContext.getPackageName());
 		view.setImageResource(drawableId);
-
+		
 		return view;
 	}
 }
