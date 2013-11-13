@@ -43,48 +43,76 @@ public class gridadapter_Game extends BaseAdapter
 	    	switch (j) 
 	    	{
 	    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
+	    	// На данный момент 
+	    	// 	0	-	белый 
+	    	// 	1 	-	Черный
+	    	//	2	-	Коричневый
+	    	// 	3	-	Серый 
+	    	// 	4 	-	красный	
+	    	//	5	-	зеленый
+	    	// 	6	-	синий 
+	    	// 	7 	-	Оранжевый	
+	    	//	8	-	Салатовый
+	    	// 	9	-	Голубой 
+	    	// 	10	-	Фиолетовый	
+	    	//	11	-	Желтый
+	    	// 	12	-	Розовый	
+	    	//		
+	    		
 			case 0:
 				arrayPicture.set(i, "ball0");
 				break;
 				
 			case 1:
-				arrayPicture.set(i, "ball10");	
+				arrayPicture.set(i, "ball1");	
 				break;
 				
 			case 2:
-				arrayPicture.set(i, "ball20");	
+				arrayPicture.set(i, "ball2");	
 				break;
 				
 			case 3:
-				arrayPicture.set(i, "ball30");	
+				arrayPicture.set(i, "ball3");	
 				break;
 
 			case 4:
-				arrayPicture.set(i, "ball40");	
+				arrayPicture.set(i, "ball4");	
 				break;
 				
 			case 5:
-				arrayPicture.set(i, "ball50");	
+				arrayPicture.set(i, "ball5");	
 				break;
 
 			case 6:
-				arrayPicture.set(i, "ball60");	
+				arrayPicture.set(i, "ball6");	
 				break;
 				
 			case 7:
-				arrayPicture.set(i, "ball70");	
+				arrayPicture.set(i, "ball7");	
 				break;
 
 			case 8:
-				arrayPicture.set(i, "ball80");	
+				arrayPicture.set(i, "ball8");	
 				break;
 				
 			case 9:
-				arrayPicture.set(i, "ball90");	
+				arrayPicture.set(i, "ball9");	
+				break;
+
+			case 10:
+				arrayPicture.set(i, "ball10");	
+				break;
+
+			case 11:
+				arrayPicture.set(i, "ball11");	
+				break;
+				
+			case 12:
+				arrayPicture.set(i, "ball12");	
 				break;
 
 			default:
-				arrayPicture.set(i, "ball1");
+				arrayPicture.set(i, "");
 				break;
 			}
 	    }
