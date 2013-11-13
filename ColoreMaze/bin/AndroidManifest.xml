@@ -20,33 +20,38 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.test1.SettingsActivity"
             android:label="@string/title_activity_settings" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"         >            
         </activity>
         <activity
             android:name="com.example.test1.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.example.test1.game_gameActivity"
             android:label="@string/title_activity_game"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.example.test1.Type"
             android:label="@string/title_activity_typeof_game" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.example.test1.Levels"
             android:label="@string/title_activity_levels" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
