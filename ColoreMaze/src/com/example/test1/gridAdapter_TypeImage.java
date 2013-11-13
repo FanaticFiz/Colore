@@ -21,7 +21,8 @@ public class gridAdapter_TypeImage extends BaseAdapter {
             imageView = new ImageView(mContext);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
-                    
+            
+            
         } else {
             imageView = (ImageView) convertView;
         }
