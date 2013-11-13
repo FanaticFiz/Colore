@@ -66,6 +66,54 @@ public class Levels extends Activity {
 			ParserXML(StringNP);			
 			break;
 
+		case 3:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 4:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 5:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 6:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 7:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 8:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 9:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
+		case 10:
+			i = NP+1;
+			StringNP = "level"+i;
+			ParserXML(StringNP);			
+			break;
+
 		default:
 			break;
 		}
