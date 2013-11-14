@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -17,14 +19,16 @@ public class game_gameActivity extends Activity {
 	//private TextView mSelectText;
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
-		
+	Animation animation;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-			
+		// подключаем файл анимации для меню
+	    animation = AnimationUtils.loadAnimation(this, R.anim.gamegridanim);
+				
 		// Получаем массив из предыдущей активити 
 		ArrayList<String> arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 				
@@ -43,6 +47,7 @@ public class game_gameActivity extends Activity {
             	{
                 // Do  
             	//mAdapter.getItemId(position);
+            	mGrid.getChildAt(position).setAnimation(animation);
             	
             	TextView someText = (TextView)findViewById(R.id.textView1);
                 someText.setText("ID: "+id+"  Position: "+position);
