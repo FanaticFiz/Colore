@@ -17,13 +17,14 @@ public class game_gameActivity extends Activity {
 	//private TextView mSelectText;
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
-			
+		
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
+			
 		// Получаем массив из предыдущей активити 
 		ArrayList<String> arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 				

@@ -1,7 +1,9 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
 import org.xmlpull.v1.XmlPullParser;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,8 +25,7 @@ public class Levels extends Activity {
 		
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
 	    gridview.setAdapter(new gridAdapter_LevelsImage(this));
-	     
-	    
+	       
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 

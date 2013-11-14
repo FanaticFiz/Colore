@@ -12,7 +12,6 @@ import android.widget.ImageView;
 public class gridadapter_Game extends BaseAdapter 
 {
 	private Context mContext;
-	
 	private ArrayList<String> arrayPicture; // массив картинок
 	private Resources mRes; 		   		// Ресурсы приложени
 	private int SizeArray;
@@ -20,7 +19,6 @@ public class gridadapter_Game extends BaseAdapter
 	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML) 
 	{
 		mContext = context;
-				
 		arrayPicture = arrayfromXML;
 		SizeArray = arrayPicture.size();
 		
@@ -112,7 +110,7 @@ public class gridadapter_Game extends BaseAdapter
 				break;
 
 			default:
-				arrayPicture.set(i, "");
+				arrayPicture.set(i, "ball13");
 				break;
 			}
 	    }
