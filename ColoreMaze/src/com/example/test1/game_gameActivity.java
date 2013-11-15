@@ -1,6 +1,8 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
+import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
@@ -16,6 +19,7 @@ public class game_gameActivity extends Activity {
 	private gridadapter_Game mAdapter;
 	private int p,LastMoov;
 	ArrayList<String> arrayfromlevel;
+	private String ColorBall;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,14 +103,70 @@ public class game_gameActivity extends Activity {
     	// 	10	-	Фиолетовый	
     	//	11	-	Желтый
     	// 	12	-	Розовый	
-		String Name_of_file = arrayfromlevel.get(position);
-		switch (Name_of_file) 
+		
+		String Name_of_file = arrayfromlevel.get(position).replaceAll("[^0-9]+", " ");
+		Name_of_file = Name_of_file.trim();
+		Integer ert = Integer.parseInt(Name_of_file);
+		
+		
+		TextView someText = (TextView)findViewById(R.id.textView1);
+		switch (ert) 
 		{
-		case "ball0":
-			
+		case 0:
+			ColorBall = "белый";
+			someText.setText("Цвет = "+ColorBall);
 			break;
-
+		case 1:
+			ColorBall = "черный";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 2:
+			ColorBall = "коричневый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 3:
+			ColorBall = "серый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 4:
+			ColorBall = "красный";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 5:
+			ColorBall = "зеленый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 6:
+			ColorBall = "синий";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 7:
+			ColorBall = "Оранжевый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 8:
+			ColorBall = "Салатовый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 9:
+			ColorBall = "Голубой";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 10:
+			ColorBall = "Фиолетовый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 11:
+			ColorBall = "Желтый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 12:
+			ColorBall = "Розовый";
+			someText.setText("Цвет = "+ColorBall);
+			break;
 		default:
+			ColorBall = "херня случилась )))";
+			someText.setText("Цвет = "+ColorBall);
 			break;
 		}
 		
