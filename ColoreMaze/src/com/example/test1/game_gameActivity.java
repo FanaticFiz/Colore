@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.TextView;
-
 
 public class game_gameActivity extends Activity {
 
@@ -17,6 +15,7 @@ public class game_gameActivity extends Activity {
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
 	private int p,LastMoov;
+	ArrayList<String> arrayfromlevel;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class game_gameActivity extends Activity {
 		p=0;LastMoov=0;
 		
 		// Получаем массив из предыдущей активити 
-		ArrayList<String> arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
+		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 				
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
@@ -42,7 +41,7 @@ public class game_gameActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
             		// 	Do
-            		game_move(position, v);
+            		game_move(parent, position, v);
         
             		//TextView someText = (TextView)findViewById(R.id.textView1);
                     //someText.setText("ID: "+id+"  Position: "+position);
@@ -53,36 +52,64 @@ public class game_gameActivity extends Activity {
 
 	
 	//
-	public void game_move(int position, View v) 
+	public void game_move(AdapterView<?> parent, int position, View v) 
 	{
 	
 		// здесь обрабатываем нажатие на элемент...
 		// нужно делать следующее: 
+		// сдесь же нужно определять конец игры который заключается в том что 
+		// игрок сумел нажать/встать на последнее поле
 		//
 		//-----------------------------------------------------------------------------------------------
 		// запоминаем только последнее нажатие, уменьшаем то что нажали и увеличиваем предыдущую картинку
 		if (p==0)		{	p++;	
 			//TextView someText = (TextView)findViewById(R.id.textView1);
 			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
-			mGrid.getChildAt(LastMoov).setScaleX((float) 1);
-	    	mGrid.getChildAt(LastMoov).setScaleY((float) 1);
+			parent.getChildAt(LastMoov).setScaleX((float) 1);
+			parent.getChildAt(LastMoov).setScaleY((float) 1);
 	    	LastMoov=position;
-	    	mGrid.getChildAt(position).setScaleX((float) 0.7);
-	    	mGrid.getChildAt(position).setScaleY((float) 0.7);	}
+	    	v.setScaleX((float) 0.7);
+	    	v.setScaleY((float) 0.7);	}
 		else			{	p--;	
 			//TextView someText = (TextView)findViewById(R.id.textView1);
 			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
-			mGrid.getChildAt(LastMoov).setScaleX((float) 1);
-	    	mGrid.getChildAt(LastMoov).setScaleY((float) 1);
+			parent.getChildAt(LastMoov).setScaleX((float) 1);
+	    	parent.getChildAt(LastMoov).setScaleY((float) 1);
 	    	LastMoov=position;
-	    	mGrid.getChildAt(position).setScaleX((float) 0.7);
-	    	mGrid.getChildAt(position).setScaleY((float) 0.7);	}
+	    	v.setScaleX((float) 0.7);
+	    	v.setScaleY((float) 0.7);	}
 		//-----------------------------------------------------------------------------------------------
 		
-		// и игровая логика в зависимости от цвета определять куда дальше можно нажать... 
-		// ведь у нас в игре нельзя беспорядочно жмякать по всем элементам а только по тем куда дальше можно сделать ход...
-		//
+	
+		// получаем имя файла ресурса по которому мы определим 
+		// какие следующие ходы возможны
+		// например с красной позиции ход возможен только на верх и вниз
+    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
+    	// На данный момент 
+    	// 	0	-	белый 
+    	// 	1 	-	Черный
+    	//	2	-	Коричневый
+    	// 	3	-	Серый 
+    	// 	4 	-	красный	
+    	//	5	-	зеленый
+    	// 	6	-	синий 
+    	// 	7 	-	Оранжевый	
+    	//	8	-	Салатовый
+    	// 	9	-	Голубой 
+    	// 	10	-	Фиолетовый	
+    	//	11	-	Желтый
+    	// 	12	-	Розовый	
+		String Name_of_file = arrayfromlevel.get(position);
+		switch (Name_of_file) 
+		{
+		case "ball0":
+			
+			break;
 
+		default:
+			break;
+		}
+		
 		
 	}
 		

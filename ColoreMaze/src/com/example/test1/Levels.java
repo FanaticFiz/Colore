@@ -23,6 +23,7 @@ public class Levels extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
 		
+		
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
 	    gridview.setAdapter(new gridAdapter_LevelsImage(this));
 	       
