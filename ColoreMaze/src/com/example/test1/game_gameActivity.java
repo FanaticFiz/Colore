@@ -1,13 +1,10 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -19,16 +16,15 @@ public class game_gameActivity extends Activity {
 	//private TextView mSelectText;
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
-	Animation animation;	
+	private int p,LastMoov;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		// подключаем файл анимации для меню
-	    animation = AnimationUtils.loadAnimation(this, R.anim.gamegridanim);
-				
+		p=0;LastMoov=0;
+		
 		// Получаем массив из предыдущей активити 
 		ArrayList<String> arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 				
@@ -45,18 +41,52 @@ public class game_gameActivity extends Activity {
         	{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
-                // Do  
-            	//mAdapter.getItemId(position);
-            	mGrid.getChildAt(position).setAnimation(animation);
-            	
-            	TextView someText = (TextView)findViewById(R.id.textView1);
-                someText.setText("ID: "+id+"  Position: "+position);
-            	            	
+            		// 	Do
+            		game_move(position, v);
+        
+            		//TextView someText = (TextView)findViewById(R.id.textView1);
+                    //someText.setText("ID: "+id+"  Position: "+position);
+                	
                 }
         	});
 	}
 
+	
+	//
+	public void game_move(int position, View v) 
+	{
+	
+		// здесь обрабатываем нажатие на элемент...
+		// нужно делать следующее: 
+		//
+		//-----------------------------------------------------------------------------------------------
+		// запоминаем только последнее нажатие, уменьшаем то что нажали и увеличиваем предыдущую картинку
+		if (p==0)		{	p++;	
+			//TextView someText = (TextView)findViewById(R.id.textView1);
+			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
+			mGrid.getChildAt(LastMoov).setScaleX((float) 1);
+	    	mGrid.getChildAt(LastMoov).setScaleY((float) 1);
+	    	LastMoov=position;
+	    	mGrid.getChildAt(position).setScaleX((float) 0.7);
+	    	mGrid.getChildAt(position).setScaleY((float) 0.7);	}
+		else			{	p--;	
+			//TextView someText = (TextView)findViewById(R.id.textView1);
+			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
+			mGrid.getChildAt(LastMoov).setScaleX((float) 1);
+	    	mGrid.getChildAt(LastMoov).setScaleY((float) 1);
+	    	LastMoov=position;
+	    	mGrid.getChildAt(position).setScaleX((float) 0.7);
+	    	mGrid.getChildAt(position).setScaleY((float) 0.7);	}
+		//-----------------------------------------------------------------------------------------------
 		
+		// и игровая логика в зависимости от цвета определять куда дальше можно нажать... 
+		// ведь у нас в игре нельзя беспорядочно жмякать по всем элементам а только по тем куда дальше можно сделать ход...
+		//
+
+		
+	}
+		
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
