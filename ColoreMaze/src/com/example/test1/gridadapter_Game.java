@@ -42,8 +42,8 @@ public class gridadapter_Game extends BaseAdapter
 	    	{
 	    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
 	    	// На данный момент 
-	    	// 	0	-	белый 
-	    	// 	1 	-	Черный
+	    	// 	0	-	белый 			-	Финиш
+	    	// 	1 	-	Черный			-	Старт
 	    	//	2	-	Коричневый
 	    	// 	3	-	Серый 
 	    	// 	4 	-	красный	
@@ -55,8 +55,10 @@ public class gridadapter_Game extends BaseAdapter
 	    	// 	10	-	Фиолетовый	
 	    	//	11	-	Желтый
 	    	// 	12	-	Розовый	
+	    	//	13	-	Прозрачный!!!
+	    	//	14 	-	лососевый )) 
 	    	//		
-	    		
+	    	
 			case 0:
 				arrayPicture.set(i, "ball0");
 				break;
@@ -108,7 +110,10 @@ public class gridadapter_Game extends BaseAdapter
 			case 12:
 				arrayPicture.set(i, "ball12");	
 				break;
-
+			case 14:
+				arrayPicture.set(i, "ball14");	
+				break;
+			
 			default:
 				arrayPicture.set(i, "ball13");
 				break;

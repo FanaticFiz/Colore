@@ -1,8 +1,6 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
-import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -14,12 +12,12 @@ import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
-	//private TextView mSelectText;
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
 	private int p,LastMoov;
-	ArrayList<String> arrayfromlevel;
-	private String ColorBall;
+	ArrayList<String> arrayfromlevel, array_legal_moovs;	// массив переданный из предыдущей активности содержит описание игрового поля / массив-список доступных ходов
+	private String ColorBall;		
+	TextView someText;    			//	поле для заметок внизу
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,10 @@ public class game_gameActivity extends Activity {
 		
 		// Получаем массив из предыдущей активити 
 		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
-				
+		
+		//Свяжемся со строкой текстовой на форме
+		someText = (TextView)findViewById(R.id.textView1);
+		
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
@@ -38,7 +39,17 @@ public class game_gameActivity extends Activity {
         mGrid.setEnabled(true);
         mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);
-	
+
+/*	
+        // Установим игрока на начальную позицию - Черную клетку!
+        for (int i=0; i< arrayfromlevel.size(); i++) 
+        {
+        	NumberFromName(arrayfromlevel.get(position));
+        	
+		}
+*/        
+
+        
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         	{
@@ -46,7 +57,7 @@ public class game_gameActivity extends Activity {
             	{
             		// 	Do
             		game_move(parent, position, v);
-        
+
             		//TextView someText = (TextView)findViewById(R.id.textView1);
                     //someText.setText("ID: "+id+"  Position: "+position);
                 	
@@ -87,11 +98,11 @@ public class game_gameActivity extends Activity {
 	
 		// получаем имя файла ресурса по которому мы определим 
 		// какие следующие ходы возможны
-		// например с красной позиции ход возможен только на верх и вниз
-    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
+		// например с красной позиции ход возможен только на верх и вправо
+    	// 
     	// На данный момент 
-    	// 	0	-	белый 
-    	// 	1 	-	Черный
+    	// 	0	-	белый 			-	Финиш
+    	// 	1 	-	Черный			- 	Старт
     	//	2	-	Коричневый
     	// 	3	-	Серый 
     	// 	4 	-	красный	
@@ -103,24 +114,25 @@ public class game_gameActivity extends Activity {
     	// 	10	-	Фиолетовый	
     	//	11	-	Желтый
     	// 	12	-	Розовый	
+		//	13	-	Прозрачный!!!
+		//	14	-	Лосось
 		
-		String Name_of_file = arrayfromlevel.get(position).replaceAll("[^0-9]+", " ");
-		Name_of_file = Name_of_file.trim();
-		Integer ert = Integer.parseInt(Name_of_file);
-		
-		
-		TextView someText = (TextView)findViewById(R.id.textView1);
+		// выдергиваем число из названия файла
+		Integer ert = NumberFromName(arrayfromlevel.get(position));
 		switch (ert) 
 		{
 		case 0:
-			ColorBall = "белый";
-			someText.setText("Цвет = "+ColorBall);
+			// Финиш
+			ColorBall = "Поздравляем, Вы выиграли!!!";
+			someText.setText("Цвет = "+ColorBall);				
 			break;
 		case 1:
-			ColorBall = "черный";
+			// Старт
+			ColorBall = "Пройдите до белой точки...";
 			someText.setText("Цвет = "+ColorBall);
 			break;
 		case 2:
+			
 			ColorBall = "коричневый";
 			someText.setText("Цвет = "+ColorBall);
 			break;
@@ -164,8 +176,17 @@ public class game_gameActivity extends Activity {
 			ColorBall = "Розовый";
 			someText.setText("Цвет = "+ColorBall);
 			break;
+		case 13:
+			ColorBall = "Ты зачем тут нажал? )))";
+			someText.setText("Цвет = "+ColorBall);
+			break;
+		case 14:
+			ColorBall = "лососевый ))";
+			someText.setText("Цвет = "+ColorBall);
+			break;			
+
 		default:
-			ColorBall = "херня случилась )))";
+			ColorBall = "Херня случилась )))";
 			someText.setText("Цвет = "+ColorBall);
 			break;
 		}
@@ -173,6 +194,14 @@ public class game_gameActivity extends Activity {
 		
 	}
 		
+	
+	public Integer NumberFromName(String name) 
+	{
+		name = name.replaceAll("[^0-9]+", " "); // Удаляем все символы кроме чисел
+		name = name.trim();						// убираем пробелы
+		return Integer.parseInt(name);			// возвращаем число
+	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
