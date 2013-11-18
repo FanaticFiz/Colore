@@ -15,9 +15,11 @@ public class game_gameActivity extends Activity {
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
 	private int p,LastMoov;
-	ArrayList<String> arrayfromlevel, array_legal_moovs;	// массив переданный из предыдущей активности содержит описание игрового поля / массив-список доступных ходов
+	ArrayList<String> arrayfromlevel;	// массив переданный из предыдущей активности содержит описание игрового поля / массив-список доступных ходов
+	int[] array_legal_moovs;
 	private String ColorBall;		
 	TextView someText;    			//	поле для заметок внизу
+	boolean firstTouch = true;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,12 +27,14 @@ public class game_gameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		
 		p=0;LastMoov=0;
+		array_legal_moovs = new int[3];
 		
 		// Получаем массив из предыдущей активити 
 		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 		
 		//Свяжемся со строкой текстовой на форме
 		someText = (TextView)findViewById(R.id.textView1);
+		someText.setText("Давайте начнем! Жмякните где нибуть...");
 		
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
@@ -40,160 +44,316 @@ public class game_gameActivity extends Activity {
         mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);
 
-/*	
-        // Установим игрока на начальную позицию - Черную клетку!
-        for (int i=0; i< arrayfromlevel.size(); i++) 
-        {
-        	NumberFromName(arrayfromlevel.get(position));
-        	
-		}
-*/        
-
-        
+              
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         	{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
-            		// 	Do
-            		game_move(parent, position, v);
-
-            		//TextView someText = (TextView)findViewById(R.id.textView1);
-                    //someText.setText("ID: "+id+"  Position: "+position);
-                	
+                 	
+            		// обрабатываю первое касание
+        			if (firstTouch) 
+        			{
+        				someText.setText("Цель: пройти от черного поля к белому");
+        				// 	При старте уровня находим в массиве черную-стартовую точку 
+        				// 	позиционируемся на ней и определяем следующие доступные ходы
+        				for (int i=0; i<arrayfromlevel.size(); i++) 
+        				{
+        					if (arrayfromlevel.get(i)=="ball1") 
+        					{
+        						parent.getChildAt(i).setScaleX((float) 0.7);
+        						parent.getChildAt(i).setScaleY((float) 0.7);
+        						// определяем доступные ходы
+        						array_legal_moovs[0] = i-1;
+        						array_legal_moovs[1] = i+1;
+        						array_legal_moovs[2] = i-10;
+        						//Legal_Moovs_Big_Picture(parent, array_legal_moovs);
+        					}
+        				}  
+        				firstTouch = false;
+        				LastMoov = position;
+        			}	else	
+        				{	
+        					game_move(parent, position, v);
+        				}                	
                 }
         	});
 	}
 
 	
 	//
-	public void game_move(AdapterView<?> parent, int position, View v) 
-	{
-	
-		// здесь обрабатываем нажатие на элемент...
-		// нужно делать следующее: 
-		// сдесь же нужно определять конец игры который заключается в том что 
-		// игрок сумел нажать/встать на последнее поле
-		//
-		//-----------------------------------------------------------------------------------------------
-		// запоминаем только последнее нажатие, уменьшаем то что нажали и увеличиваем предыдущую картинку
-		if (p==0)		{	p++;	
-			//TextView someText = (TextView)findViewById(R.id.textView1);
-			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
-			parent.getChildAt(LastMoov).setScaleX((float) 1);
-			parent.getChildAt(LastMoov).setScaleY((float) 1);
-	    	LastMoov=position;
-	    	v.setScaleX((float) 0.7);
-	    	v.setScaleY((float) 0.7);	}
-		else			{	p--;	
-			//TextView someText = (TextView)findViewById(R.id.textView1);
-			//someText.setText("Last moov is="+LastMoov+" Now you taped on"+position);
-			parent.getChildAt(LastMoov).setScaleX((float) 1);
-	    	parent.getChildAt(LastMoov).setScaleY((float) 1);
-	    	LastMoov=position;
-	    	v.setScaleX((float) 0.7);
-	    	v.setScaleY((float) 0.7);	}
-		//-----------------------------------------------------------------------------------------------
-		
-	
-		// получаем имя файла ресурса по которому мы определим 
-		// какие следующие ходы возможны
-		// например с красной позиции ход возможен только на верх и вправо
-    	// 
-    	// На данный момент 
-    	// 	0	-	белый 			-	Финиш
-    	// 	1 	-	Черный			- 	Старт
-    	//	2	-	Коричневый
-    	// 	3	-	Серый 
-    	// 	4 	-	красный	
-    	//	5	-	зеленый
-    	// 	6	-	синий 
-    	// 	7 	-	Оранжевый	
-    	//	8	-	Салатовый
-    	// 	9	-	Голубой 
-    	// 	10	-	Фиолетовый	
-    	//	11	-	Желтый
-    	// 	12	-	Розовый	
-		//	13	-	Прозрачный!!!
-		//	14	-	Лосось
-		
-		// выдергиваем число из названия файла
-		Integer ert = NumberFromName(arrayfromlevel.get(position));
-		switch (ert) 
-		{
-		case 0:
-			// Финиш
-			ColorBall = "Поздравляем, Вы выиграли!!!";
-			someText.setText("Цвет = "+ColorBall);				
-			break;
-		case 1:
-			// Старт
-			ColorBall = "Пройдите до белой точки...";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 2:
-			
-			ColorBall = "коричневый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 3:
-			ColorBall = "серый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 4:
-			ColorBall = "красный";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 5:
-			ColorBall = "зеленый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 6:
-			ColorBall = "синий";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 7:
-			ColorBall = "Оранжевый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 8:
-			ColorBall = "Салатовый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 9:
-			ColorBall = "Голубой";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 10:
-			ColorBall = "Фиолетовый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 11:
-			ColorBall = "Желтый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 12:
-			ColorBall = "Розовый";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 13:
-			ColorBall = "Ты зачем тут нажал? )))";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		case 14:
-			ColorBall = "лососевый ))";
-			someText.setText("Цвет = "+ColorBall);
-			break;			
+	public void game_move(AdapterView<?> parent, int position, View v) {
 
-		default:
-			ColorBall = "Херня случилась )))";
-			someText.setText("Цвет = "+ColorBall);
-			break;
-		}
-		
-		
+		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)) 
+		{
+
+			// -----------------------------------------------------------------------------------------------
+			// запоминаем только последнее нажатие, уменьшаем то что нажали и
+			// увеличиваем предыдущую картинку
+			if (p == 0) {	p++;
+				parent.getChildAt(LastMoov).setScaleX((float) 1);
+				parent.getChildAt(LastMoov).setScaleY((float) 1);
+				LastMoov = position;
+				v.setScaleX((float) 0.7);
+				v.setScaleY((float) 0.7);
+			} else		 {	p--;
+				parent.getChildAt(LastMoov).setScaleX((float) 1);
+				parent.getChildAt(LastMoov).setScaleY((float) 1);
+				LastMoov = position;
+				v.setScaleX((float) 0.7);
+				v.setScaleY((float) 0.7);
+			}
+			// -----------------------------------------------------------------------------------------------
+
+			// получаем имя файла ресурса по которому мы определим
+			// какие следующие ходы возможны
+			// например с красной позиции ход возможен только на верх и вправо
+			//
+			// На данный момент
+			// 0 - белый - Финиш
+			// 1 - Черный - Старт
+			// 2 - Коричневый - влево, вправо
+			// 3 - Серый - вверх
+			// 4 - красный - вверх, вправо
+			// 5 - зеленый - вправо, вниз
+			// 6 - синий - вниз, влево
+			// 7 - Оранжевый - вверх, вниз
+			// 8 - Салатовый - вправо
+			// 9 - Голубой - влево
+			// 10 - Фиолетовый - вверх, вправо, вниз
+			// 11 - Желтый - влево, вверх
+			// 12 - Розовый - вверх, вниз, влево
+			// 13 - Прозрачный!!! -
+			// 14 - Лосось - вниз
+
+			// выдергиваем число из названия файла
+			Integer ert = NumberFromName(arrayfromlevel.get(position));
+
+			switch (ert) {
+			case 0:
+				// Финиш
+				ColorBall = "Поздравляем, Вы выиграли!!!";
+				someText.setText("Цвет = " + ColorBall);
+				break;
+			case 1:
+				// Старт
+				ColorBall = "Пройдите до белой точки...";
+				someText.setText("Цвет = " + ColorBall);
+				array_legal_moovs[0] = position - 1; // заносим в массив
+				array_legal_moovs[1] = position + 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = position - 10; // ненужный элемент
+														// массива проставляем в
+														// 10000
+				break;
+			case 2:
+				ColorBall = "коричневый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 1; // заносим в массив
+				array_legal_moovs[1] = position + 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+				break;
+			case 3:
+				ColorBall = "серый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
+												// ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 4:
+				ColorBall = "красный";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = position + 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 5:
+				ColorBall = "зеленый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position + 1; // заносим в массив
+				array_legal_moovs[1] = position + 10; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 6:
+				ColorBall = "синий";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position + 10; // заносим в массив
+				array_legal_moovs[1] = position - 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 7:
+				ColorBall = "Оранжевый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = position + 10; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 8:
+				ColorBall = "Салатовый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position + 1; // заносим в массив
+				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
+												// ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 9:
+				ColorBall = "Голубой";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 1; // заносим в массив
+				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
+												// ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 10:
+				ColorBall = "Фиолетовый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = position + 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = position + 10; // ненужный элемент
+														// массива проставляем в
+														// 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 11:
+				ColorBall = "Желтый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = position - 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 12:
+				ColorBall = "Розовый";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[1] = position - 1; // координаты клеток куда
+														// доступен ход.
+				array_legal_moovs[2] = position + 10; // ненужный элемент
+														// массива проставляем в
+														// 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+			case 13:
+				ColorBall = "Ты зачем тут нажал? )))";
+				someText.setText("Цвет = " + ColorBall);
+
+				break;
+			case 14:
+				ColorBall = "лососевый ))";
+				someText.setText("Цвет = " + ColorBall);
+				// Уменьшаем то что было увеличено
+				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
+				// Определяем куда можно пойти, заносим в массив
+				array_legal_moovs[0] = position + 10; // заносим в массив
+				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
+												// ход.
+				array_legal_moovs[2] = 10000; // ненужный элемент массива
+												// проставляем в 10000
+				// Увеличиваем
+				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
+				// посылаем массив на обработку
+
+				break;
+
+			default:
+				ColorBall = "Херня случилась )))";
+				someText.setText("Цвет = " + ColorBall);
+				break;
+			}
+
+		} else {	someText.setText("Вы можете делать ход только на разрешенные поля"); 	}
+
 	}
-		
 	
 	public Integer NumberFromName(String name) 
 	{
@@ -201,6 +361,35 @@ public class game_gameActivity extends Activity {
 		name = name.trim();						// убираем пробелы
 		return Integer.parseInt(name);			// возвращаем число
 	}
+	
+	/*
+	public void Legal_Moovs_Small_Picture(AdapterView<?> parent, int[] array_legal_moovs3)
+	{
+		for (int d=0; d<array_legal_moovs3.length; d++) 
+		{
+			if (array_legal_moovs3[d]<9999) 
+			{
+				parent.getChildAt(array_legal_moovs3[d]).setScaleX((float) 1);
+				parent.getChildAt(array_legal_moovs3[d]).setScaleY((float) 1);
+			}
+		}
+	}
+	
+	// 
+	//  
+	public void Legal_Moovs_Big_Picture(AdapterView<?> parent, int[] array_legal_moovs2)
+	{
+		for (int d=0; d<array_legal_moovs2.length; d++) 
+		{
+			if (array_legal_moovs2[d]<9999) 
+			{
+				parent.getChildAt(array_legal_moovs2[d]).setScaleX((float) 1.2);
+				parent.getChildAt(array_legal_moovs2[d]).setScaleY((float) 1.2);
+			}
+		}
+	}
+	*/
+	
 	
 	
 	@Override

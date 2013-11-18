@@ -64,7 +64,8 @@ public class gridadapter_Game extends BaseAdapter
 				break;
 				
 			case 1:
-				arrayPicture.set(i, "ball1");	
+				// черное стартовое поле
+				arrayPicture.set(i, "ball1");
 				break;
 				
 			case 2:
@@ -140,11 +141,11 @@ public class gridadapter_Game extends BaseAdapter
 		else
 			view = (ImageView) convertView;
 
-
 		// Получаем идентификатор ресурса для картинки,
 	    // которая находится в векторе arrayPicture на позиции position
 		Integer drawableId = mRes.getIdentifier(arrayPicture.get(position), "drawable", mContext.getPackageName());
 		view.setImageResource(drawableId);
+		//view.setPadding(4, 4, 4, 4);
 		
 		return view;
 	}
