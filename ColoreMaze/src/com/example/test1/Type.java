@@ -19,8 +19,7 @@ public class Type extends Activity {
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 	    gridview.setAdapter(new gridAdapter_TypeImage(this));
-	    
-	    	
+	    	    	
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
