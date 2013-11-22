@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,13 +19,19 @@ import android.widget.AdapterView.OnItemClickListener;
 public class Levels extends Activity {
 	
 	ArrayList<String> list = new ArrayList<String>();
+	private SoundPool soundPool;
+	private static int soundID1;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
 		
-		
+		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		//Загружаем звуки в память
+        soundID1 = soundPool.load(this, R.raw.btn1, 1);
+        
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
 	    gridview.setAdapter(new gridAdapter_LevelsImage(this));
 	       
@@ -31,6 +39,7 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
+	        	soundPool.play(soundID1, 1, 1, 1, 0, 1f);
 	        	ChoiseLevel(position);
 	        	// Прыгаем в Игру
 	        	Intent intentG = new Intent();
