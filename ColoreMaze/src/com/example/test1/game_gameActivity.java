@@ -27,7 +27,7 @@ public class game_gameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		
 		p=0;LastMoov=0;
-		array_legal_moovs = new int[3];
+		array_legal_moovs = new int[4];
 		
 		// Получаем массив из предыдущей активити 
 		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
@@ -63,11 +63,13 @@ public class game_gameActivity extends Activity {
         					{
         						parent.getChildAt(i).setScaleX((float) 0.7);
         						parent.getChildAt(i).setScaleY((float) 0.7);
-        						// определяем доступные ходы
+        						// определяем доступные ходы (со старта идем во всех 4 направлениях)
         						array_legal_moovs[0] = i-1;
         						array_legal_moovs[1] = i+1;
         						array_legal_moovs[2] = i-10;
-        						//Legal_Moovs_Big_Picture(parent, array_legal_moovs);
+        						array_legal_moovs[3] = i+10;
+        						// Убираем те что нельзя
+        						Cheking_legal_moovs();
         					}
         				}  
         				firstTouch = false;
@@ -84,7 +86,7 @@ public class game_gameActivity extends Activity {
 	//
 	public void game_move(AdapterView<?> parent, int position, View v) {
 
-		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)) 
+		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
 		{
 
 			// -----------------------------------------------------------------------------------------------
@@ -139,12 +141,17 @@ public class game_gameActivity extends Activity {
 				// Старт
 				ColorBall = "Пройдите до белой точки...";
 				someText.setText("Цвет = " + ColorBall);
+				// Со стартовой клетки возможен ход во всех неправлениях, потому что я буду менять положение стартовой клетки постоянно
+				// Сдесь мы в массив возможных ходов добвляем все варианты, а уже невозможность хода за пределы лабиринат
+				// надо осуществляеть в другом месте... А МОЖЕТ и не надо осуществлять вовсе, поскольку нажать на те поля все равно не получится...
+						
 				array_legal_moovs[0] = position - 1; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
-														// доступен ход.
-				array_legal_moovs[2] = position - 10; // ненужный элемент
-														// массива проставляем в
-														// 10000
+				array_legal_moovs[2] = position - 10;
+				array_legal_moovs[3] = position + 10; 
+				
+				Cheking_legal_moovs();
+				
 				break;
 			case 2:
 				ColorBall = "коричневый";
@@ -152,14 +159,11 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 1; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-														// доступен ход.
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
+				array_legal_moovs[0] = position - 1; 	// заносим в массив
+				array_legal_moovs[1] = position + 1; 	// координаты клеток куда доступен ход.
+				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
+				array_legal_moovs[3] = 10000;			// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 3:
 				ColorBall = "серый";
@@ -168,14 +172,11 @@ public class game_gameActivity extends Activity {
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - 10; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
+				array_legal_moovs[1] = 10000;	 // координаты клеток куда доступен
 												// ход.
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
+				array_legal_moovs[3] = 10000; 	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 4:
 				ColorBall = "красный";
@@ -187,11 +188,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 5:
 				ColorBall = "зеленый";
@@ -203,11 +201,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position + 10; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 6:
 				ColorBall = "синий";
@@ -219,11 +214,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 7:
 				ColorBall = "Оранжевый";
@@ -235,11 +227,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position + 10; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 8:
 				ColorBall = "Салатовый";
@@ -251,11 +240,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
 												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 9:
 				ColorBall = "Голубой";
@@ -267,11 +253,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
 												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 10:
 				ColorBall = "Фиолетовый";
@@ -283,12 +266,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = position + 10; // ненужный элемент
-														// массива проставляем в
-														// 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 11:
 				ColorBall = "Желтый";
@@ -300,11 +279,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 12:
 				ColorBall = "Розовый";
@@ -316,12 +292,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = position + 10; // ненужный элемент
-														// массива проставляем в
-														// 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 			case 13:
 				ColorBall = "Ты зачем тут нажал? )))";
@@ -338,11 +310,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
 												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
-												// проставляем в 10000
-				// Увеличиваем
-				// Legal_Moovs_Big_Picture(parent, array_legal_moovs); //
-				// посылаем массив на обработку
-
+				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				Cheking_legal_moovs();
 				break;
 
 			default:
@@ -351,7 +320,7 @@ public class game_gameActivity extends Activity {
 				break;
 			}
 
-		} else {	someText.setText("Вы можете делать ход только на разрешенные поля"); 	}
+		} else {	someText.setText("Этот ход недопустим..."); 	}
 
 	}
 	
@@ -360,6 +329,22 @@ public class game_gameActivity extends Activity {
 		name = name.replaceAll("[^0-9]+", " "); // Удаляем все символы кроме чисел
 		name = name.trim();						// убираем пробелы
 		return Integer.parseInt(name);			// возвращаем число
+	}
+	
+	
+	// функция которая убирает ходы из массива доступных ходов, на основании конца лабиринта или когда точки старта и финиши соприкасаются.
+	// эту проверку делать всегда после заполнения массива доступных ходов.
+	// т.е. из уже доступных ходов выкидывать те что противоречат правилам
+	public void Cheking_legal_moovs()
+	{
+		for (int i = 0; i < array_legal_moovs.length; i++) 
+		{
+			// Просматривая все возможные ходы мы выкидываем те которые находятся за рамками игрового массива
+			if ( (array_legal_moovs[i] <= arrayfromlevel.size()) & (array_legal_moovs[i] >= 0) )	
+			{									}			
+			else 
+			{	array_legal_moovs[i] = 10000;	} 
+		}
 	}
 	
 	/*

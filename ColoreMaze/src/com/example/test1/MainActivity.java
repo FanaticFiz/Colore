@@ -42,16 +42,16 @@ public class MainActivity extends Activity {
 			
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 		
-		
+		/*
 		// ****************************************************************************
 		// *************************** работаем со звуком  ****************************
 		// Стартуем сервис проигрования музыки.
 		Intent svc=  new Intent(this, MusicService.class);
 		startService(svc);
-		
+		*/
 		//Создаем soundPool. для коротких пуков
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-        soundID1 = soundPool.load(this, R.raw.btn1, 1);
+        soundID1 = soundPool.load(this, R.raw.btn2, 1);
         
         // Связываем кнопку громкости с приложением
      	this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
