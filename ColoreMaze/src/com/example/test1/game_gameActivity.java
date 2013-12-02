@@ -67,13 +67,13 @@ public class game_gameActivity extends Activity {
         						array_legal_moovs[0] = i-1;
         						array_legal_moovs[1] = i+1;
         						array_legal_moovs[2] = i-10;
-        						array_legal_moovs[3] = i+10;
+        						array_legal_moovs[3] = i+10;	
         						// Убираем те что нельзя
         						Cheking_legal_moovs();
+        						LastMoov = i;
         					}
         				}  
-        				firstTouch = false;
-        				LastMoov = position;
+        				firstTouch = false;        				
         			}	else	
         				{	
         					game_move(parent, position, v);
@@ -90,21 +90,12 @@ public class game_gameActivity extends Activity {
 		{
 
 			// -----------------------------------------------------------------------------------------------
-			// запоминаем только последнее нажатие, уменьшаем то что нажали и
-			// увеличиваем предыдущую картинку
-			if (p == 0) {	p++;
-				parent.getChildAt(LastMoov).setScaleX((float) 1);
-				parent.getChildAt(LastMoov).setScaleY((float) 1);
-				LastMoov = position;
-				v.setScaleX((float) 0.7);
-				v.setScaleY((float) 0.7);
-			} else		 {	p--;
-				parent.getChildAt(LastMoov).setScaleX((float) 1);
-				parent.getChildAt(LastMoov).setScaleY((float) 1);
-				LastMoov = position;
-				v.setScaleX((float) 0.7);
-				v.setScaleY((float) 0.7);
-			}
+			// уменьшаем то что нажали и увеличиваем предыдущую картинку
+			parent.getChildAt(LastMoov).setScaleX((float) 1);
+			parent.getChildAt(LastMoov).setScaleY((float) 1);
+			LastMoov = position;
+			v.setScaleX((float) 0.7);
+			v.setScaleY((float) 0.7);
 			// -----------------------------------------------------------------------------------------------
 
 			// получаем имя файла ресурса по которому мы определим
