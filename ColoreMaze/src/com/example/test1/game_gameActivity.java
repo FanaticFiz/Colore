@@ -14,7 +14,7 @@ public class game_gameActivity extends Activity {
 
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
-	private int p,LastMoov;
+	private int LastMoov;
 	ArrayList<String> arrayfromlevel;	// массив переданный из предыдущей активности содержит описание игрового поля / массив-список доступных ходов
 	int[] array_legal_moovs;
 	private String ColorBall;		
@@ -26,7 +26,7 @@ public class game_gameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		p=0;LastMoov=0;
+		LastMoov=0;
 		array_legal_moovs = new int[4];
 		
 		// Получаем массив из предыдущей активити 
