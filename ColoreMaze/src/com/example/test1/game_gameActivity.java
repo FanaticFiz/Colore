@@ -70,8 +70,8 @@ public class game_gameActivity extends Activity {
         						// определяем доступные ходы (со старта идем во всех 4 направлениях)
         						array_legal_moovs[0] = i-1;
         						array_legal_moovs[1] = i+1;
-        						array_legal_moovs[2] = i-10;
-        						array_legal_moovs[3] = i+10;	
+        						array_legal_moovs[2] = i-Size_of_array;
+        						array_legal_moovs[3] = i+Size_of_array;	
         						// Убираем те что нельзя
         						Cheking_legal_moovs();
         						LastMoov = i;
@@ -142,8 +142,8 @@ public class game_gameActivity extends Activity {
 						
 				array_legal_moovs[0] = position - 1; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = position - 10;
-				array_legal_moovs[3] = position + 10; 
+				array_legal_moovs[2] = position - Size_of_array;
+				array_legal_moovs[3] = position + Size_of_array; 
 				
 				Cheking_legal_moovs();
 				
@@ -166,7 +166,7 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
 				array_legal_moovs[1] = 10000;	 // координаты клеток куда доступен
 												// ход.
 				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
@@ -179,7 +179,7 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
@@ -193,7 +193,7 @@ public class game_gameActivity extends Activity {
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position + 1; // заносим в массив
-				array_legal_moovs[1] = position + 10; // координаты клеток куда
+				array_legal_moovs[1] = position + Size_of_array; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
@@ -205,7 +205,7 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 10; // заносим в массив
+				array_legal_moovs[0] = position + Size_of_array; // заносим в массив
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
@@ -218,8 +218,8 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
-				array_legal_moovs[1] = position + 10; // координаты клеток куда
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
+				array_legal_moovs[1] = position + Size_of_array; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
@@ -257,10 +257,10 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
 														// доступен ход.
-				array_legal_moovs[2] = position + 10; // ненужный элемент
+				array_legal_moovs[2] = position + Size_of_array; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
 				break;
@@ -270,7 +270,7 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
@@ -283,10 +283,10 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 10; // заносим в массив
+				array_legal_moovs[0] = position - Size_of_array; // заносим в массив
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
 														// доступен ход.
-				array_legal_moovs[2] = position + 10; // ненужный элемент
+				array_legal_moovs[2] = position + Size_of_array; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
 				break;
@@ -301,7 +301,7 @@ public class game_gameActivity extends Activity {
 				// Уменьшаем то что было увеличено
 				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 10; // заносим в массив
+				array_legal_moovs[0] = position + Size_of_array; // заносим в массив
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
 												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
