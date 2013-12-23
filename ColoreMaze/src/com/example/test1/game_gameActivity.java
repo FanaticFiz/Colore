@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -15,12 +16,12 @@ public class game_gameActivity extends Activity {
 	private GridView mGrid;
 	private gridadapter_Game mAdapter;
 	private int LastMoov;
-	ArrayList<String> arrayfromlevel;	// массив переданный из предыдущей активности содержит описание игрового поля / массив-список доступных ходов
-	int[] array_legal_moovs;
+	ArrayList<String> arrayfromlevel;	// массив переданный из предыдущей активности содержит описание игрового поля 
+	int[] array_legal_moovs;		//  массив-список доступных ходов
 	private String ColorBall;		
 	TextView someText;    			//	поле для заметок внизу
 	boolean firstTouch = true;
-	
+	byte Size_of_array;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class game_gameActivity extends Activity {
 		
 		// Получаем массив из предыдущей активити 
 		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
+		Size_of_array = (byte) arrayfromlevel.size();
+		Size_of_array = (byte) Math.sqrt(Size_of_array);
 		
 		//Свяжемся со строкой текстовой на форме
 		someText = (TextView)findViewById(R.id.textView1);
@@ -40,7 +43,7 @@ public class game_gameActivity extends Activity {
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
-        mGrid.setNumColumns(10);
+        mGrid.setNumColumns(Size_of_array);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
         mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);

@@ -1,13 +1,11 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 public class gridadapter_Game extends BaseAdapter 
 {
