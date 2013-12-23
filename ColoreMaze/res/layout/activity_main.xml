@@ -65,7 +65,7 @@
     <TextView
         android:id="@+id/textView11"
         style="@style/Version"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/linearLayout1"
         android:layout_alignParentBottom="true"
@@ -75,7 +75,8 @@
     <TextView
         android:id="@+id/textView2"
         style="@style/ColoremMaze"
-        android:layout_width="match_parent"
+        
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

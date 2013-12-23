@@ -27,7 +27,7 @@ public class Levels extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
-		
+				
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
         soundID1 = soundPool.load(this, R.raw.btn1, 1);

@@ -134,12 +134,12 @@ public class gridadapter_Game extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-		ImageView view; // для вывода картинки
+		SquareImageView view; // для вывода картинки
 
 		if (convertView == null)
-			view = new ImageView(mContext);
+			view = new SquareImageView(mContext);
 		else
-			view = (ImageView) convertView;
+			view = (SquareImageView) convertView;
 
 		// Получаем идентификатор ресурса для картинки,
 	    // которая находится в векторе arrayPicture на позиции position

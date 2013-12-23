@@ -122,7 +122,7 @@ public class MainActivity extends Activity {
 		soundPool.play(soundID1, volume, volume, 1, 0, 1f);		
 		// отсюда идем в окно выбора типа игры
 		Intent intentG = new Intent();
-		intentG.setClass(MainActivity.this, Type.class);
+		intentG.setClass(MainActivity.this, Levels.class);
 		startActivity(intentG);
 	}	
 	public void OnClickSettings(View v) 

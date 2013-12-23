@@ -21,6 +21,7 @@ public class game_gameActivity extends Activity {
 	TextView someText;    			//	поле для заметок внизу
 	boolean firstTouch = true;
 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -338,36 +339,7 @@ public class game_gameActivity extends Activity {
 		}
 	}
 	
-	/*
-	public void Legal_Moovs_Small_Picture(AdapterView<?> parent, int[] array_legal_moovs3)
-	{
-		for (int d=0; d<array_legal_moovs3.length; d++) 
-		{
-			if (array_legal_moovs3[d]<9999) 
-			{
-				parent.getChildAt(array_legal_moovs3[d]).setScaleX((float) 1);
-				parent.getChildAt(array_legal_moovs3[d]).setScaleY((float) 1);
-			}
-		}
-	}
-	
-	// 
-	//  
-	public void Legal_Moovs_Big_Picture(AdapterView<?> parent, int[] array_legal_moovs2)
-	{
-		for (int d=0; d<array_legal_moovs2.length; d++) 
-		{
-			if (array_legal_moovs2[d]<9999) 
-			{
-				parent.getChildAt(array_legal_moovs2[d]).setScaleX((float) 1.2);
-				parent.getChildAt(array_legal_moovs2[d]).setScaleY((float) 1.2);
-			}
-		}
-	}
-	*/
-	
-	
-	
+		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
