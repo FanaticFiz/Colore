@@ -56,7 +56,7 @@ public class gridadapter_Game extends BaseAdapter
 	    	//	13	-	ѕрозрачный!!!
 	    	//	14 	-	лососевый )) 
 	    	//		
-	    	
+	    	/*
 			case 0:
 				arrayPicture.set(i, "ball0");
 				break;
@@ -112,7 +112,64 @@ public class gridadapter_Game extends BaseAdapter
 			case 14:
 				arrayPicture.set(i, "ball14");	
 				break;
-			
+			*/
+			case 0:
+				arrayPicture.set(i, "ball92");
+				break;
+				
+			case 1:
+				// черное стартовое поле
+				arrayPicture.set(i, "ball92");
+				break;
+				
+			case 2:
+				arrayPicture.set(i, "ball52");	
+				break;
+				
+			case 3:
+				arrayPicture.set(i, "ball92");	
+				break;
+
+			case 4:
+				arrayPicture.set(i, "ball52");	
+				break;
+				
+			case 5:
+				arrayPicture.set(i, "ball52");	
+				break;
+
+			case 6:
+				arrayPicture.set(i, "ball52");	
+				break;
+				
+			case 7:
+				arrayPicture.set(i, "ball52");	
+				break;
+
+			case 8:
+				arrayPicture.set(i, "ball92");	
+				break;
+				
+			case 9:
+				arrayPicture.set(i, "ball92");	
+				break;
+
+			case 10:
+				arrayPicture.set(i, "ball92");	
+				break;
+
+			case 11:
+				arrayPicture.set(i, "ball92");	
+				break;
+				
+			case 12:
+				arrayPicture.set(i, "ball92");	
+				break;
+			case 14:
+				arrayPicture.set(i, "ball92");	
+				break;
+				
+				
 			default:
 				arrayPicture.set(i, "ball13");
 				break;

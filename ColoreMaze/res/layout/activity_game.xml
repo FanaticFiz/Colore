@@ -3,15 +3,15 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="100" 
-    android:background="@drawable/menu_bg">
+    android:background="#FFEEEEEE">
 
     <GridView
         android:id="@+id/field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="95"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp" 
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp" 
         android:scrollbars="none"
         android:padding="5dp"
         >
