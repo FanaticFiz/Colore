@@ -38,7 +38,7 @@ public class game_gameActivity extends Activity {
 		
 		//—в€жемс€ со строкой текстовой на форме
 		someText = (TextView)findViewById(R.id.textView1);
-		someText.setText("ƒавайте начнем! ∆м€кните где нибуть...");
+		someText.setText("÷ель: пройти от черного пол€ к белому");
 		
 		////**************************************************
 		// ѕрив€зываемс€ к грид на форме, стандартный грид нам не подходит, используем свой собственный 
@@ -47,47 +47,52 @@ public class game_gameActivity extends Activity {
         mGrid.setEnabled(true);
         mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);
-
-              
+        
+        mGrid.getChildAt(0).setScaleX((float) 0.7);
+        
+        // Ќаходим стартовую точку
+        Find_Start_Point();     
+        //someText.setText("ƒоступные ходы: "+array_legal_moovs[0]+","+array_legal_moovs[1]+","+array_legal_moovs[2]+","+array_legal_moovs[3]+"!");        
+        
         // ќбработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         	{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
-                 	
-            		// обрабатываю первое касание
-        			if (firstTouch) 
-        			{
-        				someText.setText("÷ель: пройти от черного пол€ к белому");
-        				// 	ѕри старте уровн€ находим в массиве черную-стартовую точку 
-        				// 	позиционируемс€ на ней и определ€ем следующие доступные ходы
-        				for (int i=0; i<arrayfromlevel.size(); i++) 
-        				{
-        					if (arrayfromlevel.get(i)=="ball1") 
-        					{
-        						parent.getChildAt(i).setScaleX((float) 0.7);
-        						parent.getChildAt(i).setScaleY((float) 0.7);
-        						// определ€ем доступные ходы (со старта идем во всех 4 направлени€х)
-        						array_legal_moovs[0] = i-1;
-        						array_legal_moovs[1] = i+1;
-        						array_legal_moovs[2] = i-Sqrt_from_arraysize;
-        						array_legal_moovs[3] = i+Sqrt_from_arraysize;	
-        						// ”бираем те что нельз€
-        						Cheking_legal_moovs();
-        						LastMoov = i;
-        					}
-        				}  
-        				firstTouch = false;        				
-        			}	else	
-        				{	
-        					game_move(parent, position, v);
-        				}                	
-                }
+                 	game_move(parent, position, v);
+                 	someText.setText("ƒоступные ходы: "+array_legal_moovs[0]+","+array_legal_moovs[1]+","+array_legal_moovs[2]+","+array_legal_moovs[3]+"!");
+        		}                	
+             
         	});
+        
 	}
 
+	// 	ѕри старте уровн€ находим в массиве черную-стартовую точку 
+	// 	позиционируемс€ на ней и определ€ем следующие доступные ходы
+	public void Find_Start_Point() 
+	{
+		for (int i=0; i<arrayfromlevel.size(); i++) 
+		{
+			if (arrayfromlevel.get(i)=="ball1") 
+			{
+				//
+				//mGrid.getChildAt(i).setScaleX((float) 0.7);
+				//mGrid.getChildAt(i).setScaleY((float) 0.7);
+				// определ€ем доступные ходы (со старта идем во всех 4 направлени€х)
+				array_legal_moovs[0] = i-1;
+				array_legal_moovs[1] = i+1;
+				array_legal_moovs[2] = i-Sqrt_from_arraysize;
+				array_legal_moovs[3] = i+Sqrt_from_arraysize;	
+				// 	”бираем те что нельз€
+				Cheking_legal_moovs();
+				LastMoov = i;
+			}
+		}  
+	}
 	
-	//
+	
+	
+	// ќпредел€ем дейсвти€ при ходе...
 	public void game_move(AdapterView<?> parent, int position, View v) {
 
 		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
