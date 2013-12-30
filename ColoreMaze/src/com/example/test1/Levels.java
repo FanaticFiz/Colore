@@ -8,11 +8,15 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -21,13 +25,20 @@ public class Levels extends Activity {
 	ArrayList<String> list = new ArrayList<String>();
 	private SoundPool soundPool;
 	private static int soundID1;
-	
+	//private Context mContext;
+	//private Resources mRes;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
-				
+		
+		
+		//RelativeLayout RelLayout = (RelativeLayout)findViewById(R.id.linearLayout1);
+		//int dfg = R.drawable.hexellence;
+		
+		
+		
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
         soundID1 = soundPool.load(this, R.raw.btn1, 1);
@@ -39,6 +50,7 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
+	        	
 	        	soundPool.play(soundID1, 1, 1, 1, 0, 1f);
 	        	ChoiseLevel(position);
 	        	// Прыгаем в Игру
@@ -46,7 +58,6 @@ public class Levels extends Activity {
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
 	    		startActivity(intentG);
-	    		
 	    		
 	        }
 	    });			

@@ -1,22 +1,33 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
  
+
+
+
+
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
+	private Context 			mContext;
 	private GridView 			mGrid;
 	private Dialog				dialog_end_of_game;	
 	private gridadapter_Game 	mAdapter;
@@ -28,10 +39,14 @@ public class game_gameActivity extends Activity {
 	boolean 					firstTouch = true;
 	byte 						Sqrt_from_arraysize;
 	
+	
+	int randomBG;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+		
 		
 		LastMoov=0;Moovs_counter=0;
 		array_legal_moovs = new int[4];
@@ -40,6 +55,7 @@ public class game_gameActivity extends Activity {
 		arrayfromlevel =  getIntent().getExtras().getStringArrayList("FromLeveltogame");
 		Sqrt_from_arraysize = (byte) Math.sqrt(arrayfromlevel.size()); //выясняем сколько столбцов в массиве
 
+		RandomBackground();
 		
 		//Свяжемся со строкой текстовой на форме
 		someText = (TextView)findViewById(R.id.textView1);
@@ -76,7 +92,7 @@ public class game_gameActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
                  	game_move(parent, position, v);
-                 	someText.setText("Кол-во ходов: "+Moovs_counter);
+                 	someText.setText("BG="+randomBG+"  Кол-во ходов: "+Moovs_counter);
         		}                	
              
         	});
@@ -379,7 +395,19 @@ public class game_gameActivity extends Activity {
 			{	array_legal_moovs[i] = 10000;	} 
 		}
 	}
-	
+
+	private void RandomBackground() 
+	{
+		LinearLayout LinLayout = (LinearLayout) findViewById(R.id.LinearLayout_of_Game);
+		
+				
+		randomBG = (int) (Math.random()*9);
+		String stringBG = "bgstyle"+randomBG;
+		
+		Resources mRes = this.getResources();
+		Integer identifierID = mRes.getIdentifier(stringBG, "drawable", this.getPackageName());
+		LinLayout.setBackgroundResource(identifierID);
+	}
 	
 	
 	private void ShowGameOver() {
