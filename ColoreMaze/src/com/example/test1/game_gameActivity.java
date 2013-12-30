@@ -390,7 +390,7 @@ public class game_gameActivity extends Activity {
 	    // Заголовок и текст
 	    alertbox.setTitle("Поздравляем!");
 	    
-	    String TextToast = "Кол-во ходов: "+ Moovs_counter+"nВремя прохождения: ";
+	    String TextToast = "Кол-во ходов: "+ Moovs_counter;
 	    alertbox.setMessage(TextToast);
 	 
 	    // Добавляем кнопку 
