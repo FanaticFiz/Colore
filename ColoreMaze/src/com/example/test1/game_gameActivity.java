@@ -1,9 +1,13 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
+import java.util.Timer;
+ 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,22 +17,23 @@ import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
-	private GridView mGrid;
-	private gridadapter_Game mAdapter;
-	private int LastMoov;
-	ArrayList<String> arrayfromlevel;	// массив переданный из предыдущей активности содержит описание игрового поля 
-	int[] array_legal_moovs;		//  массив-список доступных ходов
-	private String ColorBall;		
-	TextView someText;    			//	поле для заметок внизу
-	boolean firstTouch = true;
-	byte Sqrt_from_arraysize;
+	private GridView 			mGrid;
+	private Dialog				dialog_end_of_game;	
+	private gridadapter_Game 	mAdapter;
+	private int 				LastMoov,Moovs_counter;
+	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
+	int[] 						array_legal_moovs;		//  массив-список доступных ходов
+	private String 				ColorBall;		
+	TextView 					someText;    			//	поле для заметок внизу
+	boolean 					firstTouch = true;
+	byte 						Sqrt_from_arraysize;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		LastMoov=0;
+		LastMoov=0;Moovs_counter=0;
 		array_legal_moovs = new int[4];
 		
 		// Получаем массив из предыдущей активити 
@@ -40,6 +45,18 @@ public class game_gameActivity extends Activity {
 		someText = (TextView)findViewById(R.id.textView1);
 		someText.setText("Цель: пройти от черного поля к белому");
 		
+		/*// Описываю диалоговое окно, появляющееся при прохождении уровня 
+		dialog_end_of_game = new Dialog(game_gameActivity.this);
+		dialog_end_of_game.setContentView(R.layout.dialog_end_levels);
+		dialog_end_of_game.setTitle(R.string.Dialog_end_of_game_Title);
+		dialog_end_of_game.setCancelable(false);
+		*/
+		
+		/*Timer myTimer = new Timer();
+		myTimer.schedule(null, null);
+		*/
+		
+		
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
@@ -48,11 +65,10 @@ public class game_gameActivity extends Activity {
         mAdapter = new gridadapter_Game(this, arrayfromlevel);
         mGrid.setAdapter(mAdapter);
         
-        mGrid.getChildAt(0).setScaleX((float) 0.7);
-        
+                
         // Находим стартовую точку
         Find_Start_Point();     
-        //someText.setText("Доступные ходы: "+array_legal_moovs[0]+","+array_legal_moovs[1]+","+array_legal_moovs[2]+","+array_legal_moovs[3]+"!");        
+                
         
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
@@ -60,7 +76,7 @@ public class game_gameActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
                  	game_move(parent, position, v);
-                 	someText.setText("Доступные ходы: "+array_legal_moovs[0]+","+array_legal_moovs[1]+","+array_legal_moovs[2]+","+array_legal_moovs[3]+"!");
+                 	someText.setText("Кол-во ходов: "+Moovs_counter);
         		}                	
              
         	});
@@ -75,9 +91,6 @@ public class game_gameActivity extends Activity {
 		{
 			if (arrayfromlevel.get(i)=="ball1") 
 			{
-				//
-				//mGrid.getChildAt(i).setScaleX((float) 0.7);
-				//mGrid.getChildAt(i).setScaleY((float) 0.7);
 				// определяем доступные ходы (со старта идем во всех 4 направлениях)
 				array_legal_moovs[0] = i-1;
 				array_legal_moovs[1] = i+1;
@@ -139,7 +152,10 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[0] = 10000; // Конец игры
 				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
 				array_legal_moovs[2] = 10000;
-				array_legal_moovs[3] = 10000; 
+				array_legal_moovs[3] = 10000;
+				Moovs_counter++;
+				
+				ShowGameOver();
 				
 				break;
 			case 1:
@@ -156,7 +172,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = position + Sqrt_from_arraysize; 
 				
 				Cheking_legal_moovs();
-				
+				Moovs_counter++;
 				break;
 			case 2:
 				ColorBall = "коричневый";
@@ -169,6 +185,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
 				array_legal_moovs[3] = 10000;			// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 3:
 				ColorBall = "серый";
@@ -182,6 +199,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
 				array_legal_moovs[3] = 10000; 	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 4:
 				ColorBall = "красный";
@@ -195,6 +213,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 5:
 				ColorBall = "зеленый";
@@ -208,6 +227,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 6:
 				ColorBall = "синий";
@@ -221,6 +241,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 7:
 				ColorBall = "Оранжевый";
@@ -234,6 +255,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 8:
 				ColorBall = "Салатовый";
@@ -247,6 +269,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 9:
 				ColorBall = "Голубой";
@@ -260,6 +283,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 10:
 				ColorBall = "Фиолетовый";
@@ -273,6 +297,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = position + Sqrt_from_arraysize; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 11:
 				ColorBall = "Желтый";
@@ -286,6 +311,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 12:
 				ColorBall = "Розовый";
@@ -299,6 +325,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = position + Sqrt_from_arraysize; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 			case 13:
 				ColorBall = "Ты зачем тут нажал? )))";
@@ -317,6 +344,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
+				Moovs_counter++;
 				break;
 
 			default:
@@ -352,7 +380,30 @@ public class game_gameActivity extends Activity {
 		}
 	}
 	
-		
+	
+	
+	private void ShowGameOver() {
+		 
+	    // Диалоговое окно
+	    AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+	 
+	    // Заголовок и текст
+	    alertbox.setTitle("Поздравляем!");
+	    
+	    String TextToast = "Кол-во ходов: "+ Moovs_counter+"nВремя прохождения: ";
+	    alertbox.setMessage(TextToast);
+	 
+	    // Добавляем кнопку 
+	    alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+	      public void onClick(DialogInterface arg0, int arg1) {
+	        // закрываем текущюю Activity
+	        finish();
+	      }
+	    });
+	    // показываем окно
+	    alertbox.show();
+	  }
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

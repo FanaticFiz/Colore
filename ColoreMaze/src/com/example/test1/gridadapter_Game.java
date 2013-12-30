@@ -200,7 +200,13 @@ public class gridadapter_Game extends BaseAdapter
 	    // которая находится в векторе arrayPicture на позиции position
 		Integer drawableId = mRes.getIdentifier(arrayPicture.get(position), "drawable", mContext.getPackageName());
 		view.setImageResource(drawableId);
-		//view.setPadding(4, 4, 4, 4);
+		
+		// Стартовую точку уменьшаем
+		if (arrayPicture.get(position)=="ball1") 
+		{
+			view.setScaleX((float) 0.7);
+			view.setScaleY((float) 0.7);
+		}
 		
 		return view;
 	}

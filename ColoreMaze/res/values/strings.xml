@@ -18,5 +18,7 @@
     <string name="title_activity_tof_game">TofGameActivity</string>
     <string name="title_activity_typeof_game">TypeofGame</string>
     <string name="title_activity_levels">Levels</string>
-
+    <string name="Dialog_end_of_game_Moovs">Moovs:</string>
+    <string name="Dialog_end_of_game_Time">Time:</string>
+    <string name="Dialog_end_of_game_Title">Level cleared</string>
 </resources>
