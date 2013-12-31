@@ -1,20 +1,19 @@
 package com.example.test1;
 
+import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Date;
 import java.util.Timer;
- 
-
-
-
-
-
+import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.Menu;
@@ -27,7 +26,6 @@ import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
-	private Context 			mContext;
 	private GridView 			mGrid;
 	private Dialog				dialog_end_of_game;	
 	private gridadapter_Game 	mAdapter;
@@ -35,17 +33,65 @@ public class game_gameActivity extends Activity {
 	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
 	private String 				ColorBall;		
-	TextView 					someText;    			//	поле для заметок внизу
+	TextView 					someText,TimerField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
 	byte 						Sqrt_from_arraysize;
-	
-	
+	long 						Start_Time,End_Time;
+	String ss = System.getProperty("line.separator");
 	int randomBG;
+	
+	// Таймер
+	int seconds;
+	private Timer timer    = null;
+	private long startTime;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+		
+		
+		// Пример с гугла таймер отсчитывающий вниз в данном примере от 30 секунд до 0
+		/*
+		TimerField = (TextView)findViewById(R.id.textView2);		
+		 new CountDownTimer(30000, 1000) 
+		 {
+		     public void onTick(long millisUntilFinished) 
+		     {
+		    	 TimerField.setText("seconds remaining: " + millisUntilFinished / 1000);
+		     }
+		     public void onFinish() 
+		     {
+		    	 TimerField.setText("done!");
+		     }
+		 }.start();
+		*/
+		 
+		TimerField = (TextView)findViewById(R.id.textView1);
+		class UpdateTimeTask extends TimerTask 
+		{
+		   public void run() 
+		   {
+		       /*
+			   long millis = System.currentTimeMillis() - startTime;
+		       int seconds = (int) (millis / 1000);
+		       int minutes = seconds / 60;
+		       seconds     = seconds % 60;
+		       //TimerField.setText(String.format("%d:%02d", minutes, seconds));
+		        * 
+		        */
+		       
+			   seconds++;
+			   TimerField.setText("А время то идет "+seconds);
+		       
+		       
+		   }
+		}
+		
+		startTime = System.currentTimeMillis();
+		timer = new Timer();
+		timer.schedule(new UpdateTimeTask(), 0, 1000);
+		
 		
 		
 		LastMoov=0;Moovs_counter=0;
@@ -57,6 +103,7 @@ public class game_gameActivity extends Activity {
 
 		RandomBackground();
 		
+			
 		//Свяжемся со строкой текстовой на форме
 		someText = (TextView)findViewById(R.id.textView1);
 		someText.setText("Цель: пройти от черного поля к белому");
@@ -68,11 +115,9 @@ public class game_gameActivity extends Activity {
 		dialog_end_of_game.setCancelable(false);
 		*/
 		
-		/*Timer myTimer = new Timer();
-		myTimer.schedule(null, null);
-		*/
 		
 		
+			
 		////**************************************************
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
@@ -84,7 +129,9 @@ public class game_gameActivity extends Activity {
                 
         // Находим стартовую точку
         Find_Start_Point();     
-                
+         
+        
+        Start_Time = System.currentTimeMillis();
         
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
@@ -99,6 +146,7 @@ public class game_gameActivity extends Activity {
         
 	}
 
+	
 	// 	При старте уровня находим в массиве черную-стартовую точку 
 	// 	позиционируемся на ней и определяем следующие доступные ходы
 	public void Find_Start_Point() 
@@ -171,6 +219,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = 10000;
 				Moovs_counter++;
 				
+				End_Time = System.currentTimeMillis();
+			
 				ShowGameOver();
 				
 				break;
@@ -401,7 +451,7 @@ public class game_gameActivity extends Activity {
 		LinearLayout LinLayout = (LinearLayout) findViewById(R.id.LinearLayout_of_Game);
 		
 				
-		randomBG = (int) (Math.random()*9);
+		randomBG = (int) (Math.random()*26);
 		String stringBG = "bgstyle"+randomBG;
 		
 		Resources mRes = this.getResources();
@@ -418,7 +468,10 @@ public class game_gameActivity extends Activity {
 	    // Заголовок и текст
 	    alertbox.setTitle("Поздравляем!");
 	    
-	    String TextToast = "Кол-во ходов: "+ Moovs_counter;
+	    
+	    int inTime = (int) ((End_Time - Start_Time)/1000);
+	    
+	    String TextToast = "Кол-во ходов: "+ Moovs_counter+ss+"Время: "+inTime;
 	    alertbox.setMessage(TextToast);
 	 
 	    // Добавляем кнопку 
