@@ -13,14 +13,18 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 public class game_gameActivity extends Activity {
 
+	private Animation 			animation_wrong_moovs;
 	private GridView 			mGrid;
 	private Dialog				dialog_end_of_game;	
 	private gridadapter_Game 	mAdapter;
@@ -97,6 +101,10 @@ public class game_gameActivity extends Activity {
 		// ------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------
 		
+		// подключаем файл анимации
+		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+
+		
 		
 		LastMoov=0;Moovs_counter=0;
 		array_legal_moovs = new int[4];
@@ -110,7 +118,8 @@ public class game_gameActivity extends Activity {
 			
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
-		MoovField.setText(""+Moovs_counter);
+		//MoovField.setText(""+Moovs_counter);
+		MoovField.setText(String.format("%03d", Moovs_counter));
 		
 		someText = (TextView)findViewById(R.id.game_down_text);
 		someText.setText("Цель: пройти от черного поля к белому");
@@ -147,7 +156,8 @@ public class game_gameActivity extends Activity {
             	{
                  	game_move(parent, position, v);
                  	someText.setText("Номер фона = "+randomBG);
-                 	MoovField.setText(""+Moovs_counter);
+                 	//MoovField.setText(""+Moovs_counter);
+                 	MoovField.setText(String.format("%03d", Moovs_counter));
         		}                	             
         	});
 	}
@@ -430,7 +440,12 @@ public class game_gameActivity extends Activity {
 				break;
 			}
 
-		} else {	someText.setText("Этот ход недопустим..."); 	}
+		} 
+		else 
+		{	
+			parent.getChildAt(position).startAnimation(animation_wrong_moovs);   
+			someText.setText("Этот ход недопустим..."); 	
+		}
 
 	}
 	
