@@ -1,44 +1,31 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-
 import org.xmlpull.v1.XmlPullParser;
-
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Levels extends Activity {
 	
-	ArrayList<String> list = new ArrayList<String>();
-	private SoundPool soundPool;
-	private static int soundID1;
-	//private Context mContext;
-	//private Resources mRes;
+	ArrayList<String> 		list 		= 	new ArrayList<String>();
+	private 	SoundPool 	soundPool;
+	private 	static int 	soundID1;
+	private		int			counter_col;	// кол-во столбцов	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
-		
-		
-		//RelativeLayout RelLayout = (RelativeLayout)findViewById(R.id.linearLayout1);
-		//int dfg = R.drawable.hexellence;
-		
-		
-		
+			
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
         soundID1 = soundPool.load(this, R.raw.btn1, 1);
@@ -57,6 +44,8 @@ public class Levels extends Activity {
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
+	    		//intentG.putExtra("from_level_to_game_rows", counter_row);
+	    		intentG.putExtra("from_level_to_game_col",  counter_col);
 	    		startActivity(intentG);
 	    		
 	        }
@@ -176,6 +165,7 @@ public class Levels extends Activity {
         			{
         				list.add(parser.getAttributeValue(i));
         			}
+        			counter_col = parser.getAttributeCount();
         		}
         	parser.next();
         	}
