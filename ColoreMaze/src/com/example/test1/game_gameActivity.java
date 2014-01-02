@@ -28,7 +28,7 @@ public class game_gameActivity extends Activity {
 	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
 	private String 				ColorBall;		
-	private TextView			someText,TimerField;    			//	поле для заметок внизу
+	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
 	byte 						Sqrt_from_arraysize;
 	long 						Start_Time,End_Time;
@@ -68,7 +68,7 @@ public class game_gameActivity extends Activity {
 		*/
 
 		final Handler handlerUI = new Handler();
-		TimerField = (TextView)findViewById(R.id.game_up_text);
+		TimerField = (TextView)findViewById(R.id.game_up_text1);
 		
 		class UpdateTimeTask extends TimerTask 
 		{
@@ -92,6 +92,7 @@ public class game_gameActivity extends Activity {
 		startTime = System.currentTimeMillis();
 		timer = new Timer();
 		timer.schedule(new UpdateTimeTask(), 0, 1000);
+
 		// ------------------------------------------------------------------------------------------------		
 		// ------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------
@@ -108,6 +109,9 @@ public class game_gameActivity extends Activity {
 		
 			
 		//Свяжемся со строкой текстовой на форме
+		MoovField = (TextView)findViewById(R.id.game_up_text2);
+		MoovField.setText(""+Moovs_counter);
+		
 		someText = (TextView)findViewById(R.id.game_down_text);
 		someText.setText("Цель: пройти от черного поля к белому");
 		
@@ -142,13 +146,10 @@ public class game_gameActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
                  	game_move(parent, position, v);
-                 	someText.setText("BG="+randomBG+"  Кол-во ходов: "+Moovs_counter);
-                 	//TimerField.setText("А время то идет "+seconds);
-                 	//TimerField.setText(String.format("%d:%02d", minutes, seconds));
-        		}                	
-             
+                 	someText.setText("Номер фона = "+randomBG);
+                 	MoovField.setText(""+Moovs_counter);
+        		}                	             
         	});
-        
 	}
 
 	
@@ -216,16 +217,21 @@ public class game_gameActivity extends Activity {
 			switch (ert) {
 			case 0:
 				// Финиш
-				ColorBall = "Поздравляем, Вы выиграли!!!";
-				someText.setText("Цвет = " + ColorBall);
+				
+				// тормозим таймер
+				timer.cancel();
+				
+				//ColorBall = "Поздравляем, Вы выиграли!!!";
+				//someText.setText("Цвет = " + ColorBall);
+				
+				// Массив ходов заполняем фигней
 				array_legal_moovs[0] = 10000; // Конец игры
 				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
 				Moovs_counter++;
-				
-				End_Time = System.currentTimeMillis();
 			
+				// показываем окно геймовера
 				ShowGameOver();
 				
 				break;
