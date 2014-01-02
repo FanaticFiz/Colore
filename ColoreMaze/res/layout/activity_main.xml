@@ -15,7 +15,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/textView11"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/game_up_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:gravity="bottom"
@@ -73,7 +73,7 @@
         android:text="@string/Game_version" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/game_up_text"
         style="@style/ColoremMaze"
         
         android:layout_width="wrap_content"

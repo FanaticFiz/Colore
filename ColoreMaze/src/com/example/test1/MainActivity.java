@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 		
 		
 		// Установка шрифта текстовым полям
-		final TextView textColoremaze = (TextView)findViewById(R.id.textView2);
+		final TextView textColoremaze = (TextView)findViewById(R.id.game_up_text);
 		textColoremaze.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
 		textStartGame = (TextView)findViewById(R.id.start);

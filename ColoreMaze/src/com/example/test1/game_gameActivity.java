@@ -1,16 +1,11 @@
 package com.example.test1;
 
-import java.sql.Time;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -33,15 +28,16 @@ public class game_gameActivity extends Activity {
 	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
 	private String 				ColorBall;		
-	TextView 					someText,TimerField;    			//	поле для заметок внизу
+	private TextView			someText,TimerField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
 	byte 						Sqrt_from_arraysize;
 	long 						Start_Time,End_Time;
-	String ss = System.getProperty("line.separator");
-	int randomBG;
+	int 						randomBG;
 	
+	String ss = System.getProperty("line.separator");
+		
 	// Таймер
-	int seconds;
+	private int seconds,minutes;
 	private Timer timer    = null;
 	private long startTime;
 	
@@ -49,7 +45,11 @@ public class game_gameActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+		 
 		
+		// ------------------------------------------------------------------------------------------------		
+		// ---------------------- аботает таймер и выводит в текстовое поле результат ---------------------
+		// ------------------------------------------------------------------------------------------------
 		
 		// Пример с гугла таймер отсчитывающий вниз в данном примере от 30 секунд до 0
 		/*
@@ -66,32 +66,35 @@ public class game_gameActivity extends Activity {
 		     }
 		 }.start();
 		*/
-		 
-		TimerField = (TextView)findViewById(R.id.textView1);
+
+		final Handler handlerUI = new Handler();
+		TimerField = (TextView)findViewById(R.id.game_up_text);
+		
 		class UpdateTimeTask extends TimerTask 
 		{
 		   public void run() 
 		   {
-		       /*
 			   long millis = System.currentTimeMillis() - startTime;
-		       int seconds = (int) (millis / 1000);
-		       int minutes = seconds / 60;
+		       seconds = (int) (millis / 1000);
+		       minutes = seconds / 60;
 		       seconds     = seconds % 60;
-		       //TimerField.setText(String.format("%d:%02d", minutes, seconds));
-		        * 
-		        */
 		       
-			   seconds++;
-			   TimerField.setText("А время то идет "+seconds);
-		       
-		       
+		       // Нельзя обращаться к элементам UI(user interf.) потока из другого потока.
+		       // Поэтому пользуемся handler 
+		       handlerUI.post(new Runnable()	{
+		       public void run()    			{
+		    	   	TimerField.setText(String.format("%d:%02d", minutes, seconds));
+		       									}
+		       									});       
 		   }
 		}
 		
 		startTime = System.currentTimeMillis();
 		timer = new Timer();
 		timer.schedule(new UpdateTimeTask(), 0, 1000);
-		
+		// ------------------------------------------------------------------------------------------------		
+		// ------------------------------------------------------------------------------------------------
+		// ------------------------------------------------------------------------------------------------
 		
 		
 		LastMoov=0;Moovs_counter=0;
@@ -105,7 +108,7 @@ public class game_gameActivity extends Activity {
 		
 			
 		//Свяжемся со строкой текстовой на форме
-		someText = (TextView)findViewById(R.id.textView1);
+		someText = (TextView)findViewById(R.id.game_down_text);
 		someText.setText("Цель: пройти от черного поля к белому");
 		
 		/*// Описываю диалоговое окно, появляющееся при прохождении уровня 
@@ -140,6 +143,8 @@ public class game_gameActivity extends Activity {
             	{
                  	game_move(parent, position, v);
                  	someText.setText("BG="+randomBG+"  Кол-во ходов: "+Moovs_counter);
+                 	//TimerField.setText("А время то идет "+seconds);
+                 	//TimerField.setText(String.format("%d:%02d", minutes, seconds));
         		}                	
              
         	});
@@ -467,11 +472,8 @@ public class game_gameActivity extends Activity {
 	 
 	    // Заголовок и текст
 	    alertbox.setTitle("Поздравляем!");
-	    
-	    
-	    int inTime = (int) ((End_Time - Start_Time)/1000);
-	    
-	    String TextToast = "Кол-во ходов: "+ Moovs_counter+ss+"Время: "+inTime;
+	        
+	    String TextToast = "Кол-во ходов: "+ Moovs_counter+ss+"Время: "+minutes+":"+seconds;
 	    alertbox.setMessage(TextToast);
 	 
 	    // Добавляем кнопку 

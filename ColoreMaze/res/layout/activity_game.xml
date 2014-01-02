@@ -7,7 +7,7 @@
     android:weightSum="100" >
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/game_up_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
@@ -19,7 +19,7 @@
         android:id="@+id/field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="95"
+        android:layout_weight="90"
         android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp" 
         android:scrollbars="none"
@@ -28,7 +28,7 @@
     </GridView>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/game_down_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
