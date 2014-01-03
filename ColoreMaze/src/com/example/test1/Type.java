@@ -37,7 +37,10 @@ public class Type extends Activity {
 	        	// Переходим к выбору уровней
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Type.this, Levels.class);
-	    		startActivity(intentG);	        	
+	    		startActivity(intentG);
+	    		
+	    		// анимацию перехода между активити
+	    		overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out); 
 	        }
 	    });
 	    
@@ -50,6 +53,20 @@ public class Type extends Activity {
 		return true;
 	}
 
-	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		
+		// Завершаем наше activity
+        this.finish(); 
+
+        // Intent отвечает за переходы между activity, 
+        // здесь мы возвращаемся обратно в наше главное окно
+        Intent intent = new Intent(this, MainActivity.class);  
+        startActivity(intent);
+		
+        overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out); 
+	}
 
 }

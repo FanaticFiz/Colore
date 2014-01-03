@@ -1,7 +1,9 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
 import org.xmlpull.v1.XmlPullParser;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -44,10 +46,10 @@ public class Levels extends Activity {
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
-	    		//intentG.putExtra("from_level_to_game_rows", counter_row);
 	    		intentG.putExtra("from_level_to_game_col",  counter_col);
 	    		startActivity(intentG);
 	    		
+	    		overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
 	        }
 	    });			
 	}
@@ -186,4 +188,20 @@ public class Levels extends Activity {
 		return true;
 	}
 
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		
+		// Завершаем наше activity
+        this.finish(); 
+
+        // Intent отвечает за переходы между activity, 
+        // здесь мы возвращаемся обратно в наше главное окно
+        Intent intent = new Intent(this, Type.class);  
+        startActivity(intent);
+		
+        overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
+	}
 }

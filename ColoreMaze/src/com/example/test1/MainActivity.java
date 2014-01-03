@@ -122,8 +122,10 @@ public class MainActivity extends Activity {
 		soundPool.play(soundID1, volume, volume, 1, 0, 1f);		
 		// отсюда идем в окно выбора типа игры
 		Intent intentG = new Intent();
-		intentG.setClass(MainActivity.this, Levels.class);
+		intentG.setClass(MainActivity.this, Type.class);
 		startActivity(intentG);
+		// анимируем переход между активити
+		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
 	}	
 	public void OnClickSettings(View v) 
 	{
@@ -133,6 +135,8 @@ public class MainActivity extends Activity {
 		Intent inten1 = new Intent();
 		inten1.setClass(MainActivity.this, SettingsActivity.class);
 		startActivity(inten1);
+		
+		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
 	}
 	public void OnClickAbout(View v) 
 	{
@@ -142,6 +146,8 @@ public class MainActivity extends Activity {
 		Intent inten2 = new Intent();
 		inten2.setClass(MainActivity.this, AboutActivity.class);
 		startActivity(inten2);
+		
+		
 	};
 	public void OnClickExit(View v) 
 	{

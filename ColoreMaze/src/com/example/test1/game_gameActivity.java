@@ -3,6 +3,7 @@ package com.example.test1;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -513,5 +514,12 @@ public class game_gameActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		
+		overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
+	}
 
 }
