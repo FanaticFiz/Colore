@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level1>
+
+    <array-list
+        A3="1"
+        A4="6"
+        A5="14"
+        A6="2"
+        A7="8"
+        A8="0" >
+3 строка
+    </array-list>
+    <array-list
+        A3="7"
+        A4="4"
+        A5="12"
+        A6="11"
+        A7="2"
+        A8="14" >
+4 строка
+    </array-list>
+    <array-list
+        A3="4"
+        A4="6"
+        A5="10"
+        A6="6"
+        A7="4"
+        A8="6" >
+5 строка
+    </array-list>
+    <array-list
+        A3="5"
+        A4="2"
+        A5="3"
+        A6="11"
+        A7="9"
+        A8="12" >
+6 строка
+    </array-list>
+    <array-list
+        A3="10"
+        A4="8"
+        A5="11"
+        A6="5"
+        A7="7"
+        A8="11" >
+7 строка
+    </array-list>
+    <array-list
+        A3="8"
+        A4="4"
+        A5="2"
+        A6="11"
+        A7="4"
+        A8="3" >
+8 строка
+    </array-list>
+
+</level1>

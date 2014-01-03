@@ -45,7 +45,7 @@ public class Levels extends Activity {
 	        {
 	        	
 	        	soundPool.play(soundID1, 1, 1, 1, 0, 1f);
-	        	ChoiseLevel(position);
+	        	ChoiseLevel(type_of_game, position);
 	        	// Прыгаем в Игру
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
@@ -60,86 +60,95 @@ public class Levels extends Activity {
 
 	
 	// Определяем какой файл xml подгрузить в зависимости от выбора уровня...
-	public void ChoiseLevel(int NP) 
+	public void ChoiseLevel(int type, int NP) 
 	{
+		String String_of_type;
+		switch (type) 	{
+		case 0:	String_of_type = "type1_";	break;
+		case 1:	String_of_type = "type2_";	break;
+		case 2:	String_of_type = "type3_";	break;
+		case 3:	String_of_type = "type4_";	break;
+		default:String_of_type = "type1_";	break;
+						}
+		
 		String StringNP;
 		int i;
 		switch (NP) {
 		case 0:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);
 			break;
 			
 		case 1:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);		
 			break;
 
 		case 2:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 3:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 4:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 5:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 6:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 7:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 8:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 9:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 10:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 11:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 12:
 			i = NP+1;
-			StringNP = "type1_level"+i;
+			StringNP = String_of_type+"level"+i;
 			ParserXML(StringNP);			
 			break;
 
