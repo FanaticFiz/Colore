@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level1>
+ 
+    <array-list
+    A4="1"
+    A5="5"
+    A6="9"
+    A7="0"
+    >3 строка</array-list>
+    
+    <array-list
+    A4="10"
+    A5="11"
+    A6="5"
+    A7="3"
+    >4 строка</array-list>
+    
+    <array-list
+    A4="4"
+    A5="5"
+    A6="10"
+    A7="6"
+    >5 строка</array-list>
+      
+    <array-list
+    A4="3"
+    A5="11"
+    A6="2"
+    A7="11"
+    >6 строка</array-list>
+  
+</level1>

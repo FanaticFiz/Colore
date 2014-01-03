@@ -22,6 +22,7 @@ public class Levels extends Activity {
 	private 	SoundPool 	soundPool;
 	private 	static int 	soundID1;
 	private		int			counter_col;	// кол-во столбцов	
+	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,12 @@ public class Levels extends Activity {
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
         soundID1 = soundPool.load(this, R.raw.btn1, 1);
+
+		// получаем тип выбранной игры...
+		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
         
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
-	    gridview.setAdapter(new gridAdapter_LevelsImage(this));
+	    gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game));
 	       
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {
@@ -63,79 +67,79 @@ public class Levels extends Activity {
 		switch (NP) {
 		case 0:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);
 			break;
 			
 		case 1:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);		
 			break;
 
 		case 2:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 3:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 4:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 5:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 6:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 7:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 8:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 9:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 10:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 11:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 
 		case 12:
 			i = NP+1;
-			StringNP = "level"+i;
+			StringNP = "type1_level"+i;
 			ParserXML(StringNP);			
 			break;
 

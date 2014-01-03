@@ -37,6 +37,7 @@ public class Type extends Activity {
 	        	// ѕереходим к выбору уровней
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Type.this, Levels.class);
+	     		intentG.putExtra("from_type_tolevels_tog", position);// передаЄм в левел какой тип игры выбран
 	    		startActivity(intentG);
 	    		
 	    		// анимацию перехода между активити

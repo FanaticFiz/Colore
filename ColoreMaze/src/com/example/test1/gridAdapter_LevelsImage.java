@@ -7,30 +7,81 @@ import android.widget.BaseAdapter;
 
 public class gridAdapter_LevelsImage extends BaseAdapter {
     private Context mContext;
-
-    public gridAdapter_LevelsImage(Context c) 	{ mContext = c; 			}
-    public int getCount() 						{ return mThumbIds.length; 	}
-    public Object getItem(int position) 		{ return null;				}
-    public long getItemId(int position) 		{ return 0;	   				}
+    private int 	grid_type_of_game;		
+    
+    public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels) 	
+    { 
+    	mContext = c;
+    	grid_type_of_game = type_of_game_from_levels;
+    }
+    
+    // этом методе поидее надо смотреть чему равна переменна€ type_of_game и тогда уже брать длинну 
+    // соответсвующего массива mThumbIds[] 
+    // Ќќ у мен€ поидее эти массивы будут одинаковый длинны все, поэтому мы берем длинну одного из них только.
+    public int getCount() 						{ 	return mThumbIds1.length;   }
+    public Object getItem(int position) 		{ 	return null;				}
+    public long getItemId(int position) 		{ 	return 0;	   				}
 
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) 
+    {
         SquareImageView imageView;
-        if (convertView == null) {  
+        if (convertView == null) 
+        {  
         	// if it's not recycled, initialize some attributes
             imageView = new SquareImageView(mContext);                   
-        } else {
+        } 
+        else 
+        {
             imageView = (SquareImageView) convertView;
         }
-
-        imageView.setImageResource(mThumbIds[position]);
+        
+        // ¬ зависимости от выбранного типа игры подгружаетс€ нужный массив с данными дл€ отображени€
+        switch (grid_type_of_game) {
+		case 0:
+			imageView.setImageResource(mThumbIds1[position]);	
+			break;
+		case 1:
+			imageView.setImageResource(mThumbIds2[position]);	
+			break;
+		case 2:
+			imageView.setImageResource(mThumbIds3[position]);	
+			break;
+		case 3:
+			imageView.setImageResource(mThumbIds4[position]);	
+			break;
+		default:
+			//imageView.setImageResource(mThumbIds1[position]);	
+			break;
+		}
+            
         return imageView;
     }
 
-    // ≈сли хотим добавить элементов, то добавл€ем их сюда
-    private Integer[] mThumbIds = {
-            R.drawable.level1, R.drawable.level2, R.drawable.level3, R.drawable.level4,
-            R.drawable.level5, R.drawable.level6, R.drawable.level7, R.drawable.level8,
-            R.drawable.level9, R.drawable.level10,R.drawable.level11,R.drawable.level12,
+    // «десь обь€влены массивы в которых перечисл€ютс€ графические ресурсы дл€ отображени€ уровней 
+    // в активити levels. Ќа данный момент € планирую 24 уровн€ на каждый тип игры.
+    private Integer[] mThumbIds1 = {
+            R.drawable.type1_level1, R.drawable.type1_level2, R.drawable.type1_level3, R.drawable.type1_level4,
+            R.drawable.type1_level5, R.drawable.type1_level6, R.drawable.type1_level7, R.drawable.type1_level8,
+            R.drawable.type1_level9, R.drawable.type1_level10,R.drawable.type1_level11,R.drawable.type1_level12,
     };
+    
+    private Integer[] mThumbIds2 = {
+            R.drawable.type2_level1, R.drawable.type2_level2, R.drawable.type2_level3, R.drawable.type2_level4,
+            R.drawable.type2_level5, R.drawable.type2_level6, R.drawable.type2_level7, R.drawable.type2_level8,
+            R.drawable.type2_level9, R.drawable.type2_level10,R.drawable.type2_level11,R.drawable.type2_level12,
+    };
+
+    private Integer[] mThumbIds3 = {
+            R.drawable.type3_level1, R.drawable.type3_level2, R.drawable.type3_level3, R.drawable.type3_level4,
+            R.drawable.type3_level5, R.drawable.type3_level6, R.drawable.type3_level7, R.drawable.type3_level8,
+            R.drawable.type3_level9, R.drawable.type3_level10,R.drawable.type3_level11,R.drawable.type3_level12,
+    };
+
+    private Integer[] mThumbIds4 = {
+            R.drawable.type4_level1, R.drawable.type4_level2, R.drawable.type4_level3, R.drawable.type4_level4,
+            R.drawable.type4_level5, R.drawable.type4_level6, R.drawable.type4_level7, R.drawable.type4_level8,
+            R.drawable.type4_level9, R.drawable.type4_level10,R.drawable.type4_level11,R.drawable.type4_level12,
+    };
+
 }
