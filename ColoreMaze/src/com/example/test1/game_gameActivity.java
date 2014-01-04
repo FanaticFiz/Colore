@@ -34,7 +34,7 @@ public class game_gameActivity extends Activity {
 	private String 				ColorBall;		
 	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
-	int 						counter_col;
+	int 						type_game_from,counter_col;
 	long 						Start_Time,End_Time;
 	int 						randomBG;
 	
@@ -111,6 +111,7 @@ public class game_gameActivity extends Activity {
 		// Получаем данные из предыдущей активити. Игровой массив и кол-во строк и столбцов в игровом поле 
 		arrayfromlevel 	=	getIntent().getExtras().getStringArrayList("FromLeveltogame");
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
+		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
 	
 		
 		RandomBackground();
@@ -519,6 +520,14 @@ public class game_gameActivity extends Activity {
 		super.onBackPressed();
 		
 		overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
+		
+		switch (type_game_from) 	{
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		default:			break;
+							}    		 
 	}
 
 }

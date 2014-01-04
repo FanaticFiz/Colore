@@ -51,9 +51,16 @@ public class Levels extends Activity {
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
 	    		intentG.putExtra("from_level_to_game_col",  counter_col);
+	    		intentG.putExtra("from_level_to_game_type", type_of_game);
 	    		startActivity(intentG);
 	    		
-	    		overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
+	    		switch (type_of_game) 	{
+				case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
+				case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
+				case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// Активность уходит вниз
+				case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// Активность уходит вверх
+				default:			break;
+									}    		
 	        }
 	    });			
 	}
