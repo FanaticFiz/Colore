@@ -3,12 +3,10 @@ package com.example.test1;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.Menu;
@@ -26,7 +24,7 @@ public class game_gameActivity extends Activity {
 
 	private Animation 			animation_wrong_moovs;
 	private GridView 			mGrid;
-	private Dialog				dialog_end_of_game;	
+	//private Dialog				dialog_end_of_game;
 	private gridadapter_Game 	mAdapter;
 	private int 				LastMoov,Moovs_counter;
 	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового пол€ 
@@ -38,7 +36,7 @@ public class game_gameActivity extends Activity {
 	long 						Start_Time,End_Time;
 	int 						randomBG;
 	
-	String ss = System.getProperty("line.separator");
+	String ss = System.getProperty("line.separator"); // строка разделитель
 		
 	// “аймер
 	private int seconds,minutes;

@@ -9,9 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
-         >
-        
+        android:layout_weight="5"        >
         <TextView
             android:id="@+id/game_up_text1"
             android:layout_width="match_parent"
@@ -19,20 +17,15 @@
             android:gravity="left"
             android:textSize="22sp"
             android:paddingLeft="2dp"
-            android:text="00:11"
-            android:textColor="#FF007700"
-            />
-
+            android:textColor="#FF007700" />
          <TextView
-             android:id="@+id/game_up_text2"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+            android:id="@+id/game_up_text2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textSize="22sp"
-             android:gravity="right"
-             android:paddingRight="2dp"
-             android:text="00:22"
-             android:textColor="#FF007700" />
-
+            android:gravity="right"
+            android:paddingRight="2dp"
+            android:textColor="#FF007700" />
     </FrameLayout>
 
     <GridView
