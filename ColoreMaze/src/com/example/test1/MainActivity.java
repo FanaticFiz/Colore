@@ -18,12 +18,10 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	
-	//private MusicService mServ;
-	
 	TextView textStartGame,textStartGame1,textStartGame2,textStartGame3,textStartGame4;
 	private Animation menu_animation;
 	private SoundPool soundPool;
+	private Intent svc;
 	boolean loaded = false;
 	private static int soundID1;
 	private static float volume;
@@ -39,16 +37,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 			
-			
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
 		
-		/*
 		// ****************************************************************************
 		// *************************** работаем со звуком  ****************************
 		// Стартуем сервис проигрования музыки.
-		Intent svc=  new Intent(this, MusicService.class);
+		svc=  new Intent(this, MusicService.class);
 		startService(svc);
-		*/
+		
 		//Создаем soundPool. для коротких пуков
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         soundID1 = soundPool.load(this, R.raw.btn2, 1);
@@ -96,15 +93,6 @@ public class MainActivity extends Activity {
 		menu_animation = AnimationUtils.loadAnimation(this, R.anim.menuanimation);
 	}
 
-	
-	/*
-	// как определить, что воспроизведение файла закончилось?
-	// Для этой цели служит функция обратного вызова onCompletion. 
-	public void onCompletion(MediaPlayer arg0) 
-	{
-        arg0.start(); //Запускаем воспроизведение заново
-	}
-	*/
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -167,8 +155,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onPause();
 
-		// Ставим на паузу
-		//mServ.player.pause();
 		
 		volume++;
 		Editor editor = mSettings.edit();
@@ -182,9 +168,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 
-		// стартуем музыку опять
-		//mServ.player.start();
-	    
 		
 		// если ли нужный нам ключ
 		if (mSettings.contains(APP_PREFERENCES_COUNTER)) 
@@ -201,7 +184,21 @@ public class MainActivity extends Activity {
 	{
 		super.onDestroy();
 		// TODO Auto-generated method stub
-		//mServ.player.release();
+		soundPool.release();
+		soundPool = null;
+		
+		stopService(svc);
+		finish();
 	}
 	
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		
+		stopService(svc);
+		finish();
+		
+	}
 }

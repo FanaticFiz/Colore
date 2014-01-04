@@ -64,9 +64,8 @@ public class Type extends Activity {
 
         // Intent отвечает за переходы между activity, 
         // здесь мы возвращаемся обратно в наше главное окно
-        Intent intent = new Intent(this, MainActivity.class);  
-        startActivity(intent);
-		
+        //Intent intent = new Intent(this, MainActivity.class);  
+        //startActivity(intent);
         overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out); 
 	}
 

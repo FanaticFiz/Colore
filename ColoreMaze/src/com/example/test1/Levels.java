@@ -212,8 +212,8 @@ public class Levels extends Activity {
 
         // Intent отвечает за переходы между activity, 
         // здесь мы возвращаемся обратно в наше главное окно
-        Intent intent = new Intent(this, Type.class);  
-        startActivity(intent);
+        //Intent intent = new Intent(this, Type.class);  
+        //startActivity(intent);
 		
         overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
 	}
