@@ -199,6 +199,5 @@ public class MainActivity extends Activity {
 		
 		stopService(svc);
 		finish();
-		
 	}
 }

@@ -227,7 +227,6 @@ public class game_gameActivity extends Activity {
 			switch (ert) {
 			case 0:
 				// Финиш
-				
 				// тормозим таймер
 				timer.cancel();
 				

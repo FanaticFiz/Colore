@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class Type extends Activity {
 
@@ -40,8 +41,13 @@ public class Type extends Activity {
 	     		intentG.putExtra("from_type_tolevels_tog", position);// передаём в левел какой тип игры выбран
 	    		startActivity(intentG);
 	    		
-	    		// анимацию перехода между активити
-	    		overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out); 
+	    		switch (position) 	{
+				case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
+				case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
+				case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// Активность уходит вниз
+				case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// Активность уходит вверх
+				default:			break;
+									}    		 
 	        }
 	    });
 	    
@@ -62,10 +68,6 @@ public class Type extends Activity {
 		// Завершаем наше activity
         this.finish(); 
 
-        // Intent отвечает за переходы между activity, 
-        // здесь мы возвращаемся обратно в наше главное окно
-        //Intent intent = new Intent(this, MainActivity.class);  
-        //startActivity(intent);
         overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out); 
 	}
 

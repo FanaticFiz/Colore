@@ -209,12 +209,13 @@ public class Levels extends Activity {
 		
 		// Завершаем наше activity
         this.finish(); 
-
-        // Intent отвечает за переходы между activity, 
-        // здесь мы возвращаемся обратно в наше главное окно
-        //Intent intent = new Intent(this, Type.class);  
-        //startActivity(intent);
 		
-        overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
+		switch (type_of_game) 	{
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		default:			break;
+							}    		 
 	}
 }
