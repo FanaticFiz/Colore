@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level1>
+    <array-list
+    A1="13"
+    A2="13"         
+    A3="13"
+    A4="13"
+    A5="13"
+    >1 строка</array-list>
+    
+    <array-list
+    A1="13"
+    A2="1"         
+    A3="6"
+    A4="0"
+    A5="13"
+    >2 строка</array-list>
+    
+    <array-list
+    A1="13"
+    A2="7"         
+    A3="4"
+    A4="12"
+    A5="13"
+    >3 строка</array-list>
+    
+    <array-list
+    A1="13"
+    A2="8"         
+    A3="2"
+    A4="11"
+    A5="13"
+    >4 строка</array-list>
+    
+    <array-list
+    A1="13"
+    A2="13"         
+    A3="13"
+    A4="13"
+    A5="13"
+    >5 строка</array-list>
+     
+</level1>

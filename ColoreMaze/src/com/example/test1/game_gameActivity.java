@@ -153,10 +153,13 @@ public class game_gameActivity extends Activity {
         	{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
-                 	game_move(parent, position, v);
-                 	someText.setText("Номер фона = "+randomBG);
-                 	//MoovField.setText(""+Moovs_counter);
-                 	MoovField.setText(String.format("%03d", Moovs_counter));
+                 	if (NumberFromName(arrayfromlevel.get(position))==13) 
+                 	{						}
+                 	else 	{
+                 		game_move(parent, position, v);
+                 		someText.setText("Номер фона = "+randomBG);
+                 		MoovField.setText(String.format("%03d", Moovs_counter));
+                 			}
         		}                	             
         	});
 	}
@@ -185,8 +188,8 @@ public class game_gameActivity extends Activity {
 	
 	
 	// Определяем дейсвтия при ходе...
-	public void game_move(AdapterView<?> parent, int position, View v) {
-
+	public void game_move(AdapterView<?> parent, int position, View v) 
+	{
 		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
 		{
 
@@ -466,7 +469,8 @@ public class game_gameActivity extends Activity {
 			if ( (array_legal_moovs[i] <= arrayfromlevel.size()) & (array_legal_moovs[i] >= 0) )	
 			{									}			
 			else 
-			{	array_legal_moovs[i] = 10000;	} 
+			{	array_legal_moovs[i] = 10000;	}
+		
 		}
 	}
 
