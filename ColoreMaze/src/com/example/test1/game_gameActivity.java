@@ -39,7 +39,7 @@ public class game_gameActivity extends Activity {
 	String ss = System.getProperty("line.separator"); // строка разделитель
 		
 	// Таймер
-	private int seconds,minutes;
+	private int seconds,minutes,hours;
 	private Timer timer    = null;
 	private long startTime;
 	
@@ -77,16 +77,20 @@ public class game_gameActivity extends Activity {
 		   public void run() 
 		   {
 			   long millis = System.currentTimeMillis() - startTime;
-		       seconds = (int) (millis / 1000);
-		       minutes = seconds / 60;
-		       seconds     = seconds % 60;
+		       seconds 	= 	(int) (millis / 1000);
+		       minutes 	= 	seconds / 60;
+		       hours	=	minutes	/ 60;
+		       
+		       minutes	=	minutes % 60;
+		       seconds  = 	seconds % 60;
 		       
 		       // Нельзя обращаться к элементам UI(user interf.) потока из другого потока.
 		       // Поэтому пользуемся handler 
 		       handlerUI.post(new Runnable()	{
 		       public void run()    			{
-		    	   	TimerField.setText(String.format("%d:%02d", minutes, seconds));
-		       									}
+		    	    if (hours>0)  	{	TimerField.setText(String.format("%d:%02d:%02d", hours, minutes, seconds));	} 
+		    	    else 			{	TimerField.setText(String.format("%d:%02d", minutes, seconds));	} 
+		    	   								}
 		       									});       
 		   }
 		}
