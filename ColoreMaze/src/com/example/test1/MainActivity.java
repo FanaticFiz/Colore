@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
 		// ****************************************************************************
 		// *************************** работаем со звуком  ****************************
 		// —тартуем сервис проигровани€ музыки.
-		svc=  new Intent(this, MusicService.class);
-		startService(svc);
+		//svc=  new Intent(this, MusicService.class);
+		//startService(svc);
 		
 		//—оздаем soundPool. дл€ коротких пуков
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);

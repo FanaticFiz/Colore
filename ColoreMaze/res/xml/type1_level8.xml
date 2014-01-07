@@ -1,84 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level1>
-
-    <array-list
-        A3="1"
-        A4="6"
-        A5="14"
-        A6="2"
-        A7="8"
-        A8="0" >
-	1 строка
-	</array-list>
-	
-	<array-list
-        A3="4"
-        A4="6"
-        A5="14"
-        A6="2"
-        A7="8"
-        A8="3" >
-	2 строка
-	</array-list>
-	
-    <array-list
-        A3="12"
-        A4="6"
-        A5="14"
-        A6="2"
-        A7="8"
-        A8="3" >
-	3 строка
-    </array-list>
-    	
-    <array-list
-        A3="7"
-        A4="4"
-        A5="12"
-        A6="11"
-        A7="2"
-        A8="14" >
-	4 строка
-    </array-list>
-    
-    <array-list
-        A3="4"
-        A4="6"
-        A5="10"
-        A6="6"
-        A7="4"
-        A8="6" >
-	5 строка
-    </array-list>
-    
-    <array-list
-        A3="5"
-        A4="2"
-        A5="3"
-        A6="11"
-        A7="9"
-        A8="12" >
-	6 строка
-    </array-list>
-    
-    <array-list
-        A3="10"
-        A4="8"
-        A5="11"
-        A6="5"
-        A7="7"
-        A8="11" >
-	7 строка
-    </array-list>
-    
-    <array-list
-        A3="8"
-        A4="4"
-        A5="2"
-        A6="11"
-        A7="4"
-        A8="3" >
-	8 строка
-    </array-list>
-
-</level1>
+<level>
+	<array-list	A1="5"	A2="6"	A3="2"	A4="8"	A5="6" 	>	1 строка	</array-list>
+	<array-list	A1="4"	A2="3"	A3="1"	A4="14"	A5="12" >	2 строка	</array-list>
+	<array-list	A1="10"	A2="6"	A3="7"	A4="7"	A5="7" 	>	3 строка	</array-list>
+    <array-list	A1="14"	A2="4"	A3="11"	A4="9"	A5="12" >	4 строка	</array-list>
+    <array-list	A1="4"	A2="8"	A3="4"	A4="12"	A5="5" 	>	5 строка    </array-list>
+    <array-list A1="5"  A2="2"  A3="2"  A4="9"  A5="12" >	6 строка    </array-list>
+    <array-list A1="10" A2="4"  A3="0"  A4="6"  A5="11" >	7 строка    </array-list>
+</level>

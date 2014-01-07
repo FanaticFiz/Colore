@@ -1,68 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level1>
-
-	<array-list
-        A1="5"
-        A2="6"
-        A3="2"
-        A4="8"
-        A5="6" >
-	1 строка
-    </array-list>
-    
-	<array-list
-        A1="4"
-        A2="3"
-        A3="1"
-        A4="14"
-        A5="12" >
-	2 строка
-    </array-list>
-    
-	<array-list
-        A1="10"
-        A2="6"
-        A3="7"
-        A4="7"
-        A5="7" >
-	3 строка
-    </array-list>
-    
-	<array-list
-        A1="14"
-        A2="4"
-        A3="11"
-        A4="9"
-        A5="12" >
-	4 строка
-    </array-list>
-    
-	<array-list
-        A1="4"
-        A2="8"
-        A3="4"
-        A4="12"
-        A5="5" >
-	5 строка
-    </array-list>
-    
-	<array-list
-        A1="5"
-        A2="2"
-        A3="2"
-        A4="9"
-        A5="12" >
-	6 строка
-    </array-list>
-    
-	<array-list
-        A1="10"
-        A2="4"
-        A3="0"
-        A4="6"
-        A5="11" >
-	7 строка
-    </array-list>
-    
-
-</level1>
+<level>
+    <array-list	A1="13"	A2="6"	A3="14"	A4="2"	A5="8"	>	1 строка	</array-list>
+    <array-list	A1="11"	A2="6"	A3="14"	A4="2"	A5="8"	>	2 строка	</array-list>
+    <array-list	A1="4"	A2="6"	A3="14"	A4="2"	A5="8"	>	3 строка	</array-list>
+    <array-list	A1="7"	A2="6"	A3="14"	A4="2"	A5="8"	>	4 строка	</array-list>
+    <array-list	A1="10"	A2="6"	A3="14"	A4="2"	A5="8"	>	5 строка	</array-list>
+    <array-list	A1="9"	A2="6"	A3="14"	A4="2"	A5="8"	>	6 строка	</array-list>
+</level>

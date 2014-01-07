@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+    <array-list	A1="13"	A2="6"	A3="14"	A4="2"	A5="8"	A6="2"	>	1 строка	</array-list>
+    <array-list	A1="11"	A2="6"	A3="14"	A4="2"	A5="8"	A6="9"	>	2 строка	</array-list>
+    <array-list	A1="4"	A2="6"	A3="14"	A4="2"	A5="8"	A6="7"	>	3 строка	</array-list>
+    <array-list	A1="7"	A2="6"	A3="14"	A4="2"	A5="8"	A6="4"	>	4 строка	</array-list>
+    <array-list	A1="10"	A2="6"	A3="14"	A4="2"	A5="8"	A6="12"	>	5 строка	</array-list>
+    <array-list	A1="9"	A2="6"	A3="14"	A4="2"	A5="8"	A6="11"	>	6 строка	</array-list>
+</level>
