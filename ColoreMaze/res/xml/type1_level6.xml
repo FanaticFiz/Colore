@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
-    <array-list	A1="13"	A2="6"	A3="14"	A4="2"	A5="8"	>	1 строка	</array-list>
-    <array-list	A1="11"	A2="6"	A3="14"	A4="2"	A5="8"	>	2 строка	</array-list>
-    <array-list	A1="4"	A2="6"	A3="14"	A4="2"	A5="8"	>	3 строка	</array-list>
-    <array-list	A1="7"	A2="6"	A3="14"	A4="2"	A5="8"	>	4 строка	</array-list>
-    <array-list	A1="10"	A2="6"	A3="14"	A4="2"	A5="8"	>	5 строка	</array-list>
-    <array-list	A1="9"	A2="6"	A3="14"	A4="2"	A5="8"	>	6 строка	</array-list>
+    <array-list	A1="1"	A2="6"	A3="2"	A4="9"	A5="0"	>	1 строка	</array-list>
+    <array-list	A1="7"	A2="8"	A3="7"	A4="3"	A5="12"	>	2 строка	</array-list>
+    <array-list	A1="10"	A2="14"	A3="4"	A4="12"	A5="10"	>	3 строка	</array-list>
+    <array-list	A1="5"	A2="3"	A3="5"	A4="11"	A5="7"	>	4 строка	</array-list>
+    <array-list	A1="5"	A2="12"	A3="2"	A4="4"	A5="11"	>	5 строка	</array-list>
+    <array-list	A1="3"	A2="8"	A3="5"	A4="2"	A5="9"	>	6 строка	</array-list>
 </level>
