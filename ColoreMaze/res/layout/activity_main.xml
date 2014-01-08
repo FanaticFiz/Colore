@@ -12,8 +12,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="100"
         android:layout_above="@+id/textView11"
         android:layout_below="@+id/game_up_text"
         android:layout_centerHorizontal="true"
@@ -26,7 +27,9 @@
             style="@style/MenuFont"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+        	android:layout_height="0dp"       
+            android:layout_weight="30"
             android:gravity="center_vertical|center_horizontal"
             android:longClickable="true"
             android:onClick="OnClickPlay"
@@ -38,25 +41,31 @@
             style="@style/MenuFont"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+        	android:layout_height="0dp"       
+            android:layout_weight="25"
             android:onClick="OnClickSettings"
             android:text="@string/menu_settings_game" />
 
         <TextView
             android:id="@+id/about"
             style="@style/MenuFont"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1"
+            android:layout_weight="25"
             android:onClick="OnClickAbout"
             android:text="@string/menu_about" />
 
         <TextView
             android:id="@+id/exit"
             style="@style/ExitFont"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+        	android:layout_height="0dp"       
+            android:layout_weight="20"
             android:onClick="OnClickExit"
             android:text="@string/menu_exit" />
 
@@ -74,14 +83,8 @@
 
     <TextView
         android:id="@+id/game_up_text"
-        style="@style/ColoremMaze"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/app_name" />
+        style="@style/Name_of_aplication_large"
+        android:text="@string/app_name"
+        android:textSize="40sp" />
 
 </RelativeLayout>
