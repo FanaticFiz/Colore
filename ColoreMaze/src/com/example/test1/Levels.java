@@ -50,8 +50,9 @@ public class Levels extends Activity {
 	        	Intent intentG = new Intent();
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
-	    		intentG.putExtra("from_level_to_game_col",  counter_col);
-	    		intentG.putExtra("from_level_to_game_type", type_of_game);
+	    		intentG.putExtra("from_level_to_game_col",  counter_col);	
+	    		intentG.putExtra("from_level_to_game_number_of_level",  position);	// Передаю номер уровня для отображения оного			
+	    		intentG.putExtra("from_level_to_game_type", type_of_game); 	// использую для анимации между активити
 	    		startActivity(intentG);
 	    		
 	    		switch (type_of_game) 	{

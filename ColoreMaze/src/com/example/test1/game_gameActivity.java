@@ -3,6 +3,7 @@ package com.example.test1;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,10 +34,11 @@ public class game_gameActivity extends Activity {
 	private String 				ColorBall;		
 	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
-	int 						type_game_from,counter_col;
+	int 						type_game_from,counter_col,number_of_level;
 	long 						Start_Time,End_Time;
 	int 						randomBG;
-	
+	ImageButton 				ImbuttonReset;
+	                                           
 	String ss = System.getProperty("line.separator"); // строка разделитель
 		
 	// Таймер
@@ -114,6 +117,7 @@ public class game_gameActivity extends Activity {
 		arrayfromlevel 	=	getIntent().getExtras().getStringArrayList("FromLeveltogame");
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
+		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
 	
 		
 		RandomBackground();
@@ -121,8 +125,7 @@ public class game_gameActivity extends Activity {
 			
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
-		//MoovField.setText(""+Moovs_counter);
-		MoovField.setText(String.format("%03d", Moovs_counter));
+		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
 		
 		someText = (TextView)findViewById(R.id.game_down_text);
 		someText.setText("Цель: пройти от черного поля к белому");
@@ -152,6 +155,8 @@ public class game_gameActivity extends Activity {
         
         Start_Time = System.currentTimeMillis();
         
+        
+        
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         	{
@@ -162,13 +167,26 @@ public class game_gameActivity extends Activity {
                  	else 	{
                  		game_move(parent, position, v);
                  		someText.setText("Номер фона = "+randomBG);
-                 		MoovField.setText(String.format("%03d", Moovs_counter));
+                 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
                  			}
         		}                	             
-        	});
+        	});     
+      
 	}
 
-	
+	   
+    public void onResetClick(View v)
+    {
+
+    	startTime = System.currentTimeMillis();
+    	Moovs_counter=0;
+    	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+    
+    	mGrid.setAdapter(mAdapter);
+    	
+    	Find_Start_Point();
+    }
+    
 	// 	При старте уровня находим в массиве черную-стартовую точку 
 	// 	позиционируемся на ней и определяем следующие доступные ходы
 	public void Find_Start_Point() 
