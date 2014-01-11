@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -14,7 +15,7 @@ public class gridadapter_Game extends BaseAdapter
 	private Resources mRes; 		   		// –есурсы приложени
 	private int SizeArray;
 	
-	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML) 
+	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML, String game_type) 
 	{
 		mContext = context;
 		arrayPicture = arrayfromXML;
@@ -25,7 +26,7 @@ public class gridadapter_Game extends BaseAdapter
 	 
 	    // ћетод заполн€ющий массив arrayPicture
 	    makePictArray();
-	    
+	        	    
 	}
 
 	
@@ -171,7 +172,7 @@ public class gridadapter_Game extends BaseAdapter
 				*/
 				
 			default:
-				arrayPicture.set(i, "ball13");
+				arrayPicture.set(i, "ball21");
 				break;
 			}
 	    }

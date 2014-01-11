@@ -21,7 +21,6 @@ public class MainActivity extends Activity {
 	TextView textStartGame,textStartGame1,textStartGame2,textStartGame3,textStartGame4;
 	private Animation menu_animation;
 	private SoundPool soundPool;
-	private Intent svc;
 	boolean loaded = false;
 	private static int soundID1;
 	private static float volume;
@@ -42,10 +41,6 @@ public class MainActivity extends Activity {
 		
 		// ****************************************************************************
 		// *************************** работаем со звуком  ****************************
-		// Стартуем сервис проигрования музыки.
-		//svc=  new Intent(this, MusicService.class);
-		//startService(svc);
-		
 		//Создаем soundPool. для коротких пуков
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         soundID1 = soundPool.load(this, R.raw.btn2, 1);
@@ -63,22 +58,21 @@ public class MainActivity extends Activity {
 		// ****************************************************************************
         
         
-		
-		
 		// Установка шрифта текстовым полям
 		final TextView textColoremaze = (TextView)findViewById(R.id.game_up_text);
 		textColoremaze.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
 		textStartGame = (TextView)findViewById(R.id.start);
-		textStartGame.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/trashco.ttf"));
+		textStartGame.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame1 = (TextView)findViewById(R.id.settings);
-		textStartGame1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/trashco.ttf"));
+		textStartGame1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame2 = (TextView)findViewById(R.id.about);
-		textStartGame2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/trashco.ttf"));
+		textStartGame2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame3 = (TextView)findViewById(R.id.exit);
 		textStartGame3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame4 = (TextView)findViewById(R.id.textView11);
-				
+		
+		/*
 		// Добавляем тени
 		textColoremaze.setShadowLayer(8f,4f,4f,0xFF000000);
 		textStartGame.setShadowLayer(8f,8f,8f,0xFF000000);
@@ -86,7 +80,7 @@ public class MainActivity extends Activity {
 		textStartGame2.setShadowLayer(8f,8f,8f,0xFF000000);
 		textStartGame3.setShadowLayer(8f,4f,4f,0xFF000000);
 		textStartGame4.setShadowLayer(8f,4f,4f,0xFF000000);
-		
+		*/
 			
 		
 		// подключаем файл анимации для меню
@@ -155,7 +149,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onPause();
 
-		
 		volume++;
 		Editor editor = mSettings.edit();
 		editor.putFloat(APP_PREFERENCES_COUNTER, volume);
@@ -167,7 +160,6 @@ public class MainActivity extends Activity {
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
-
 		
 		// если ли нужный нам ключ
 		if (mSettings.contains(APP_PREFERENCES_COUNTER)) 
@@ -187,7 +179,6 @@ public class MainActivity extends Activity {
 		soundPool.release();
 		soundPool = null;
 		
-		stopService(svc);
 		finish();
 	}
 	
@@ -197,7 +188,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		
-		stopService(svc);
 		finish();
 	}
 }

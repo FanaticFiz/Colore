@@ -29,9 +29,9 @@ public class game_gameActivity extends Activity {
 	//private Dialog				dialog_end_of_game;
 	private gridadapter_Game 	mAdapter;
 	private int 				LastMoov,Moovs_counter;
-	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
+	ArrayList<String> 			arrayfromlevel,_arrayfromlevel_;			// массив переданный из предыдущей активности содержит описание игрового поля 
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
-	private String 				ColorBall;		
+	private String 				ColorBall,XMLgame_type;	// XMLgame_type - прописанный в XML файле вариант игры	
 	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
 	int 						type_game_from,counter_col,number_of_level;
@@ -118,7 +118,8 @@ public class game_gameActivity extends Activity {
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
 		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
-	
+		XMLgame_type	=	getIntent().getExtras().getString("from_level_to_game_XMLgame_type");
+		
 		
 		RandomBackground();
 		
@@ -136,16 +137,31 @@ public class game_gameActivity extends Activity {
 		dialog_end_of_game.setTitle(R.string.Dialog_end_of_game_Title);
 		dialog_end_of_game.setCancelable(false);
 		*/
-		
-		
-		
+			
 			
 		////**************************************************
+			_arrayfromlevel_ = (ArrayList<String>) arrayfromlevel.clone();
+			
+		    if (Integer.parseInt(XMLgame_type)==1)
+		    {
+		    	for (int i=0; i<_arrayfromlevel_.size(); i++) 
+		    	{
+		    		if ((Integer.parseInt(_arrayfromlevel_.get(i))==1)|(Integer.parseInt(_arrayfromlevel_.get(i))==0)) 
+		    		{   	}
+		    		else	{	_arrayfromlevel_.set(i, "21");	}
+				}
+		    	   
+		    }   			
+	    
+	    int dgerg;
+		dgerg = 6;		
+	    int sfrfg = dgerg++;
+	    
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, arrayfromlevel);
+        mAdapter = new gridadapter_Game(this, _arrayfromlevel_,XMLgame_type);
         mGrid.setAdapter(mAdapter);
         
                 
@@ -179,9 +195,11 @@ public class game_gameActivity extends Activity {
     {
 
     	startTime = System.currentTimeMillis();
+    	hours=0;minutes=0;seconds=0;
     	Moovs_counter=0;
     	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
-    
+    	TimerField.setText(String.format("%d:%02d", minutes, seconds));
+    	
     	mGrid.setAdapter(mAdapter);
     	
     	Find_Start_Point();
@@ -530,6 +548,8 @@ public class game_gameActivity extends Activity {
 	    // показываем окно
 	    alertbox.show();
 	  }
+	
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

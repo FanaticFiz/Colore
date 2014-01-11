@@ -22,7 +22,8 @@ public class Levels extends Activity {
 	private 	SoundPool 	soundPool;
 	private 	static int 	soundID1;
 	private		int			counter_col;	// кол-во столбцов	
-	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class
+	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
+	private		String		XMLgame_type="0";	// Типа усложнения игры из файла
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,9 @@ public class Levels extends Activity {
 	    		intentG.setClass(Levels.this, game_gameActivity.class);
 	    		intentG.putExtra("FromLeveltogame", list);
 	    		intentG.putExtra("from_level_to_game_col",  counter_col);	
-	    		intentG.putExtra("from_level_to_game_number_of_level",  position);	// Передаю номер уровня для отображения оного			
-	    		intentG.putExtra("from_level_to_game_type", type_of_game); 	// использую для анимации между активити
+	    		intentG.putExtra("from_level_to_game_number_of_level",  position);		// Передаю номер уровня для отображения оного			
+	    		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
+	    		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
 	    		startActivity(intentG);
 	    		
 	    		switch (type_of_game) 	{
@@ -182,6 +184,15 @@ public class Levels extends Activity {
         	while (parser.getEventType()!= XmlPullParser.END_DOCUMENT) 
         	{
         		if (parser.getEventType() == XmlPullParser.START_TAG
+                        && parser.getName().equals("game-type"))
+        		{
+        			for (int i = 0; i < parser.getAttributeCount(); i++)
+        			{
+        				XMLgame_type = parser.getAttributeValue(i);
+        			}
+        		}
+        		
+        		if (parser.getEventType() == XmlPullParser.START_TAG
                     && parser.getName().equals("array-list")) 
         		{
         			for (int i = 0; i < parser.getAttributeCount(); i++)
@@ -190,6 +201,7 @@ public class Levels extends Activity {
         			}
         			counter_col = parser.getAttributeCount();
         		}
+        		
         	parser.next();
         	}
         }
