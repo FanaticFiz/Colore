@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	TextView textStartGame,textStartGame1,textStartGame2,textStartGame3,textStartGame4;
+	TextView textStartGame1,textStartGame2,textStartGame3,textStartGame4;
 	private Animation menu_animation;
 	private SoundPool soundPool;
 	boolean loaded = false;
@@ -62,8 +62,6 @@ public class MainActivity extends Activity {
 		final TextView textColoremaze = (TextView)findViewById(R.id.game_up_text);
 		textColoremaze.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
-		textStartGame = (TextView)findViewById(R.id.start);
-		textStartGame.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame1 = (TextView)findViewById(R.id.settings);
 		textStartGame1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		textStartGame2 = (TextView)findViewById(R.id.about);
@@ -99,8 +97,7 @@ public class MainActivity extends Activity {
 
 	public void OnClickPlay(View v) 
 	{
-		// Анимируем меню
-		textStartGame.startAnimation(menu_animation);
+		/*
 		soundPool.play(soundID1, volume, volume, 1, 0, 1f);		
 		// отсюда идем в окно выбора типа игры
 		Intent intentG = new Intent();
@@ -108,6 +105,7 @@ public class MainActivity extends Activity {
 		startActivity(intentG);
 		// анимируем переход между активити
 		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
+		*/
 	}	
 	public void OnClickSettings(View v) 
 	{

@@ -172,7 +172,7 @@ public class gridadapter_Game extends BaseAdapter
 				*/
 				
 			default:
-				arrayPicture.set(i, "ball21");
+				arrayPicture.set(i, "ball13");
 				break;
 			}
 	    }

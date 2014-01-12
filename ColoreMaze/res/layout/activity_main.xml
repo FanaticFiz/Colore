@@ -22,19 +22,13 @@
         android:gravity="bottom"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/start"
-            style="@style/MenuFont"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-        	android:layout_height="0dp"       
-            android:layout_weight="30"
-            android:gravity="center_vertical|center_horizontal"
-            android:longClickable="true"
-            android:onClick="OnClickPlay"
-            android:text="@string/menu_start_game"
-            android:textStyle="bold|italic" />
+         <ImageButton
+             android:id="@+id/imbuttonmenu"
+             android:layout_width="wrap_content"
+        	 android:layout_height="wrap_content"       
+             android:layout_gravity="center_horizontal"
+             android:background="#00000000"
+             android:src="@drawable/imbuttonmain" />
 
         <TextView
             android:id="@+id/settings"
@@ -43,7 +37,7 @@
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
         	android:layout_height="0dp"       
-            android:layout_weight="25"
+            android:layout_weight="35"
             android:onClick="OnClickSettings"
             android:text="@string/menu_settings_game" />
 
@@ -54,7 +48,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="25"
+            android:layout_weight="35"
             android:onClick="OnClickAbout"
             android:text="@string/menu_about" />
 
@@ -65,7 +59,7 @@
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
         	android:layout_height="0dp"       
-            android:layout_weight="20"
+            android:layout_weight="30"
             android:onClick="OnClickExit"
             android:text="@string/menu_exit" />
 

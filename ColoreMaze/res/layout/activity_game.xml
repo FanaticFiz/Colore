@@ -23,7 +23,7 @@
             android:textSize="22sp" />
 			
          <ImageButton
-             android:id="@+id/imbutton"
+             android:id="@+id/imbuttonreset"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_gravity="center_horizontal"
