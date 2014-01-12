@@ -28,6 +28,7 @@
         	 android:layout_height="wrap_content"       
              android:layout_gravity="center_horizontal"
              android:background="#00000000"
+             android:onClick="onPlayClick"
              android:src="@drawable/imbuttonmain" />
 
         <TextView

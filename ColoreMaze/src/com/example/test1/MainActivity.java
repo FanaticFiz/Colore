@@ -95,9 +95,9 @@ public class MainActivity extends Activity {
 	}
 
 
-	public void OnClickPlay(View v) 
+	public void onPlayClick(View v) 
 	{
-		/*
+		
 		soundPool.play(soundID1, volume, volume, 1, 0, 1f);		
 		// отсюда идем в окно выбора типа игры
 		Intent intentG = new Intent();
@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
 		startActivity(intentG);
 		// анимируем переход между активити
 		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
-		*/
+		
 	}	
 	public void OnClickSettings(View v) 
 	{
