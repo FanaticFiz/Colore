@@ -23,10 +23,14 @@ public class MainActivity extends Activity {
 	private SoundPool soundPool;
 	boolean loaded = false;
 	private static int soundID1;
-	private static float volume;
+	
+	private static float	volume;
+	private static int 		Sound_on_of,fontBG;
+    public static final String APP_PREFERENCES = "mysettings";  				// Имя файла настроек
+    public static final String APP_PREFERENCES_menu_volume 	= "volume";			// Громкость музыки
+    public static final String APP_PREFERENCES_menu_sound	= "Sound_on_of";	// вкл/выкл звука
+    public static final String APP_PREFERENCES_menu_fonBG	= "fontBG";			// фон выбранный по умолчанию 
     
-    public static final String APP_PREFERENCES = "mysettings";  		// Имя файла настроек
-    public static final String APP_PREFERENCES_COUNTER = "vol";		// Счетчик
     SharedPreferences mSettings;
     
     
@@ -83,6 +87,8 @@ public class MainActivity extends Activity {
 		
 		// подключаем файл анимации для меню
 		menu_animation = AnimationUtils.loadAnimation(this, R.anim.menuanimation);
+		
+		//MyGetPreferences();
 	}
 
 	
@@ -141,6 +147,32 @@ public class MainActivity extends Activity {
 
 	
 	
+	public void MyGetPreferences() 
+	{
+		/*// если ли нужный нам ключ
+		if (mSettings.contains(APP_PREFERENCES_menu_volume)) 
+		{	volume = mSettings.getFloat(APP_PREFERENCES_menu_volume, 0);	}
+		if (mSettings.contains(APP_PREFERENCES_menu_sound)) 
+		{	volume = mSettings.getInt(APP_PREFERENCES_menu_sound, 0);	}
+		if (mSettings.contains(APP_PREFERENCES_menu_fonBG)) 
+		{	volume = mSettings.getInt(APP_PREFERENCES_menu_fonBG, 0);	}
+		*/
+		textStartGame4.setText(String.format("Громкость, Звук вкл/выкл, Тип фона: %d:%d:%d", volume, Sound_on_of, fontBG));
+	}
+	
+	
+	public void MySetPreferences() 
+	{
+		Editor editor = mSettings.edit();
+		editor.putFloat(APP_PREFERENCES_menu_volume, 	volume		);
+		editor.putFloat(APP_PREFERENCES_menu_sound, 	Sound_on_of	);
+		editor.putFloat(APP_PREFERENCES_menu_fonBG, 	fontBG		);
+		editor.apply();
+
+	}
+	
+	
+	
 	@Override
 	protected void onPause() 
 	{
@@ -148,9 +180,6 @@ public class MainActivity extends Activity {
 		super.onPause();
 
 		volume++;
-		Editor editor = mSettings.edit();
-		editor.putFloat(APP_PREFERENCES_COUNTER, volume);
-		editor.apply();
 	}
 	
 	@Override
@@ -158,14 +187,6 @@ public class MainActivity extends Activity {
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
-		
-		// если ли нужный нам ключ
-		if (mSettings.contains(APP_PREFERENCES_COUNTER)) 
-		{
-			// Получаем число из настроек
-			volume = mSettings.getFloat(APP_PREFERENCES_COUNTER, 0);
-			textStartGame4.setText("= "+volume);
-		}
 		
 	}
 	
