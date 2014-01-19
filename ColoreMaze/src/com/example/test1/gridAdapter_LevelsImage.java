@@ -7,8 +7,11 @@ import android.widget.BaseAdapter;
 
 public class gridAdapter_LevelsImage extends BaseAdapter {
     private Context mContext;
-    private int 	grid_type_of_game,preference_levels_compleate;		
-    
+    private int 	grid_type_of_game;
+    private int 	P_L_C1=1,	P_L_C2=0,	P_L_C3=0,	P_L_C4=0,	
+    				P_L_C5=0,	P_L_C6=0,	P_L_C7=0,	P_L_C8=0,
+    				P_L_C9=0,	P_L_C10=0,	P_L_C11=0,	P_L_C12=0;		
+    private int 	ggggg;
     
     public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels) 	
     { 
@@ -19,7 +22,7 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
     // этом методе поидее надо смотреть чему равна переменная type_of_game и тогда уже брать длинну 
     // соответсвующего массива mThumbIds[] 
     // НО у меня поидее эти массивы будут одинаковый длинны все, поэтому мы берем длинну одного из них только.
-    public int getCount() 						{ 	return mThumbIds1.length;   }
+    public int getCount() 						{ 	return mThumbIds1.length-12;   }
     public Object getItem(int position) 		{ 	return null;				}
     public long getItemId(int position) 		{ 	return 0;	   				}
 
@@ -37,19 +40,65 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
             imageView = (SquareImageView) convertView;
         }
         
+        
+        switch (position) 
+        {
+		case 0:	if (P_L_C1 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 1:	if (P_L_C2 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 2:	if (P_L_C3 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 3:	if (P_L_C4 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 4:	if (P_L_C5 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 5:	if (P_L_C6 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 6:	if (P_L_C7 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 7:	if (P_L_C8 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 8:	if (P_L_C9 == 1)   	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 9:	if (P_L_C10 == 1)  	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 10:if (P_L_C11 == 1)  	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+		case 11:if (P_L_C12 == 1)  	{  	ggggg = position + 12;	}
+				else 				{	ggggg = position;		}
+				break;
+
+		default:
+			ggggg = position;
+			break;
+		}
+        
+        
         // В зависимости от выбранного типа игры подгружается нужный массив с данными для отображения
         switch (grid_type_of_game) {
 		case 0:
-			imageView.setImageResource(mThumbIds1[position]);	
+			imageView.setImageResource(mThumbIds1[ggggg]);	
 			break;
 		case 1:
-			imageView.setImageResource(mThumbIds2[position]);	
+			imageView.setImageResource(mThumbIds2[ggggg]);	
 			break;
 		case 2:
-			imageView.setImageResource(mThumbIds3[position]);	
+			imageView.setImageResource(mThumbIds3[ggggg]);	
 			break;
 		case 3:
-			imageView.setImageResource(mThumbIds4[position]);	
+			imageView.setImageResource(mThumbIds4[ggggg]);	
 			break;
 		default:
 			//imageView.setImageResource(mThumbIds1[position]);	
@@ -62,9 +111,14 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
     // Здесь обьявлены массивы в которых перечисляются графические ресурсы для отображения уровней 
     // в активити levels. На данный момент я планирую 24 уровня на каждый тип игры.
     private Integer[] mThumbIds1 = {
-            R.drawable.layer_of_levelsgrid1,	R.drawable.layer_of_levelsgrid2,	R.drawable.layer_of_levelsgrid3,	R.drawable.layer_of_levelsgrid4,
+    		
+    		R.drawable.layer_of_levelsgrid1,	R.drawable.layer_of_levelsgrid2,	R.drawable.layer_of_levelsgrid3,	R.drawable.layer_of_levelsgrid4,
             R.drawable.layer_of_levelsgrid5,	R.drawable.layer_of_levelsgrid6,	R.drawable.layer_of_levelsgrid7,	R.drawable.layer_of_levelsgrid8,
             R.drawable.layer_of_levelsgrid9,	R.drawable.layer_of_levelsgrid10,	R.drawable.layer_of_levelsgrid11,	R.drawable.layer_of_levelsgrid12,
+              
+    		R.drawable.type1_level1,			R.drawable.type1_level2,			R.drawable.type1_level3,			R.drawable.type1_level4,
+    		R.drawable.type1_level5,			R.drawable.type1_level6,			R.drawable.type1_level7,			R.drawable.type1_level8,
+    		R.drawable.type1_level8,			R.drawable.type1_level10,			R.drawable.type1_level11,			R.drawable.type1_level12,          
     };
     
     private Integer[] mThumbIds2 = {
