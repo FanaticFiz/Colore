@@ -1,5 +1,6 @@
 package com.example.test1;
 
+
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -44,7 +45,7 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
-	        	
+	        	       	
 	        	soundPool.play(soundID1, 1, 1, 1, 0, 1f);
 	        	ChoiseLevel(type_of_game, position);
 	        	// Прыгаем в Игру

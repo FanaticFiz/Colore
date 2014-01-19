@@ -7,7 +7,8 @@ import android.widget.BaseAdapter;
 
 public class gridAdapter_LevelsImage extends BaseAdapter {
     private Context mContext;
-    private int 	grid_type_of_game;		
+    private int 	grid_type_of_game,preference_levels_compleate;		
+    
     
     public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels) 	
     { 
@@ -57,13 +58,13 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
             
         return imageView;
     }
-
+   
     // Здесь обьявлены массивы в которых перечисляются графические ресурсы для отображения уровней 
     // в активити levels. На данный момент я планирую 24 уровня на каждый тип игры.
     private Integer[] mThumbIds1 = {
-            R.drawable.type1_level1, R.drawable.type1_level2, R.drawable.type1_level3, R.drawable.type1_level4,
-            R.drawable.type1_level5, R.drawable.type1_level6, R.drawable.type1_level7, R.drawable.type1_level8,
-            R.drawable.type1_level9, R.drawable.type1_level10,R.drawable.type1_level11,R.drawable.type1_level12,
+            R.drawable.layer_of_levelsgrid1,	R.drawable.layer_of_levelsgrid2,	R.drawable.layer_of_levelsgrid3,	R.drawable.layer_of_levelsgrid4,
+            R.drawable.layer_of_levelsgrid5,	R.drawable.layer_of_levelsgrid6,	R.drawable.layer_of_levelsgrid7,	R.drawable.layer_of_levelsgrid8,
+            R.drawable.layer_of_levelsgrid9,	R.drawable.layer_of_levelsgrid10,	R.drawable.layer_of_levelsgrid11,	R.drawable.layer_of_levelsgrid12,
     };
     
     private Integer[] mThumbIds2 = {
