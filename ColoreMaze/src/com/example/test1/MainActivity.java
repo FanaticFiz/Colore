@@ -33,6 +33,69 @@ public class MainActivity extends Activity {
     
     SharedPreferences mSettings;
     
+    // Уровень 1
+ 	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"0";		// Общее кол-во ходов 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"1";		// Первый
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"0";		// второй
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"0";		// 
+
+ 	// Уровень 2
+ 	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"1";		// Первый
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"0";		// второй
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"0";		// 
+     	
+ 	// Уровень 3
+ 	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"1";		// Первый
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"0";		// второй
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"0";		// 
+
+ 	// Уровень 4
+ 	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"1";		// Первый
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"0";		// второй
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"0";		// 
+ 	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"0";		// 
+ 	
+ 	
+    
+    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -41,7 +104,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 			
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
+		
 		
 		// ****************************************************************************
 		// *************************** работаем со звуком  ****************************

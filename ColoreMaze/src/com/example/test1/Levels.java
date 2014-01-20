@@ -2,14 +2,14 @@ package com.example.test1;
 
 
 import java.util.ArrayList;
-
 import org.xmlpull.v1.XmlPullParser;
-
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,11 +26,86 @@ public class Levels extends Activity {
 	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
 	private		String		XMLgame_type="0";	// Типа усложнения игры из файла
 	
+	// Preferences
+	SharedPreferences mSettings;
+	public static final String 	APP_PREFERENCES = "mysettings";  							// Имя файла настроек	
+	// массив заполненный из преференсес
+	private static int[] 		pref_type_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
+
+	// Уровень 1
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"0";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"0";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"0";		// 
+
+	// Уровень 2
+	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"0";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"0";		// 
+    	
+	// Уровень 3
+	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"0";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"0";		// 
+
+	// Уровень 4
+	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"0";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"0";		// 
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
 			
+		
+		
+		//
+		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+		
+		
+		
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
         soundID1 = soundPool.load(this, R.raw.btn1, 1);
@@ -38,8 +113,12 @@ public class Levels extends Activity {
 		// получаем тип выбранной игры...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
         
+		
+		MyGetPreferences(type_of_game);
+		
+		// передаём в класс грид: контекст, тип выбранный в предыдущей активности и массив из преферансес
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
-	    gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game));
+	    gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game, pref_type_AllAboutLevels));
 	       
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {
@@ -69,6 +148,42 @@ public class Levels extends Activity {
 	    });			
 	}
 
+	
+	
+	public void MyGetPreferences(int type) 
+	{
+		switch (type) 
+		{
+		case 0:	
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_1))	{	pref_type_AllAboutLevels[0] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_1, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_2))	{	pref_type_AllAboutLevels[1] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_2, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_3))	{	pref_type_AllAboutLevels[2] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_3, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_4))	{	pref_type_AllAboutLevels[3] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_4, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_5))	{	pref_type_AllAboutLevels[4] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_5, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_6))	{	pref_type_AllAboutLevels[5] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_6, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_7))	{	pref_type_AllAboutLevels[6] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_7, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_8))	{	pref_type_AllAboutLevels[7] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_8, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_9))	{	pref_type_AllAboutLevels[8] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_9, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_10))	{	pref_type_AllAboutLevels[9]	= mSettings.getInt(APP_PREFERENCES_levels_of_type1_10,0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_11))	{	pref_type_AllAboutLevels[10]= mSettings.getInt(APP_PREFERENCES_levels_of_type1_11,0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_12))	{	pref_type_AllAboutLevels[11]= mSettings.getInt(APP_PREFERENCES_levels_of_type1_12,0);	}
+		break;
+
+		case 1:	
+		break;
+
+		case 2:	
+		break;
+
+		case 3:	
+		break;
+
+		default:
+			break;
+		}
+	}
+	
+	
 	
 	// Определяем какой файл xml подгрузить в зависимости от выбора уровня...
 	public void ChoiseLevel(int type, int NP) 

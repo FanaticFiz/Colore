@@ -6,17 +6,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class gridAdapter_LevelsImage extends BaseAdapter {
-    private Context mContext;
-    private int 	grid_type_of_game;
-    private int 	P_L_C1=1,	P_L_C2=0,	P_L_C3=0,	P_L_C4=0,	
-    				P_L_C5=0,	P_L_C6=0,	P_L_C7=0,	P_L_C8=0,
-    				P_L_C9=0,	P_L_C10=0,	P_L_C11=0,	P_L_C12=0;		
-    private int 	ggggg;
+    private Context 		mContext;
+    private int 			grid_type_of_game;
+    private static int[] 	array_of_P;	
+    private int 			ggggg;
     
-    public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels) 	
+	
+ 	
+    public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels, int[] pref_type_AllAboutLevels) 	
     { 
     	mContext = c;
     	grid_type_of_game = type_of_game_from_levels;
+    	array_of_P = pref_type_AllAboutLevels;
     }
     
     // этом методе поидее надо смотреть чему равна переменная type_of_game и тогда уже брать длинну 
@@ -49,41 +50,41 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
         // возможно даже что так лучше в плане что ненужно в коде потом менять состояния или как то рисовать/перерисовывать что то
         switch (position) 
         {
-		case 0:	if (P_L_C1 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 0:	if (array_of_P[0] > 0) 	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 1:	if (P_L_C2 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 1:	if (array_of_P[1] > 0) 	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 2:	if (P_L_C3 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 2:	if (array_of_P[2] > 0) 	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 3:	if (P_L_C4 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 3:	if (array_of_P[3] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 4:	if (P_L_C5 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 4:	if (array_of_P[4] > 0) 	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 5:	if (P_L_C6 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 5:	if (array_of_P[5] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 6:	if (P_L_C7 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 6:	if (array_of_P[6] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 7:	if (P_L_C8 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 7:	if (array_of_P[7] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 8:	if (P_L_C9 == 1)   	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 8:	if (array_of_P[8] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 9:	if (P_L_C10 == 1)  	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 9:	if (array_of_P[9] > 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 10:if (P_L_C11 == 1)  	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 10:if (array_of_P[10]> 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
-		case 11:if (P_L_C12 == 1)  	{  	ggggg = position + 12;	}
-				else 				{	ggggg = position;		}
+		case 11:if (array_of_P[11]> 0)	{  	ggggg = position + 12;	}
+				else 					{	ggggg = position;		}
 				break;
 
 		default:
