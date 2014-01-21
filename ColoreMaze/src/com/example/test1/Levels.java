@@ -2,7 +2,9 @@ package com.example.test1;
 
 
 import java.util.ArrayList;
+
 import org.xmlpull.v1.XmlPullParser;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -32,65 +34,68 @@ public class Levels extends Activity {
 	// массив заполненный из преференсес
 	private static int[] 		pref_type_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
 
-	// Уровень 1
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"0";		// Общее кол-во ходов 
-	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"0";		// второй
-	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"0";		// 
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"levels_of_type1_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"levels_of_type1_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"levels_of_type1_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"levels_of_type1_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
 
 	// Уровень 2
-	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"0";		// второй
-	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"0";		// 
+	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
+	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"levels_of_type2_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"levels_of_type2_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"levels_of_type2_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"levels_of_type2_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"levels_of_type2_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
     	
 	// Уровень 3
-	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"0";		// второй
-	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"0";		// 
+	//private static int[] 		pref_type3_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
+	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"levels_of_type3_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"levels_of_type3_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"levels_of_type3_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"levels_of_type3_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"levels_of_type3_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
 
 	// Уровень 4
-	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"0";		// второй
-	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"0";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"0";		// 
+	//private static int[] 		pref_type4_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
+	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"levels_of_type4_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"levels_of_type4_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"levels_of_type4_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"levels_of_type4_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"levels_of_type4_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"levels_of_type4_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
+	
 	
 	
 	@Override

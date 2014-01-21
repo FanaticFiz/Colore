@@ -50,40 +50,39 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
         // возможно даже что так лучше в плане что ненужно в коде потом менять состояния или как то рисовать/перерисовывать что то
         switch (position) 
         {
-		case 0:	if (array_of_P[0] > 0) 	{  	ggggg = position + 12;	}
+		case 0:	ggggg = position+12;		break;
+				
+		case 1:	if (array_of_P[0] > 0) 	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 1:	if (array_of_P[1] > 0) 	{  	ggggg = position + 12;	}
+		case 2:	if (array_of_P[1] > 0) 	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 2:	if (array_of_P[2] > 0) 	{  	ggggg = position + 12;	}
+		case 3:	if (array_of_P[2] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 3:	if (array_of_P[3] > 0)	{  	ggggg = position + 12;	}
+		case 4:	if (array_of_P[3] > 0) 	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 4:	if (array_of_P[4] > 0) 	{  	ggggg = position + 12;	}
+		case 5:	if (array_of_P[4] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 5:	if (array_of_P[5] > 0)	{  	ggggg = position + 12;	}
+		case 6:	if (array_of_P[5] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 6:	if (array_of_P[6] > 0)	{  	ggggg = position + 12;	}
+		case 7:	if (array_of_P[6] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 7:	if (array_of_P[7] > 0)	{  	ggggg = position + 12;	}
+		case 8:	if (array_of_P[7] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 8:	if (array_of_P[8] > 0)	{  	ggggg = position + 12;	}
+		case 9:	if (array_of_P[8] > 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 9:	if (array_of_P[9] > 0)	{  	ggggg = position + 12;	}
+		case 10:if (array_of_P[9]> 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
-		case 10:if (array_of_P[10]> 0)	{  	ggggg = position + 12;	}
-				else 					{	ggggg = position;		}
-				break;
-		case 11:if (array_of_P[11]> 0)	{  	ggggg = position + 12;	}
+		case 11:if (array_of_P[10]> 0)	{  	ggggg = position + 12;	}
 				else 					{	ggggg = position;		}
 				break;
 
