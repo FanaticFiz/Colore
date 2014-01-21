@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Levels extends Activity {
 	
+	private Animation 			animation_wrong_moovs;
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
 	private 	SoundPool 	soundPool;
 	private 	static int 	soundID1;
@@ -109,7 +112,9 @@ public class Levels extends Activity {
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 		
-		
+		// подключаем файл анимации
+		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+			
 		
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 		//Загружаем звуки в память
@@ -129,26 +134,35 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
-	        	       	
-	        	soundPool.play(soundID1, 1, 1, 1, 0, 1f);
-	        	ChoiseLevel(type_of_game, position);
-	        	// Прыгаем в Игру
-	        	Intent intentG = new Intent();
-	    		intentG.setClass(Levels.this, game_gameActivity.class);
-	    		intentG.putExtra("FromLeveltogame", list);
-	    		intentG.putExtra("from_level_to_game_col",  counter_col);	
-	    		intentG.putExtra("from_level_to_game_number_of_level",  position);		// Передаю номер уровня для отображения оного			
-	    		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
-	    		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
-	    		startActivity(intentG);
+	        	// Идем играть только если уровень открыт
+	        	int position_for_array = position-1;
+	        	if (pref_type_AllAboutLevels[position_for_array] > 0) 
+	        	{
+     		        	
+	        		soundPool.play(soundID1, 1, 1, 1, 0, 1f);
+	        		ChoiseLevel(type_of_game, position);
+	        		// 	Прыгаем в Игру
+	        		Intent intentG = new Intent();
+	        		intentG.setClass(Levels.this, game_gameActivity.class);
+	        		intentG.putExtra("FromLeveltogame", list);
+	        		intentG.putExtra("from_level_to_game_col",  counter_col);	
+	        		intentG.putExtra("from_level_to_game_number_of_level",  position);		// Передаю номер уровня для отображения оного			
+	        		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
+	        		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
+	        		startActivity(intentG);
 	    		
-	    		switch (type_of_game) 	{
-				case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
-				case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
-				case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// Активность уходит вниз
-				case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// Активность уходит вверх
-				default:			break;
-									}    		
+	        		switch (type_of_game) 	{
+	        		case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
+	        		case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
+	        		case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// Активность уходит вниз
+	        		case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// Активность уходит вверх
+	        		default:			break;
+	        								}
+	        	}
+	        	else 
+	        	{
+	        		parent.getChildAt(position).startAnimation(animation_wrong_moovs);
+				}
 	        }
 	    });			
 	}

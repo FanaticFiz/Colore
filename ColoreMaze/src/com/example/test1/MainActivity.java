@@ -25,23 +25,89 @@ public class MainActivity extends Activity {
 	private static int soundID1;
 	
 	private static float	volume;
-	private static int 		Sound_on_of,fontBG;
+	//private static int 		Sound_on_of,fontBG;
+	
     public static final String APP_PREFERENCES = "mysettings";  				// Имя файла настроек
+    
+    public static final String APP_PREFERENCES_FirstRun 	= "FirstRun";		// признак первого запуска
     public static final String APP_PREFERENCES_menu_volume 	= "volume";			// Громкость музыки
     public static final String APP_PREFERENCES_menu_sound	= "Sound_on_of";	// вкл/выкл звука
     public static final String APP_PREFERENCES_menu_fonBG	= "fontBG";			// фон выбранный по умолчанию 
     
     SharedPreferences mSettings;
-      
-    
+    Editor preferences_editor;      
+    // Уровень 1 
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"levels_of_type1_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"levels_of_type1_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"levels_of_type1_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"levels_of_type1_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
+
+	// Уровень 2
+	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"levels_of_type2_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"levels_of_type2_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"levels_of_type2_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"levels_of_type2_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"levels_of_type2_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
+    	
+	// Уровень 3
+	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"levels_of_type3_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"levels_of_type3_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"levels_of_type3_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"levels_of_type3_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"levels_of_type3_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
+
+	// Уровень 4
+	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"levels_of_type4_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"levels_of_type4_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"levels_of_type4_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"levels_of_type4_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"levels_of_type4_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"levels_of_type4_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
+	
+	
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-			
+		
+		// Преференсес
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+		PreferencesInit();
+		
 		
 		
 		// ****************************************************************************
@@ -148,31 +214,45 @@ public class MainActivity extends Activity {
 
 	
 	
-	public void MyGetPreferences() 
+	public void PreferencesInit() 
 	{
-		/*// если ли нужный нам ключ
-		if (mSettings.contains(APP_PREFERENCES_menu_volume)) 
-		{	volume = mSettings.getFloat(APP_PREFERENCES_menu_volume, 0);	}
-		if (mSettings.contains(APP_PREFERENCES_menu_sound)) 
-		{	volume = mSettings.getInt(APP_PREFERENCES_menu_sound, 0);	}
-		if (mSettings.contains(APP_PREFERENCES_menu_fonBG)) 
-		{	volume = mSettings.getInt(APP_PREFERENCES_menu_fonBG, 0);	}
-		*/
-		textStartGame4.setText(String.format("Громкость, Звук вкл/выкл, Тип фона: %d:%d:%d", volume, Sound_on_of, fontBG));
+		// Если НЕ существует переменной FirstRun(да собственно как и любой другой) значит приложение еще не запускалось
+		// проводим инициализацию всех переменных в начальное положение
+		if (!mSettings.contains(APP_PREFERENCES_FirstRun)) 
+		{ 
+			preferences_editor = mSettings.edit();
+			// Общие настройки
+			preferences_editor.putInt(APP_PREFERENCES_FirstRun, 1);
+			preferences_editor.putInt(APP_PREFERENCES_menu_fonBG, 		0);	// Фон поумолчанию
+			preferences_editor.putInt(APP_PREFERENCES_menu_sound, 		1);	// Звуки нажатий включены
+			preferences_editor.putInt(APP_PREFERENCES_menu_volume, 		1);	// музыка ВКЛ
+			
+			// Настройки игры
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type1, 	0);	// Общее кол-во ходов на легком (1) уровне игры
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type2, 	0);	// Общее кол-во ходов на среднем (2) уровне игры
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type3, 	0);	// Общее кол-во ходов на легком (3) уровне игры
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type4, 	0);	// Общее кол-во ходов на легком (4) уровне игры
+			
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_1,	0);		//	Тип 1. Уровень 1
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_2,	0);		//	Тип 1. Уровень 2
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_3,	0);		//	Тип 1. Уровень 3
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_4,	0);		//	Тип 1. Уровень 4
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_5,	0);		//	Тип 1. Уровень 5
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_6,	0);		//	Тип 1. Уровень 6
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_7,	0);		//	Тип 1. Уровень 7
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_8,	0);		//	Тип 1. Уровень 8
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_9,	0);		//	Тип 1. Уровень 9
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_10,	0);		//	Тип 1. Уровень 10
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_11,	0);		//	Тип 1. Уровень 11
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_12,	0);		//	Тип 1. Уровень 12
+			
+			preferences_editor.apply();
+		}
+		
 	}
 	
 	
-	public void MySetPreferences() 
-	{
-		Editor editor = mSettings.edit();
-		editor.putFloat(APP_PREFERENCES_menu_volume, 	volume		);
-		editor.putFloat(APP_PREFERENCES_menu_sound, 	Sound_on_of	);
-		editor.putFloat(APP_PREFERENCES_menu_fonBG, 	fontBG		);
-		editor.apply();
-
-	}
-	
-	
+		
 	
 	@Override
 	protected void onPause() 
@@ -201,7 +281,6 @@ public class MainActivity extends Activity {
 		
 		finish();
 	}
-	
 	
 	@Override
 	public void onBackPressed() {
