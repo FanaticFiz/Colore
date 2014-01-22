@@ -124,7 +124,7 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
               
     		R.drawable.type1_level1,			R.drawable.type1_level2,			R.drawable.type1_level3,			R.drawable.type1_level4,
     		R.drawable.type1_level5,			R.drawable.type1_level6,			R.drawable.type1_level7,			R.drawable.type1_level8,
-    		R.drawable.type1_level8,			R.drawable.type1_level10,			R.drawable.type1_level11,			R.drawable.type1_level12,          
+    		R.drawable.type1_level9,			R.drawable.type1_level10,			R.drawable.type1_level11,			R.drawable.type1_level12,          
     };
     
     private Integer[] mThumbIds2 = {

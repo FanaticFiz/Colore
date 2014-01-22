@@ -134,9 +134,11 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
-	        	// Идем играть только если уровень открыт
-	        	int position_for_array = position-1;
-	        	if (pref_type_AllAboutLevels[position_for_array] > 0) 
+	        	// Идем играть только если уровень открыт (Исключение только для уровня 1)
+	        	// нужно смотреть на элемент массива -1 (на предыдущий)
+	        	int position_of_array = position - 1;
+	        	if (position==0){	position_of_array=0;	}
+	        	if ( (pref_type_AllAboutLevels[position_of_array] > 0) | (position==0) ) 
 	        	{
      		        	
 	        		soundPool.play(soundID1, 1, 1, 1, 0, 1f);
@@ -150,7 +152,8 @@ public class Levels extends Activity {
 	        		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
 	        		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
 	        		startActivity(intentG);
-	    		
+	        		
+
 	        		switch (type_of_game) 	{
 	        		case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
 	        		case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
@@ -373,4 +376,26 @@ public class Levels extends Activity {
 		default:			break;
 							}    		 
 	}
+	
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		
+		MyGetPreferences(type_of_game);		
+		// передаём в класс грид: контекст, тип выбранный в предыдущей активности и массив из преферансес
+		GridView gridview = (GridView) findViewById(R.id.levelselect);
+		gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game, pref_type_AllAboutLevels));
+			    		
+		switch (type_of_game) 	{
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		default:				break;
+								}    		 
+
+	}
+	
 }
