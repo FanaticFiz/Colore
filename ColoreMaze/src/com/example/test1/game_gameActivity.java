@@ -3,12 +3,14 @@ package com.example.test1;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
@@ -26,9 +28,9 @@ public class game_gameActivity extends Activity {
 
 	private Animation 			animation_wrong_moovs;
 	private GridView 			mGrid;
-	//private Dialog				dialog_end_of_game;
+	//private Dialog			dialog_end_of_game;
 	private gridadapter_Game 	mAdapter;
-	private int 				LastMoov,Moovs_counter;
+	private int 				LastMoov,Moovs_counter,moovs_counter_all;
 	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
 	private String 				ColorBall,XMLgame_type;	// XMLgame_type - прописанный в XML файле вариант игры	
@@ -40,7 +42,79 @@ public class game_gameActivity extends Activity {
 	ImageButton 				ImbuttonReset;
 	                                           
 	String ss = System.getProperty("line.separator"); // строка разделитель
-		
+	
+	// Preferences
+	SharedPreferences mSettings;
+	Editor editor;
+	public static final String 	APP_PREFERENCES = "mysettings";  							// Имя файла настроек
+	
+	// Уровень 1
+	// Данный массив содержит всю информацию по прохождению всех уровней первого типа
+	// первые 24 параметра содержат в себе кол-ов ходов за которое каждый из уровней пройден...
+	// Причем наличие люой цифры большей чем 0 автоматически означает что уровень был пройден! (это справедливо для всех уровней кроме первого)
+	// последний параметр это общее кол-во ходов
+	//private static int[] 		pref_type1_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_6	= 	"levels_of_type1_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_7	= 	"levels_of_type1_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_8	= 	"levels_of_type1_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_9	= 	"levels_of_type1_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
+
+	// Уровень 2
+	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
+	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_6	= 	"levels_of_type2_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_7	= 	"levels_of_type2_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_8	= 	"levels_of_type2_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_9	= 	"levels_of_type2_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_10	= 	"levels_of_type2_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
+    	
+	// Уровень 3
+	//private static int[] 		pref_type3_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
+	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_6	= 	"levels_of_type3_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_7	= 	"levels_of_type3_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_8	= 	"levels_of_type3_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_9	= 	"levels_of_type3_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_10	= 	"levels_of_type3_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
+
+	// Уровень 4
+	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_6	= 	"levels_of_type4_6";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_7	= 	"levels_of_type4_7";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_8	= 	"levels_of_type4_8";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_9	= 	"levels_of_type4_9";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_10	= 	"levels_of_type4_10";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"levels_of_type4_11";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
+	
 	// Таймер
 	private int seconds,minutes,hours;
 	private Timer timer    = null;
@@ -51,6 +125,15 @@ public class game_gameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		 
+		
+		//	
+		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+		
+		if (mSettings.contains(APP_PREFERENCES_moovs_of_type1)) 
+		{	
+			moovs_counter_all = mSettings.getInt(APP_PREFERENCES_moovs_of_type1, 0);	
+		}
+		
 		
 		// ------------------------------------------------------------------------------------------------		
 		// ---------------------- аботает таймер и выводит в текстовое поле результат ---------------------
@@ -110,7 +193,7 @@ public class game_gameActivity extends Activity {
 		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 	
 		
-		LastMoov=0;Moovs_counter=0;
+		LastMoov=0;
 		array_legal_moovs = new int[4];
 		
 		// Получаем данные из предыдущей активити. Игровой массив и кол-во строк и столбцов в игровом поле 
@@ -164,9 +247,11 @@ public class game_gameActivity extends Activity {
                  	if (NumberFromName(arrayfromlevel.get(position))==13) 
                  	{						}
                  	else 	{
-                 		game_move(parent, position, v);
+                 		
                  		someText.setText("Номер фона = "+randomBG);
                  		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+                 		
+                 		game_move(parent, position, v);
                  			}
         		}                	             
         	});     
@@ -176,7 +261,9 @@ public class game_gameActivity extends Activity {
 	   
     public void onResetClick(View v)
     {
-
+    	
+    	//mSettings.
+    	
     	startTime = System.currentTimeMillis();
     	hours=0;minutes=0;seconds=0;
     	Moovs_counter=0;
@@ -214,8 +301,7 @@ public class game_gameActivity extends Activity {
 	public void game_move(AdapterView<?> parent, int position, View v) 
 	{
 		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
-		{
-
+		{			
 			// -----------------------------------------------------------------------------------------------
 			// уменьшаем то что нажали и увеличиваем предыдущую картинку
 			parent.getChildAt(LastMoov).setScaleX((float) 1);
@@ -225,6 +311,10 @@ public class game_gameActivity extends Activity {
 			v.setScaleY((float) 0.7);
 			// -----------------------------------------------------------------------------------------------
 
+			//	Т.е. если мы сюда попали значит мы сделали легальный ход... т.е. мы уже тут можем считать счетчик ходов а не в каждом отдельном кайсе
+			Moovs_counter++;
+			
+			
 			// получаем имя файла ресурса по которому мы определим
 			// какие следующие ходы возможны
 			// например с красной позиции ход возможен только на верх и вправо
@@ -247,24 +337,25 @@ public class game_gameActivity extends Activity {
 			// 14 - Лосось - вниз
 
 			// выдергиваем число из названия файла
-			Integer ert = NumberFromName(arrayfromlevel.get(position));
-
+			Integer ert = NumberFromName(arrayfromlevel.get(position));			
 			switch (ert) {
 			case 0:
 				// Финиш
 				// тормозим таймер
 				timer.cancel();
 				
-				//ColorBall = "Поздравляем, Вы выиграли!!!";
-				//someText.setText("Цвет = " + ColorBall);
+				moovs_counter_all = moovs_counter_all + Moovs_counter;
+									
+				// Пишем в преференсес
+				//передаю тип игры, уровень и сделанное кол-во ходов
+				MySetPreferences(type_game_from, number_of_level,Moovs_counter);
 				
 				// Массив ходов заполняем фигней
 				array_legal_moovs[0] = 10000; // Конец игры
 				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
-				Moovs_counter++;
-			
+				
 				// показываем окно геймовера
 				ShowGameOver();
 				
@@ -283,179 +374,118 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = position + counter_col; 
 				
 				Cheking_legal_moovs();
-				Moovs_counter++;
+			
 				break;
 			case 2:
-				ColorBall = "коричневый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - 1; 	// заносим в массив
 				array_legal_moovs[1] = position + 1; 	// координаты клеток куда доступен ход.
 				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
 				array_legal_moovs[3] = 10000;			// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 3:
-				ColorBall = "серый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
 				array_legal_moovs[1] = 10000;	 // координаты клеток куда доступен
-												// ход.
 				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
 				array_legal_moovs[3] = 10000; 	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 4:
-				ColorBall = "красный";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 5:
-				ColorBall = "зеленый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position + 1; // заносим в массив
 				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 6:
-				ColorBall = "синий";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position + counter_col; // заносим в массив
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 7:
-				ColorBall = "Оранжевый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
 				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 8:
-				ColorBall = "Салатовый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position + 1; // заносим в массив
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 9:
-				ColorBall = "Голубой";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - 1; // заносим в массив
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 10:
-				ColorBall = "Фиолетовый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
 				array_legal_moovs[1] = position + 1; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = position + counter_col; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 11:
-				ColorBall = "Желтый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
 				array_legal_moovs[1] = position - 1; // координаты клеток куда
-														// доступен ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 12:
-				ColorBall = "Розовый";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда
-														// доступен ход.
+				array_legal_moovs[1] = position - 1; // координаты клеток куда доступен ход.										
 				array_legal_moovs[2] = position + counter_col; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 			case 13:
-				ColorBall = "Ты зачем тут нажал? )))";
-				someText.setText("Цвет = " + ColorBall);
-
+				// СЮда поидее мы никогда не должны попасть, ход по клетке 13 отсеивается в Cheking_legal_moovs
 				break;
 			case 14:
-				ColorBall = "лососевый ))";
-				someText.setText("Цвет = " + ColorBall);
-				// Уменьшаем то что было увеличено
-				// Legal_Moovs_Small_Picture(parent, array_legal_moovs);
 				// Определяем куда можно пойти, заносим в массив
 				array_legal_moovs[0] = position + counter_col; // заносим в массив
 				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-												// ход.
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				Moovs_counter++;
+				
 				break;
 
 			default:
@@ -472,6 +502,96 @@ public class game_gameActivity extends Activity {
 		}
 
 	}
+	
+	
+	
+	
+	public void MySetPreferences(int type, int level, int mooves) 
+	{
+		editor = mSettings.edit();
+		switch (type) 
+		{
+		case 0:
+			// пишем общее кол-во ходов
+			editor.putInt(APP_PREFERENCES_moovs_of_type1,moovs_counter_all);
+			// пишем в переменную текущего уровня кол-во ходов за которое прошел  
+			switch (level-1)		{
+				case 0:	editor.putInt(APP_PREFERENCES_levels_of_type1_1,	mooves);	break;
+				case 1:	editor.putInt(APP_PREFERENCES_levels_of_type1_2,	mooves);	break;
+				case 2:	editor.putInt(APP_PREFERENCES_levels_of_type1_3,	mooves);	break;
+				case 3:	editor.putInt(APP_PREFERENCES_levels_of_type1_4,	mooves);	break;
+				case 4:	editor.putInt(APP_PREFERENCES_levels_of_type1_5,	mooves);	break;
+				case 5:	editor.putInt(APP_PREFERENCES_levels_of_type1_6,	mooves);	break;
+				case 6:	editor.putInt(APP_PREFERENCES_levels_of_type1_7,	mooves);	break;
+				case 7:	editor.putInt(APP_PREFERENCES_levels_of_type1_8,	mooves);	break;
+				case 8:	editor.putInt(APP_PREFERENCES_levels_of_type1_9,	mooves);	break;
+				case 9:	editor.putInt(APP_PREFERENCES_levels_of_type1_10,	mooves);	break;
+				case 10:editor.putInt(APP_PREFERENCES_levels_of_type1_11,	mooves);	break;
+				case 11:editor.putInt(APP_PREFERENCES_levels_of_type1_12,	mooves);	break;
+				default:	break;	}
+		break;
+
+		case 1:	
+			editor.putInt(APP_PREFERENCES_moovs_of_type2,moovs_counter_all);
+			switch (level-1)		{
+				case 0:	editor.putInt(APP_PREFERENCES_levels_of_type2_1,	mooves);	break;
+				case 1:	editor.putInt(APP_PREFERENCES_levels_of_type2_2,	mooves);	break;
+				case 2:	editor.putInt(APP_PREFERENCES_levels_of_type2_3,	mooves);	break;
+				case 3:	editor.putInt(APP_PREFERENCES_levels_of_type2_4,	mooves);	break;
+				case 4:	editor.putInt(APP_PREFERENCES_levels_of_type2_5,	mooves);	break;
+				case 5:	editor.putInt(APP_PREFERENCES_levels_of_type2_6,	mooves);	break;
+				case 6:	editor.putInt(APP_PREFERENCES_levels_of_type2_7,	mooves);	break;
+				case 7:	editor.putInt(APP_PREFERENCES_levels_of_type2_8,	mooves);	break;
+				case 8:	editor.putInt(APP_PREFERENCES_levels_of_type2_9,	mooves);	break;
+				case 9:	editor.putInt(APP_PREFERENCES_levels_of_type2_10,	mooves);	break;
+				case 10:editor.putInt(APP_PREFERENCES_levels_of_type2_11,	mooves);	break;
+				case 11:editor.putInt(APP_PREFERENCES_levels_of_type2_12,	mooves);	break;
+				default:	break;	}
+		break;
+
+		case 2:	
+			editor.putInt(APP_PREFERENCES_moovs_of_type3,moovs_counter_all);
+			switch (level-1)		{
+				case 0:	editor.putInt(APP_PREFERENCES_levels_of_type3_1,	mooves);	break;
+				case 1:	editor.putInt(APP_PREFERENCES_levels_of_type3_2,	mooves);	break;
+				case 2:	editor.putInt(APP_PREFERENCES_levels_of_type3_3,	mooves);	break;
+				case 3:	editor.putInt(APP_PREFERENCES_levels_of_type3_4,	mooves);	break;
+				case 4:	editor.putInt(APP_PREFERENCES_levels_of_type3_5,	mooves);	break;
+				case 5:	editor.putInt(APP_PREFERENCES_levels_of_type3_6,	mooves);	break;
+				case 6:	editor.putInt(APP_PREFERENCES_levels_of_type3_7,	mooves);	break;
+				case 7:	editor.putInt(APP_PREFERENCES_levels_of_type3_8,	mooves);	break;
+				case 8:	editor.putInt(APP_PREFERENCES_levels_of_type3_9,	mooves);	break;
+				case 9:	editor.putInt(APP_PREFERENCES_levels_of_type3_10,	mooves);	break;
+				case 10:editor.putInt(APP_PREFERENCES_levels_of_type3_11,	mooves);	break;
+				case 11:editor.putInt(APP_PREFERENCES_levels_of_type3_12,	mooves);	break;
+				default:	break;	}
+		break;
+
+		case 3:	
+			editor.putInt(APP_PREFERENCES_moovs_of_type4,moovs_counter_all);
+			switch (level-1)		{
+				case 0:	editor.putInt(APP_PREFERENCES_levels_of_type4_1,	mooves);	break;
+				case 1:	editor.putInt(APP_PREFERENCES_levels_of_type4_2,	mooves);	break;
+				case 2:	editor.putInt(APP_PREFERENCES_levels_of_type4_3,	mooves);	break;
+				case 3:	editor.putInt(APP_PREFERENCES_levels_of_type4_4,	mooves);	break;
+				case 4:	editor.putInt(APP_PREFERENCES_levels_of_type4_5,	mooves);	break;
+				case 5:	editor.putInt(APP_PREFERENCES_levels_of_type4_6,	mooves);	break;
+				case 6:	editor.putInt(APP_PREFERENCES_levels_of_type4_7,	mooves);	break;
+				case 7:	editor.putInt(APP_PREFERENCES_levels_of_type4_8,	mooves);	break;
+				case 8:	editor.putInt(APP_PREFERENCES_levels_of_type4_9,	mooves);	break;
+				case 9:	editor.putInt(APP_PREFERENCES_levels_of_type4_10,	mooves);	break;
+				case 10:editor.putInt(APP_PREFERENCES_levels_of_type4_11,	mooves);	break;
+				case 11:editor.putInt(APP_PREFERENCES_levels_of_type4_12,	mooves);	break;
+				default:	break;	}
+		break;
+
+		default:
+			break;
+		}
+
+		editor.apply();
+	}
+	
 	
 	public Integer NumberFromName(String name) 
 	{
