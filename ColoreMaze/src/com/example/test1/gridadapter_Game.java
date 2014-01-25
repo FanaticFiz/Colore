@@ -15,7 +15,7 @@ public class gridadapter_Game extends BaseAdapter
 	private Resources mRes; 		   		// Ресурсы приложени
 	private int SizeArray;
 	
-	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML, String game_type) 
+	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML, int xMLgame_type) 
 	{
 		mContext = context;
 		arrayPicture = arrayfromXML;

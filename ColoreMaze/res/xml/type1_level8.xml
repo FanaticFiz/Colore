@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
+    <game-type	type="19">	Тип игры подсчет ходов маршрута	</game-type>
 	<array-list	A1="5"	A2="6"	A3="2"	A4="8"	A5="6" 	>	1 строка	</array-list>
 	<array-list	A1="4"	A2="3"	A3="1"	A4="14"	A5="12" >	2 строка	</array-list>
 	<array-list	A1="10"	A2="6"	A3="7"	A4="7"	A5="7" 	>	3 строка	</array-list>

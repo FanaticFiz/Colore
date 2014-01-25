@@ -1,8 +1,10 @@
 package com.example.test1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -31,14 +33,17 @@ public class game_gameActivity extends Activity {
 	//private Dialog			dialog_end_of_game;
 	private gridadapter_Game 	mAdapter;
 	private int 				LastMoov,Moovs_counter,moovs_counter_all;
-	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля 
+	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля
+	ArrayList<Integer>			array_all_moovs;		// массив всех сделаных ходов... пригодится ))
 	int[] 						array_legal_moovs;		//  массив-список доступных ходов
-	private String 				ColorBall,XMLgame_type;	// XMLgame_type - прописанный в XML файле вариант игры	
+	private String 				ColorBall;	// XMLgame_type - прописанный в XML файле вариант игры	
+	int 						Kvest_from_XMLFile;
 	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
 	boolean 					firstTouch = true;
 	int 						type_game_from,counter_col,number_of_level;
 	long 						Start_Time,End_Time;
 	int 						randomBG;
+	Boolean						Priznak_kvesta;
 	ImageButton 				ImbuttonReset;
 	                                           
 	String ss = System.getProperty("line.separator"); // строка разделитель
@@ -126,6 +131,7 @@ public class game_gameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		 
 		
+		array_all_moovs = new ArrayList<Integer>();
 		//	
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 		
@@ -201,8 +207,7 @@ public class game_gameActivity extends Activity {
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
 		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
-		XMLgame_type	=	getIntent().getExtras().getString("from_level_to_game_XMLgame_type");
-		
+		Kvest_from_XMLFile	=	Integer.parseInt(getIntent().getExtras().getString("from_level_to_game_XMLgame_type"));
 		
 		RandomBackground();
 		
@@ -227,7 +232,7 @@ public class game_gameActivity extends Activity {
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, arrayfromlevel,XMLgame_type);
+        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile);
         mGrid.setAdapter(mAdapter);
         
                 
@@ -247,11 +252,11 @@ public class game_gameActivity extends Activity {
                  	if (NumberFromName(arrayfromlevel.get(position))==13) 
                  	{						}
                  	else 	{
+                 		game_move(parent, position, v);
                  		
                  		someText.setText("Номер фона = "+randomBG);
                  		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
-                 		
-                 		game_move(parent, position, v);
+
                  			}
         		}                	             
         	});     
@@ -262,10 +267,15 @@ public class game_gameActivity extends Activity {
     public void onResetClick(View v)
     {
     	
-    	//mSettings.
+    	MyRestart_Level();
     	
+    }
+    
+    private void MyRestart_Level() 
+    {
     	startTime = System.currentTimeMillis();
     	hours=0;minutes=0;seconds=0;
+    	array_all_moovs.clear();
     	Moovs_counter=0;
     	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
     	TimerField.setText(String.format("%d:%02d", minutes, seconds));
@@ -273,7 +283,9 @@ public class game_gameActivity extends Activity {
     	mGrid.setAdapter(mAdapter);
     	
     	Find_Start_Point();
-    }
+		
+	}
+    
     
 	// 	При старте уровня находим в массиве черную-стартовую точку 
 	// 	позиционируемся на ней и определяем следующие доступные ходы
@@ -344,8 +356,9 @@ public class game_gameActivity extends Activity {
 				// тормозим таймер
 				timer.cancel();
 				
+				
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
-									
+				
 				// Пишем в преференсес
 				//передаю тип игры, уровень и сделанное кол-во ходов
 				MySetPreferences(type_game_from, number_of_level,Moovs_counter);
@@ -356,8 +369,15 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
 				
-				// показываем окно геймовера
-				ShowGameOver();
+				
+				// Проверка на выполнение задания поставленного на данном уровне
+				switch (number_of_level)	
+				{
+				case 8:	if (Test_to_MoovKvest(Moovs_counter,Kvest_from_XMLFile)) 	{	ShowGameOver();		}
+						else 														{	MyRestart_Level();	}
+						break;
+				default:	ShowGameOver();	break;
+				}
 				
 				break;
 			case 1:
@@ -374,7 +394,8 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = position + counter_col; 
 				
 				Cheking_legal_moovs();
-			
+				array_all_moovs.add(position);
+				
 				break;
 			case 2:
 				// Определяем куда можно пойти, заносим в массив
@@ -383,7 +404,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
 				array_legal_moovs[3] = 10000;			// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 3:
 				// Определяем куда можно пойти, заносим в массив
@@ -392,7 +413,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
 				array_legal_moovs[3] = 10000; 	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 4:
 				// Определяем куда можно пойти, заносим в массив
@@ -401,7 +422,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 5:
 				// Определяем куда можно пойти, заносим в массив
@@ -410,7 +431,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 6:
 				// Определяем куда можно пойти, заносим в массив
@@ -419,7 +440,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 7:
 				// Определяем куда можно пойти, заносим в массив
@@ -428,7 +449,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 8:
 				// Определяем куда можно пойти, заносим в массив
@@ -437,7 +458,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 9:
 				// Определяем куда можно пойти, заносим в массив
@@ -446,7 +467,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 10:
 				// Определяем куда можно пойти, заносим в массив
@@ -455,7 +476,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = position + counter_col; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 11:
 				// Определяем куда можно пойти, заносим в массив
@@ -464,7 +485,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 12:
 				// Определяем куда можно пойти, заносим в массив
@@ -473,7 +494,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = position + counter_col; // ненужный элемент
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 			case 13:
 				// СЮда поидее мы никогда не должны попасть, ход по клетке 13 отсеивается в Cheking_legal_moovs
@@ -485,7 +506,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000; // ненужный элемент массива
 				array_legal_moovs[3] = 10000;	// проставляем в 10000
 				Cheking_legal_moovs();
-				
+				array_all_moovs.add(position);
 				break;
 
 			default:
@@ -628,6 +649,28 @@ public class game_gameActivity extends Activity {
 		Integer identifierID = mRes.getIdentifier(stringBG, "drawable", this.getPackageName());
 		LinLayout.setBackgroundResource(identifierID);
 	}
+	
+	
+	// Цель пройти лабиринт за строго определенное кол-во ходов
+	// Есть массив который содержит эти ходы, нужно его весь перебрать и проверить нет ли одинаковых ходов, таковых быть не должно!	
+	private boolean Test_to_MoovKvest(int kolvo_hodov, int kvest) 
+	{
+		// признак выполненного задания устанавливаем в false, и пытаемся его подтвердить
+		if (kvest != kolvo_hodov)	{	return false;	}
+		else 
+		{	// Если кол-во ходов равное то проверяем на читерство!
+			boolean local_bool = false;			
+			// В массиве всех ходов ищем частоту вхождния каждого элемента, если она больше 1 бьем тревогу!
+			for (int i = 0; i < array_all_moovs.size(); i++) 
+			{
+				if (Collections.frequency(array_all_moovs, array_all_moovs.get(i))	>	1) 
+				{	local_bool = true;	break; }
+			}	
+			if (local_bool) { 	return false;	}
+			else 			{	return true;	}
+		}
+	}
+	
 	
 	
 	private void ShowGameOver() {
