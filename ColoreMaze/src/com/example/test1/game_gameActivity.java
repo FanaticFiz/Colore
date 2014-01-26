@@ -273,7 +273,9 @@ public class game_gameActivity extends Activity {
     
     private void MyRestart_Level() 
     {
+    	
     	startTime = System.currentTimeMillis();
+    	
     	hours=0;minutes=0;seconds=0;
     	array_all_moovs.clear();
     	Moovs_counter=0;
@@ -352,10 +354,7 @@ public class game_gameActivity extends Activity {
 			Integer ert = NumberFromName(arrayfromlevel.get(position));			
 			switch (ert) {
 			case 0:
-				// Финиш
-				// тормозим таймер
-				timer.cancel();
-				
+				// Финиш	
 				
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
 				
@@ -373,10 +372,10 @@ public class game_gameActivity extends Activity {
 				// Проверка на выполнение задания поставленного на данном уровне
 				switch (number_of_level)	
 				{
-				case 8:	if (Test_to_MoovKvest(Moovs_counter,Kvest_from_XMLFile)) 	{	ShowGameOver();		}
-						else 														{	MyRestart_Level();	}
+				case 8:	if (Test_to_MoovKvest(Moovs_counter,Kvest_from_XMLFile)) 	{	timer.cancel();	ShowGameOver();	}
+						else 														{	MyRestart_Level();				}
 						break;
-				default:	ShowGameOver();	break;
+				default:	timer.cancel(); ShowGameOver();	break;
 				}
 				
 				break;
