@@ -20,8 +20,7 @@ public class MainActivity extends Activity {
 
 	TextView textStartGame1,textStartGame2,textStartGame3,textStartGame4;
 	private Animation menu_animation;
-	private SoundPool soundPool;
-	boolean loaded = false;
+	public SoundPool soundPool;
 	private static int soundID1;
 	
 	private static float	volume;

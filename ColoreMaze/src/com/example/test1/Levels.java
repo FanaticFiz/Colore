@@ -27,19 +27,19 @@ public class Levels extends Activity {
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
 	private 	SoundPool 	soundPool;
 	private 	static int 	soundID1;
-	private		int			counter_col;	// кол-во столбцов	
-	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
-	private		String		XMLgame_type="0";	// Типа усложнения игры из файла
+	private		int			counter_col;	// РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ	
+	private		int			type_of_game;	// РїРїРѕР»СѓС‡Р°РµРј С‚РёРїР° РёРіСЂС‹ РєРѕС‚РѕСЂСѓСЋ РІС‹Р±СЂР°Р»Рё РІ Type.class]
+	private		String		XMLgame_type="0";	// РўРёРїР° СѓСЃР»РѕР¶РЅРµРЅРёСЏ РёРіСЂС‹ РёР· С„Р°Р№Р»Р°
 	
 	// Preferences
 	SharedPreferences mSettings;
-	public static final String 	APP_PREFERENCES = "mysettings";  							// Имя файла настроек	
-	// массив заполненный из преференсес
+	public static final String 	APP_PREFERENCES = "mysettings";  							// РРјСЏ С„Р°Р№Р»Р° РЅР°СЃС‚СЂРѕРµРє	
+	// РјР°СЃСЃРёРІ Р·Р°РїРѕР»РЅРµРЅРЅС‹Р№ РёР· РїСЂРµС„РµСЂРµРЅСЃРµСЃ
 	private static int[] 		pref_type_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
 
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
-	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// РћР±С‰РµРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
@@ -51,11 +51,11 @@ public class Levels extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
 
-	// Уровень 2
+	// РЈСЂРѕРІРµРЅСЊ 2
 	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
 	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
@@ -67,11 +67,11 @@ public class Levels extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
     	
-	// Уровень 3
+	// РЈСЂРѕРІРµРЅСЊ 3
 	//private static int[] 		pref_type3_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
 	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
@@ -83,11 +83,11 @@ public class Levels extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
 
-	// Уровень 4
+	// РЈСЂРѕРІРµРЅСЊ 4
 	//private static int[] 		pref_type4_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
 	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
@@ -112,21 +112,21 @@ public class Levels extends Activity {
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 		
-		// подключаем файл анимации
+		// РїРѕРґРєР»СЋС‡Р°РµРј С„Р°Р№Р» Р°РЅРёРјР°С†РёРё
 		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
 		
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-		//Загружаем звуки в память
+		//Р—Р°РіСЂСѓР¶Р°РµРј Р·РІСѓРєРё РІ РїР°РјСЏС‚СЊ
         soundID1 = soundPool.load(this, R.raw.btn1, 1);
 
-		// получаем тип выбранной игры...
+		// РїРѕР»СѓС‡Р°РµРј С‚РёРї РІС‹Р±СЂР°РЅРЅРѕР№ РёРіСЂС‹...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
         
 		
 		MyGetPreferences(type_of_game);
 		
-		// передаём в класс грид: контекст, тип выбранный в предыдущей активности и массив из преферансес
+		// РїРµСЂРµРґР°С‘Рј РІ РєР»Р°СЃСЃ РіСЂРёРґ: РєРѕРЅС‚РµРєСЃС‚, С‚РёРї РІС‹Р±СЂР°РЅРЅС‹Р№ РІ РїСЂРµРґС‹РґСѓС‰РµР№ Р°РєС‚РёРІРЅРѕСЃС‚Рё Рё РјР°СЃСЃРёРІ РёР· РїСЂРµС„РµСЂР°РЅСЃРµСЃ
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
 	    gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game, pref_type_AllAboutLevels));
 	       
@@ -134,8 +134,8 @@ public class Levels extends Activity {
 	    {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 	        {
-	        	// Идем играть только если уровень открыт (Исключение только для уровня 1)
-	        	// нужно смотреть на элемент массива -1 (на предыдущий)
+	        	// РРґРµРј РёРіСЂР°С‚СЊ С‚РѕР»СЊРєРѕ РµСЃР»Рё СѓСЂРѕРІРµРЅСЊ РѕС‚РєСЂС‹С‚ (РСЃРєР»СЋС‡РµРЅРёРµ С‚РѕР»СЊРєРѕ РґР»СЏ СѓСЂРѕРІРЅСЏ 1)
+	        	// РЅСѓР¶РЅРѕ СЃРјРѕС‚СЂРµС‚СЊ РЅР° СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР° -1 (РЅР° РїСЂРµРґС‹РґСѓС‰РёР№)
 	        	int position_of_array = position - 1;
 	        	if (position==0){	position_of_array=0;	}
 	        	if ( (pref_type_AllAboutLevels[position_of_array] > 0) | (position==0) ) 
@@ -143,22 +143,22 @@ public class Levels extends Activity {
      		        	
 	        		soundPool.play(soundID1, 1, 1, 1, 0, 1f);
 	        		ChoiseLevel(type_of_game, position);
-	        		// 	Прыгаем в Игру
+	        		// 	РџСЂС‹РіР°РµРј РІ РРіСЂСѓ
 	        		Intent intentG = new Intent();
 	        		intentG.setClass(Levels.this, game_gameActivity.class);
 	        		intentG.putExtra("FromLeveltogame", list);
 	        		intentG.putExtra("from_level_to_game_col",  counter_col);	
-	        		intentG.putExtra("from_level_to_game_number_of_level",  position);		// Передаю номер уровня для отображения оного			
-	        		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
-	        		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
+	        		intentG.putExtra("from_level_to_game_number_of_level",  position);		// РџРµСЂРµРґР°СЋ РЅРѕРјРµСЂ СѓСЂРѕРІРЅСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРЅРѕРіРѕ			
+	        		intentG.putExtra("from_level_to_game_type", type_of_game); 				// РёСЃРїРѕР»СЊР·СѓСЋ РґР»СЏ Р°РЅРёРјР°С†РёРё РјРµР¶РґСѓ Р°РєС‚РёРІРёС‚Рё
+	        		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// РџРµСЂРµРґР°РµРј С‚РёРї РёРіСЂС‹ РёР· XML С„Р°Р№Р»Р°
 	        		startActivity(intentG);
 	        		
 
 	        		switch (type_of_game) 	{
-	        		case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// Активность уходит влево
-	        		case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// Активность уходит вправо	
-	        		case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// Активность уходит вниз
-	        		case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// Активность уходит вверх
+	        		case 0:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break; 	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІР»РµРІРѕ
+	        		case 2:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРїСЂР°РІРѕ	
+	        		case 3:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);		break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРЅРёР·
+	        		case 1:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРІРµСЂС…
 	        		default:			break;
 	        								}
 	        	}
@@ -207,7 +207,7 @@ public class Levels extends Activity {
 	
 	
 	
-	// Определяем какой файл xml подгрузить в зависимости от выбора уровня...
+	// РћРїСЂРµРґРµР»СЏРµРј РєР°РєРѕР№ С„Р°Р№Р» xml РїРѕРґРіСЂСѓР·РёС‚СЊ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±РѕСЂР° СѓСЂРѕРІРЅСЏ...
 	public void ChoiseLevel(int type, int NP) 
 	{
 		String String_of_type;
@@ -308,10 +308,10 @@ public class Levels extends Activity {
 	
 	private void ParserXML(String Name_of_XML_file) 
 	{
-		 // ------------------- Достаем из XML уровень -------------------------
-	    // и загоняем в массив list
+		 // ------------------- Р”РѕСЃС‚Р°РµРј РёР· XML СѓСЂРѕРІРµРЅСЊ -------------------------
+	    // Рё Р·Р°РіРѕРЅСЏРµРј РІ РјР°СЃСЃРёРІ list
 		
-		// Получаем ID нужного файла исполльзуя название файла
+		// РџРѕР»СѓС‡Р°РµРј ID РЅСѓР¶РЅРѕРіРѕ С„Р°Р№Р»Р° РёСЃРїРѕР»Р»СЊР·СѓСЏ РЅР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р°
 	    int XMLFileID = getResources().getIdentifier(Name_of_XML_file,"xml",getPackageName());
 		list.clear();
 		
@@ -346,9 +346,9 @@ public class Levels extends Activity {
         
         catch (Throwable t) 
         {
-            Toast.makeText(this,"Ошибка при загрузке XML-документа: " + t.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ XML-РґРѕРєСѓРјРµРЅС‚Р°: " + t.toString(), Toast.LENGTH_SHORT).show();
         }
-	    // ------------------- Достаем из XML уровень -------------------------    
+	    // ------------------- Р”РѕСЃС‚Р°РµРј РёР· XML СѓСЂРѕРІРµРЅСЊ -------------------------    
 	    
 	}
 	
@@ -365,14 +365,14 @@ public class Levels extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		
-		// Завершаем наше activity
+		// Р—Р°РІРµСЂС€Р°РµРј РЅР°С€Рµ activity
         this.finish(); 
 		
 		switch (type_of_game) 	{
-		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
-		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
-		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
-		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІР»РµРІРѕ
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРїСЂР°РІРѕ	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРЅРёР·
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРІРµСЂС…
 		default:			break;
 							}    		 
 	}
@@ -384,15 +384,15 @@ public class Levels extends Activity {
 		super.onRestart();
 		
 		MyGetPreferences(type_of_game);		
-		// передаём в класс грид: контекст, тип выбранный в предыдущей активности и массив из преферансес
+		// РїРµСЂРµРґР°С‘Рј РІ РєР»Р°СЃСЃ РіСЂРёРґ: РєРѕРЅС‚РµРєСЃС‚, С‚РёРї РІС‹Р±СЂР°РЅРЅС‹Р№ РІ РїСЂРµРґС‹РґСѓС‰РµР№ Р°РєС‚РёРІРЅРѕСЃС‚Рё Рё РјР°СЃСЃРёРІ РёР· РїСЂРµС„РµСЂР°РЅСЃРµСЃ
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
 		gridview.setAdapter(new gridAdapter_LevelsImage(this, type_of_game, pref_type_AllAboutLevels));
 			    		
 		switch (type_of_game) 	{
-		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
-		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
-		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
-		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІР»РµРІРѕ
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРїСЂР°РІРѕ	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРЅРёР·
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРІРµСЂС…
 		default:				break;
 								}    		 
 

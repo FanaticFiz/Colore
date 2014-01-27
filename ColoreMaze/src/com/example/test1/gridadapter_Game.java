@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 public class gridadapter_Game extends BaseAdapter 
 {
 	private Context mContext;
-	private ArrayList<String> arrayPicture; // массив картинок
-	private Resources mRes; 		   		// Ресурсы приложени
+	private ArrayList<String> arrayPicture; // РјР°СЃСЃРёРІ РєР°СЂС‚РёРЅРѕРє
+	private Resources mRes; 		   		// Р РµСЃСѓСЂСЃС‹ РїСЂРёР»РѕР¶РµРЅРё
 	private int SizeArray;
 	
 	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML, int xMLgame_type) 
@@ -21,10 +21,10 @@ public class gridadapter_Game extends BaseAdapter
 		arrayPicture = arrayfromXML;
 		SizeArray = arrayPicture.size();
 		
-	    // Получаем все ресурсы приложения
+	    // РџРѕР»СѓС‡Р°РµРј РІСЃРµ СЂРµСЃСѓСЂСЃС‹ РїСЂРёР»РѕР¶РµРЅРёСЏ
 	    mRes = mContext.getResources();
 	 
-	    // Метод заполняющий массив arrayPicture
+	    // РњРµС‚РѕРґ Р·Р°РїРѕР»РЅСЏСЋС‰РёР№ РјР°СЃСЃРёРІ arrayPicture
 	    makePictArray();
 	        	    
 	}
@@ -32,30 +32,30 @@ public class gridadapter_Game extends BaseAdapter
 	
 	private void makePictArray() 
 	{  	   
-	    // добавляем
+	    // РґРѕР±Р°РІР»СЏРµРј
 	    for (int i = 0; i<SizeArray; i++)
 	    {
 	    	int j = Integer.parseInt(arrayPicture.get(i));
-	    	// j это содержимае i ячейки массива
+	    	// j СЌС‚Рѕ СЃРѕРґРµСЂР¶РёРјР°Рµ i СЏС‡РµР№РєРё РјР°СЃСЃРёРІР°
 	    	switch (j) 
 	    	{
-	    	// в зависимости от содержимого меняем ячейку массива на название файла с рисунком .png
-	    	// На данный момент 
-	    	// 	0	-	белый 			-	Финиш
-	    	// 	1 	-	Черный			-	Старт
-	    	//	2	-	Коричневый
-	    	// 	3	-	Серый 
-	    	// 	4 	-	красный	
-	    	//	5	-	зеленый
-	    	// 	6	-	синий 
-	    	// 	7 	-	Оранжевый	
-	    	//	8	-	Салатовый
-	    	// 	9	-	Голубой 
-	    	// 	10	-	Фиолетовый	
-	    	//	11	-	Желтый
-	    	// 	12	-	Розовый	
-	    	//	13	-	Прозрачный!!!
-	    	//	14 	-	лососевый )) 
+	    	// РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РјРµРЅСЏРµРј СЏС‡РµР№РєСѓ РјР°СЃСЃРёРІР° РЅР° РЅР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° СЃ СЂРёСЃСѓРЅРєРѕРј .png
+	    	// РќР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ 
+	    	// 	0	-	Р±РµР»С‹Р№ 			-	Р¤РёРЅРёС€
+	    	// 	1 	-	Р§РµСЂРЅС‹Р№			-	РЎС‚Р°СЂС‚
+	    	//	2	-	РљРѕСЂРёС‡РЅРµРІС‹Р№
+	    	// 	3	-	РЎРµСЂС‹Р№ 
+	    	// 	4 	-	РєСЂР°СЃРЅС‹Р№	
+	    	//	5	-	Р·РµР»РµРЅС‹Р№
+	    	// 	6	-	СЃРёРЅРёР№ 
+	    	// 	7 	-	РћСЂР°РЅР¶РµРІС‹Р№	
+	    	//	8	-	РЎР°Р»Р°С‚РѕРІС‹Р№
+	    	// 	9	-	Р“РѕР»СѓР±РѕР№ 
+	    	// 	10	-	Р¤РёРѕР»РµС‚РѕРІС‹Р№	
+	    	//	11	-	Р–РµР»С‚С‹Р№
+	    	// 	12	-	Р РѕР·РѕРІС‹Р№	
+	    	//	13	-	РџСЂРѕР·СЂР°С‡РЅС‹Р№!!!
+	    	//	14 	-	Р»РѕСЃРѕСЃРµРІС‹Р№ )) 
 	    	//		
 	    	
 			case 0:
@@ -63,7 +63,7 @@ public class gridadapter_Game extends BaseAdapter
 				break;
 				
 			case 1:
-				// черное стартовое поле
+				// С‡РµСЂРЅРѕРµ СЃС‚Р°СЂС‚РѕРІРѕРµ РїРѕР»Рµ
 				arrayPicture.set(i, "ball1");
 				break;
 				
@@ -119,7 +119,7 @@ public class gridadapter_Game extends BaseAdapter
 				break;
 				
 			case 1:
-				// черное стартовое поле
+				// С‡РµСЂРЅРѕРµ СЃС‚Р°СЂС‚РѕРІРѕРµ РїРѕР»Рµ
 				arrayPicture.set(i, "ball92");
 				break;
 				
@@ -190,19 +190,19 @@ public class gridadapter_Game extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-		SquareImageView view; // для вывода картинки
+		SquareImageView view; // РґР»СЏ РІС‹РІРѕРґР° РєР°СЂС‚РёРЅРєРё
 
 		if (convertView == null)
 			view = new SquareImageView(mContext);
 		else
 			view = (SquareImageView) convertView;
 
-		// Получаем идентификатор ресурса для картинки,
-	    // которая находится в векторе arrayPicture на позиции position
+		// РџРѕР»СѓС‡Р°РµРј РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРµСЃСѓСЂСЃР° РґР»СЏ РєР°СЂС‚РёРЅРєРё,
+	    // РєРѕС‚РѕСЂР°СЏ РЅР°С…РѕРґРёС‚СЃСЏ РІ РІРµРєС‚РѕСЂРµ arrayPicture РЅР° РїРѕР·РёС†РёРё position
 		Integer drawableId = mRes.getIdentifier(arrayPicture.get(position), "drawable", mContext.getPackageName());
 		view.setImageResource(drawableId);
 		
-		// Стартовую точку уменьшаем
+		// РЎС‚Р°СЂС‚РѕРІСѓСЋ С‚РѕС‡РєСѓ СѓРјРµРЅСЊС€Р°РµРј
 		if (arrayPicture.get(position)=="ball1") 
 		{
 			view.setScaleX((float) 0.7);

@@ -28,40 +28,40 @@ import android.widget.TextView;
 
 public class game_gameActivity extends Activity {
 
-	private Animation 			animation_wrong_moovs;
-	private GridView 			mGrid;
-	//private Dialog			dialog_end_of_game;
-	private gridadapter_Game 	mAdapter;
-	private int 				LastMoov,Moovs_counter,moovs_counter_all;
-	ArrayList<String> 			arrayfromlevel;			// массив переданный из предыдущей активности содержит описание игрового поля
-	ArrayList<Integer>			array_all_moovs;		// массив всех сделаных ходов... пригодится ))
-	int[] 						array_legal_moovs;		//  массив-список доступных ходов
-	private String 				ColorBall;	// XMLgame_type - прописанный в XML файле вариант игры	
-	int 						Kvest_from_XMLFile;
-	private TextView			someText,TimerField,MoovField;    			//	поле для заметок внизу
-	boolean 					firstTouch = true;
-	int 						type_game_from,counter_col,number_of_level;
-	long 						Start_Time,End_Time;
-	int 						randomBG;
+	private Animation			animation_wrong_moovs;
+	private GridView			mGrid;
+	// private Dialog dialog_end_of_game;
+	private gridadapter_Game	mAdapter;
+	private int					LastMoov, Moovs_counter, moovs_counter_all;
+	ArrayList<String>			arrayfromlevel;										// РјР°СЃСЃРёРІРїРµСЂРµРґР°РЅРЅС‹Р№РёР·РїСЂРµРґС‹РґСѓС‰РµР№Р°РєС‚РёРІРЅРѕСЃС‚РёСЃРѕРґРµСЂР¶РёС‚РѕРїРёСЃР°РЅРёРµРёРіСЂРѕРІРѕРіРѕРїРѕР»СЏ
+	ArrayList<Integer>			array_all_moovs;									// РјР°СЃСЃРёРІРІСЃРµС…СЃРґРµР»Р°РЅС‹С…С…РѕРґРѕРІ...РїСЂРёРіРѕРґРёС‚СЃСЏ))
+	int[]						array_legal_moovs;									// РјР°СЃСЃРёРІ-СЃРїРёСЃРѕРєРґРѕСЃС‚СѓРїРЅС‹С…С…РѕРґРѕРІ
+	private String				ColorBall;											// XMLgame_type-РїСЂРѕРїРёСЃР°РЅРЅС‹Р№РІXMLС„Р°Р№Р»РµРІР°СЂРёР°РЅС‚РёРіСЂС‹
+	int							Kvest_from_XMLFile;
+	private TextView			someText, TimerField, MoovField;					// РїРѕР»РµРґР»СЏР·Р°РјРµС‚РѕРєРІРЅРёР·Сѓ
+	boolean						firstTouch							= true;
+	int							type_game_from, counter_col, number_of_level;
+	long						Start_Time, End_Time;
+	int							randomBG;
 	Boolean						Priznak_kvesta;
-	ImageButton 				ImbuttonReset;
+	ImageButton					ImbuttonReset;
 	                                           
-	String ss = System.getProperty("line.separator"); // строка разделитель
+	String ss = System.getProperty("line.separator"); // СЃС‚СЂРѕРєР° СЂР°Р·РґРµР»РёС‚РµР»СЊ
 	
 	// Preferences
 	SharedPreferences mSettings;
 	Editor editor;
-	public static final String 	APP_PREFERENCES = "mysettings";  							// Имя файла настроек
+	public static final String 	APP_PREFERENCES = "mysettings";  							// РРјСЏ С„Р°Р№Р»Р° РЅР°СЃС‚СЂРѕРµРє
 	
-	// Уровень 1
-	// Данный массив содержит всю информацию по прохождению всех уровней первого типа
-	// первые 24 параметра содержат в себе кол-ов ходов за которое каждый из уровней пройден...
-	// Причем наличие люой цифры большей чем 0 автоматически означает что уровень был пройден! (это справедливо для всех уровней кроме первого)
-	// последний параметр это общее кол-во ходов
+	// РЈСЂРѕРІРµРЅСЊ 1
+	// Р”Р°РЅРЅС‹Р№ РјР°СЃСЃРёРІ СЃРѕРґРµСЂР¶РёС‚ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РїРѕ РїСЂРѕС…РѕР¶РґРµРЅРёСЋ РІСЃРµС… СѓСЂРѕРІРЅРµР№ РїРµСЂРІРѕРіРѕ С‚РёРїР°
+	// РїРµСЂРІС‹Рµ 24 РїР°СЂР°РјРµС‚СЂР° СЃРѕРґРµСЂР¶Р°С‚ РІ СЃРµР±Рµ РєРѕР»-РѕРІ С…РѕРґРѕРІ Р·Р° РєРѕС‚РѕСЂРѕРµ РєР°Р¶РґС‹Р№ РёР· СѓСЂРѕРІРЅРµР№ РїСЂРѕР№РґРµРЅ...
+	// РџСЂРёС‡РµРј РЅР°Р»РёС‡РёРµ Р»СЋРѕР№ С†РёС„СЂС‹ Р±РѕР»СЊС€РµР№ С‡РµРј 0 Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РѕР·РЅР°С‡Р°РµС‚ С‡С‚Рѕ СѓСЂРѕРІРµРЅСЊ Р±С‹Р» РїСЂРѕР№РґРµРЅ! (СЌС‚Рѕ СЃРїСЂР°РІРµРґР»РёРІРѕ РґР»СЏ РІСЃРµС… СѓСЂРѕРІРЅРµР№ РєСЂРѕРјРµ РїРµСЂРІРѕРіРѕ)
+	// РїРѕСЃР»РµРґРЅРёР№ РїР°СЂР°РјРµС‚СЂ СЌС‚Рѕ РѕР±С‰РµРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ
 	//private static int[] 		pref_type1_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
-	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// РћР±С‰РµРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
@@ -73,11 +73,11 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
 
-	// Уровень 2
+	// РЈСЂРѕРІРµРЅСЊ 2
 	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
 	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
@@ -89,11 +89,11 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
     	
-	// Уровень 3
+	// РЈСЂРѕРІРµРЅСЊ 3
 	//private static int[] 		pref_type3_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
 	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
@@ -105,10 +105,10 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
 
-	// Уровень 4
+	// РЈСЂРѕРІРµРЅСЊ 4
 	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// РџРµСЂРІС‹Р№
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// РІС‚РѕСЂРѕР№
 	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
@@ -120,7 +120,7 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"levels_of_type4_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
 	
-	// Таймер
+	// РўР°Р№РјРµСЂ
 	private int seconds,minutes,hours;
 	private Timer timer    = null;
 	private long startTime;
@@ -142,10 +142,10 @@ public class game_gameActivity extends Activity {
 		
 		
 		// ------------------------------------------------------------------------------------------------		
-		// ---------------------- аботает таймер и выводит в текстовое поле результат ---------------------
+		// ---------------------- Р°Р±РѕС‚Р°РµС‚ С‚Р°Р№РјРµСЂ Рё РІС‹РІРѕРґРёС‚ РІ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ СЂРµР·СѓР»СЊС‚Р°С‚ ---------------------
 		// ------------------------------------------------------------------------------------------------
 		
-		// Пример с гугла таймер отсчитывающий вниз в данном примере от 30 секунд до 0
+		// РџСЂРёРјРµСЂ СЃ РіСѓРіР»Р° С‚Р°Р№РјРµСЂ РѕС‚СЃС‡РёС‚С‹РІР°СЋС‰РёР№ РІРЅРёР· РІ РґР°РЅРЅРѕРј РїСЂРёРјРµСЂРµ РѕС‚ 30 СЃРµРєСѓРЅРґ РґРѕ 0
 		/*
 		TimerField = (TextView)findViewById(R.id.textView2);		
 		 new CountDownTimer(30000, 1000) 
@@ -176,8 +176,8 @@ public class game_gameActivity extends Activity {
 		       minutes	=	minutes % 60;
 		       seconds  = 	seconds % 60;
 		       
-		       // Нельзя обращаться к элементам UI(user interf.) потока из другого потока.
-		       // Поэтому пользуемся handler 
+		       // РќРµР»СЊР·СЏ РѕР±СЂР°С‰Р°С‚СЊСЃСЏ Рє СЌР»РµРјРµРЅС‚Р°Рј UI(user interf.) РїРѕС‚РѕРєР° РёР· РґСЂСѓРіРѕРіРѕ РїРѕС‚РѕРєР°.
+		       // РџРѕСЌС‚РѕРјСѓ РїРѕР»СЊР·СѓРµРјСЃСЏ handler 
 		       handlerUI.post(new Runnable()	{
 		       public void run()    			{
 		    	    if (hours>0)  	{	TimerField.setText(String.format("%d:%02d:%02d", hours, minutes, seconds));	} 
@@ -195,14 +195,14 @@ public class game_gameActivity extends Activity {
 		// ------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------
 		
-		// подключаем файл анимации
+		// РїРѕРґРєР»СЋС‡Р°РµРј С„Р°Р№Р» Р°РЅРёРјР°С†РёРё
 		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 	
 		
 		LastMoov=0;
 		array_legal_moovs = new int[4];
 		
-		// Получаем данные из предыдущей активити. Игровой массив и кол-во строк и столбцов в игровом поле 
+		// РџРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ РёР· РїСЂРµРґС‹РґСѓС‰РµР№ Р°РєС‚РёРІРёС‚Рё. РРіСЂРѕРІРѕР№ РјР°СЃСЃРёРІ Рё РєРѕР»-РІРѕ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ РІ РёРіСЂРѕРІРѕРј РїРѕР»Рµ 
 		arrayfromlevel 	=	getIntent().getExtras().getStringArrayList("FromLeveltogame");
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
@@ -212,14 +212,14 @@ public class game_gameActivity extends Activity {
 		RandomBackground();
 		
 			
-		//Свяжемся со строкой текстовой на форме
+		//РЎРІСЏР¶РµРјСЃСЏ СЃРѕ СЃС‚СЂРѕРєРѕР№ С‚РµРєСЃС‚РѕРІРѕР№ РЅР° С„РѕСЂРјРµ
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
 		
 		someText = (TextView)findViewById(R.id.game_down_text);
-		someText.setText("Цель: пройти от черного поля к белому");
+		someText.setText("Р¦РµР»СЊ: РїСЂРѕР№С‚Рё РѕС‚ С‡РµСЂРЅРѕРіРѕ РїРѕР»СЏ Рє Р±РµР»РѕРјСѓ");
 		
-		/*// Описываю диалоговое окно, появляющееся при прохождении уровня 
+		/*// РћРїРёСЃС‹РІР°СЋ РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ, РїРѕСЏРІР»СЏСЋС‰РµРµСЃСЏ РїСЂРё РїСЂРѕС…РѕР¶РґРµРЅРёРё СѓСЂРѕРІРЅСЏ 
 		dialog_end_of_game = new Dialog(game_gameActivity.this);
 		dialog_end_of_game.setContentView(R.layout.dialog_end_levels);
 		dialog_end_of_game.setTitle(R.string.Dialog_end_of_game_Title);
@@ -228,15 +228,15 @@ public class game_gameActivity extends Activity {
 			
 			
 		////**************************************************	
-		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
+		// РџСЂРёРІСЏР·С‹РІР°РµРјСЃСЏ Рє РіСЂРёРґ РЅР° С„РѕСЂРјРµ, СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РіСЂРёРґ РЅР°Рј РЅРµ РїРѕРґС…РѕРґРёС‚, РёСЃРїРѕР»СЊР·СѓРµРј СЃРІРѕР№ СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ 
 		mGrid = (GridView)findViewById(R.id.field);
-        mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
+        mGrid.setNumColumns(counter_col);					// Р—Р°РґР°РµРј РєРѕР»-РІРѕ РєРѕР»РѕРЅРѕРє РІ РѕС‚РѕР±СЂР°Р¶РµРЅРёРё
         mGrid.setEnabled(true);
         mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile);
         mGrid.setAdapter(mAdapter);
         
                 
-        // Находим стартовую точку
+        // РќР°С…РѕРґРёРј СЃС‚Р°СЂС‚РѕРІСѓСЋ С‚РѕС‡РєСѓ
         Find_Start_Point();     
          
         
@@ -244,7 +244,7 @@ public class game_gameActivity extends Activity {
         
         
         
-        // Обработчик нажатий
+        // РћР±СЂР°Р±РѕС‚С‡РёРє РЅР°Р¶Р°С‚РёР№
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         	{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
@@ -254,7 +254,7 @@ public class game_gameActivity extends Activity {
                  	else 	{
                  		game_move(parent, position, v);
                  		
-                 		someText.setText("Номер фона = "+randomBG);
+                 		someText.setText("РќРѕРјРµСЂ С„РѕРЅР° = "+randomBG);
                  		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
 
                  			}
@@ -289,20 +289,20 @@ public class game_gameActivity extends Activity {
 	}
     
     
-	// 	При старте уровня находим в массиве черную-стартовую точку 
-	// 	позиционируемся на ней и определяем следующие доступные ходы
+	// 	РџСЂРё СЃС‚Р°СЂС‚Рµ СѓСЂРѕРІРЅСЏ РЅР°С…РѕРґРёРј РІ РјР°СЃСЃРёРІРµ С‡РµСЂРЅСѓСЋ-СЃС‚Р°СЂС‚РѕРІСѓСЋ С‚РѕС‡РєСѓ 
+	// 	РїРѕР·РёС†РёРѕРЅРёСЂСѓРµРјСЃСЏ РЅР° РЅРµР№ Рё РѕРїСЂРµРґРµР»СЏРµРј СЃР»РµРґСѓСЋС‰РёРµ РґРѕСЃС‚СѓРїРЅС‹Рµ С…РѕРґС‹
 	public void Find_Start_Point() 
 	{
 		for (int i=0; i<arrayfromlevel.size(); i++) 
 		{
 			if (arrayfromlevel.get(i)=="ball1") 
 			{
-				// определяем доступные ходы (со старта идем во всех 4 направлениях)
+				// РѕРїСЂРµРґРµР»СЏРµРј РґРѕСЃС‚СѓРїРЅС‹Рµ С…РѕРґС‹ (СЃРѕ СЃС‚Р°СЂС‚Р° РёРґРµРј РІРѕ РІСЃРµС… 4 РЅР°РїСЂР°РІР»РµРЅРёСЏС…)
 				array_legal_moovs[0] = i-1;
 				array_legal_moovs[1] = i+1;
 				array_legal_moovs[2] = i-counter_col;
 				array_legal_moovs[3] = i+counter_col;	
-				// 	Убираем те что нельзя
+				// 	РЈР±РёСЂР°РµРј С‚Рµ С‡С‚Рѕ РЅРµР»СЊР·СЏ
 				Cheking_legal_moovs();
 				LastMoov = i;
 			}
@@ -311,13 +311,13 @@ public class game_gameActivity extends Activity {
 	
 	
 	
-	// Определяем дейсвтия при ходе...
+	// РћРїСЂРµРґРµР»СЏРµРј РґРµР№СЃРІС‚РёСЏ РїСЂРё С…РѕРґРµ...
 	public void game_move(AdapterView<?> parent, int position, View v) 
 	{
 		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
 		{			
 			// -----------------------------------------------------------------------------------------------
-			// уменьшаем то что нажали и увеличиваем предыдущую картинку
+			// СѓРјРµРЅСЊС€Р°РµРј С‚Рѕ С‡С‚Рѕ РЅР°Р¶Р°Р»Рё Рё СѓРІРµР»РёС‡РёРІР°РµРј РїСЂРµРґС‹РґСѓС‰СѓСЋ РєР°СЂС‚РёРЅРєСѓ
 			parent.getChildAt(LastMoov).setScaleX((float) 1);
 			parent.getChildAt(LastMoov).setScaleY((float) 1);
 			LastMoov = position;
@@ -325,51 +325,51 @@ public class game_gameActivity extends Activity {
 			v.setScaleY((float) 0.7);
 			// -----------------------------------------------------------------------------------------------
 
-			//	Т.е. если мы сюда попали значит мы сделали легальный ход... т.е. мы уже тут можем считать счетчик ходов а не в каждом отдельном кайсе
+			//	Рў.Рµ. РµСЃР»Рё РјС‹ СЃСЋРґР° РїРѕРїР°Р»Рё Р·РЅР°С‡РёС‚ РјС‹ СЃРґРµР»Р°Р»Рё Р»РµРіР°Р»СЊРЅС‹Р№ С…РѕРґ... С‚.Рµ. РјС‹ СѓР¶Рµ С‚СѓС‚ РјРѕР¶РµРј СЃС‡РёС‚Р°С‚СЊ СЃС‡РµС‚С‡РёРє С…РѕРґРѕРІ Р° РЅРµ РІ РєР°Р¶РґРѕРј РѕС‚РґРµР»СЊРЅРѕРј РєР°Р№СЃРµ
 			Moovs_counter++;
 			
 			
-			// получаем имя файла ресурса по которому мы определим
-			// какие следующие ходы возможны
-			// например с красной позиции ход возможен только на верх и вправо
+			// РїРѕР»СѓС‡Р°РµРј РёРјСЏ С„Р°Р№Р»Р° СЂРµСЃСѓСЂСЃР° РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РјС‹ РѕРїСЂРµРґРµР»РёРј
+			// РєР°РєРёРµ СЃР»РµРґСѓСЋС‰РёРµ С…РѕРґС‹ РІРѕР·РјРѕР¶РЅС‹
+			// РЅР°РїСЂРёРјРµСЂ СЃ РєСЂР°СЃРЅРѕР№ РїРѕР·РёС†РёРё С…РѕРґ РІРѕР·РјРѕР¶РµРЅ С‚РѕР»СЊРєРѕ РЅР° РІРµСЂС… Рё РІРїСЂР°РІРѕ
 			//
-			// На данный момент
-			// 0 - белый - Финиш
-			// 1 - Черный - Старт
-			// 2 - Коричневый - влево, вправо
-			// 3 - Серый - вверх
-			// 4 - красный - вверх, вправо
-			// 5 - зеленый - вправо, вниз
-			// 6 - синий - вниз, влево
-			// 7 - Оранжевый - вверх, вниз
-			// 8 - Салатовый - вправо
-			// 9 - Голубой - влево
-			// 10 - Фиолетовый - вверх, вправо, вниз
-			// 11 - Желтый - влево, вверх
-			// 12 - Розовый - вверх, вниз, влево
-			// 13 - Прозрачный!!! -
-			// 14 - Лосось - вниз
+			// РќР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
+			// 0 - Р±РµР»С‹Р№ - Р¤РёРЅРёС€
+			// 1 - Р§РµСЂРЅС‹Р№ - РЎС‚Р°СЂС‚
+			// 2 - РљРѕСЂРёС‡РЅРµРІС‹Р№ - РІР»РµРІРѕ, РІРїСЂР°РІРѕ
+			// 3 - РЎРµСЂС‹Р№ - РІРІРµСЂС…
+			// 4 - РєСЂР°СЃРЅС‹Р№ - РІРІРµСЂС…, РІРїСЂР°РІРѕ
+			// 5 - Р·РµР»РµРЅС‹Р№ - РІРїСЂР°РІРѕ, РІРЅРёР·
+			// 6 - СЃРёРЅРёР№ - РІРЅРёР·, РІР»РµРІРѕ
+			// 7 - РћСЂР°РЅР¶РµРІС‹Р№ - РІРІРµСЂС…, РІРЅРёР·
+			// 8 - РЎР°Р»Р°С‚РѕРІС‹Р№ - РІРїСЂР°РІРѕ
+			// 9 - Р“РѕР»СѓР±РѕР№ - РІР»РµРІРѕ
+			// 10 - Р¤РёРѕР»РµС‚РѕРІС‹Р№ - РІРІРµСЂС…, РІРїСЂР°РІРѕ, РІРЅРёР·
+			// 11 - Р–РµР»С‚С‹Р№ - РІР»РµРІРѕ, РІРІРµСЂС…
+			// 12 - Р РѕР·РѕРІС‹Р№ - РІРІРµСЂС…, РІРЅРёР·, РІР»РµРІРѕ
+			// 13 - РџСЂРѕР·СЂР°С‡РЅС‹Р№!!! -
+			// 14 - Р›РѕСЃРѕСЃСЊ - РІРЅРёР·
 
-			// выдергиваем число из названия файла
+			// РІС‹РґРµСЂРіРёРІР°РµРј С‡РёСЃР»Рѕ РёР· РЅР°Р·РІР°РЅРёСЏ С„Р°Р№Р»Р°
 			Integer ert = NumberFromName(arrayfromlevel.get(position));			
 			switch (ert) {
 			case 0:
-				// Финиш	
+				// Р¤РёРЅРёС€	
 				
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
 				
-				// Пишем в преференсес
-				//передаю тип игры, уровень и сделанное кол-во ходов
+				// РџРёС€РµРј РІ РїСЂРµС„РµСЂРµРЅСЃРµСЃ
+				//РїРµСЂРµРґР°СЋ С‚РёРї РёРіСЂС‹, СѓСЂРѕРІРµРЅСЊ Рё СЃРґРµР»Р°РЅРЅРѕРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ
 				MySetPreferences(type_game_from, number_of_level,Moovs_counter);
 				
-				// Массив ходов заполняем фигней
-				array_legal_moovs[0] = 10000; // Конец игры
-				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
+				// РњР°СЃСЃРёРІ С…РѕРґРѕРІ Р·Р°РїРѕР»РЅСЏРµРј С„РёРіРЅРµР№
+				array_legal_moovs[0] = 10000; // РљРѕРЅРµС† РёРіСЂС‹
+				array_legal_moovs[1] = 10000; // РҐРѕРґРёС‚СЊ РЅРёРєСѓРґР° РЅРµР»СЊР·СЏ
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
 				
 				
-				// Проверка на выполнение задания поставленного на данном уровне
+				// РџСЂРѕРІРµСЂРєР° РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°РЅРёСЏ РїРѕСЃС‚Р°РІР»РµРЅРЅРѕРіРѕ РЅР° РґР°РЅРЅРѕРј СѓСЂРѕРІРЅРµ
 				switch (number_of_level)	
 				{
 				case 8:	if (Test_to_MoovKvest(Moovs_counter,Kvest_from_XMLFile)) 	{	timer.cancel();	ShowGameOver();	}
@@ -380,15 +380,15 @@ public class game_gameActivity extends Activity {
 				
 				break;
 			case 1:
-				// Старт
-				ColorBall = "Пройдите до белой точки...";
-				someText.setText("Цвет = " + ColorBall);
-				// Со стартовой клетки возможен ход во всех неправлениях, потому что я буду менять положение стартовой клетки постоянно
-				// Сдесь мы в массив возможных ходов добвляем все варианты, а уже невозможность хода за пределы лабиринат
-				// надо осуществляеть в другом месте... А МОЖЕТ и не надо осуществлять вовсе, поскольку нажать на те поля все равно не получится...
+				// РЎС‚Р°СЂС‚
+				ColorBall = "РџСЂРѕР№РґРёС‚Рµ РґРѕ Р±РµР»РѕР№ С‚РѕС‡РєРё...";
+				someText.setText("Р¦РІРµС‚ = " + ColorBall);
+				// РЎРѕ СЃС‚Р°СЂС‚РѕРІРѕР№ РєР»РµС‚РєРё РІРѕР·РјРѕР¶РµРЅ С…РѕРґ РІРѕ РІСЃРµС… РЅРµРїСЂР°РІР»РµРЅРёСЏС…, РїРѕС‚РѕРјСѓ С‡С‚Рѕ СЏ Р±СѓРґСѓ РјРµРЅСЏС‚СЊ РїРѕР»РѕР¶РµРЅРёРµ СЃС‚Р°СЂС‚РѕРІРѕР№ РєР»РµС‚РєРё РїРѕСЃС‚РѕСЏРЅРЅРѕ
+				// РЎРґРµСЃСЊ РјС‹ РІ РјР°СЃСЃРёРІ РІРѕР·РјРѕР¶РЅС‹С… С…РѕРґРѕРІ РґРѕР±РІР»СЏРµРј РІСЃРµ РІР°СЂРёР°РЅС‚С‹, Р° СѓР¶Рµ РЅРµРІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ С…РѕРґР° Р·Р° РїСЂРµРґРµР»С‹ Р»Р°Р±РёСЂРёРЅР°С‚
+				// РЅР°РґРѕ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЊ РІ РґСЂСѓРіРѕРј РјРµСЃС‚Рµ... Рђ РњРћР–Р•Рў Рё РЅРµ РЅР°РґРѕ РѕСЃСѓС‰РµСЃС‚РІР»СЏС‚СЊ РІРѕРІСЃРµ, РїРѕСЃРєРѕР»СЊРєСѓ РЅР°Р¶Р°С‚СЊ РЅР° С‚Рµ РїРѕР»СЏ РІСЃРµ СЂР°РІРЅРѕ РЅРµ РїРѕР»СѓС‡РёС‚СЃСЏ...
 						
-				array_legal_moovs[0] = position - 1; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
+				array_legal_moovs[0] = position - 1; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
 				array_legal_moovs[2] = position - counter_col;
 				array_legal_moovs[3] = position + counter_col; 
 				
@@ -397,120 +397,120 @@ public class game_gameActivity extends Activity {
 				
 				break;
 			case 2:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 1; 	// заносим в массив
-				array_legal_moovs[1] = position + 1; 	// координаты клеток куда доступен ход.
-				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
-				array_legal_moovs[3] = 10000;			// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - 1; 	// Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + 1; 	// РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ С…РѕРґ.
+				array_legal_moovs[2] = 10000;	 		// РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;			// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 3:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = 10000;	 // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
-				array_legal_moovs[3] = 10000; 	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = 10000;	 // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ
+				array_legal_moovs[2] = 10000; 	// РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000; 	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 4:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 5:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 1; // заносим в массив
-				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position + 1; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + counter_col; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 6:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position + counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position - 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 7:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + counter_col; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 8:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 1; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position + 1; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = 10000; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 9:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 1; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - 1; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = 10000; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 10:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = position + counter_col; // ненужный элемент
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position + 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = position + counter_col; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 11:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position - 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР°
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 12:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда доступен ход.										
-				array_legal_moovs[2] = position + counter_col; // ненужный элемент
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position - counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = position - 1; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ С…РѕРґ.										
+				array_legal_moovs[2] = position + counter_col; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 13:
-				// СЮда поидее мы никогда не должны попасть, ход по клетке 13 отсеивается в Cheking_legal_moovs
+				// РЎР®РґР° РїРѕРёРґРµРµ РјС‹ РЅРёРєРѕРіРґР° РЅРµ РґРѕР»Р¶РЅС‹ РїРѕРїР°СЃС‚СЊ, С…РѕРґ РїРѕ РєР»РµС‚РєРµ 13 РѕС‚СЃРµРёРІР°РµС‚СЃСЏ РІ Cheking_legal_moovs
 				break;
 			case 14:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + counter_col; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				// РћРїСЂРµРґРµР»СЏРµРј РєСѓРґР° РјРѕР¶РЅРѕ РїРѕР№С‚Рё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[0] = position + counter_col; // Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
+				array_legal_moovs[1] = 10000; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»РµС‚РѕРє РєСѓРґР° РґРѕСЃС‚СѓРїРµРЅ
+				array_legal_moovs[2] = 10000; // РЅРµРЅСѓР¶РЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+				array_legal_moovs[3] = 10000;	// РїСЂРѕСЃС‚Р°РІР»СЏРµРј РІ 10000
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 
 			default:
-				ColorBall = "Херня случилась )))";
-				someText.setText("Цвет = " + ColorBall);
+				ColorBall = "РҐРµСЂРЅСЏ СЃР»СѓС‡РёР»Р°СЃСЊ )))";
+				someText.setText("Р¦РІРµС‚ = " + ColorBall);
 				break;
 			}
 
@@ -518,7 +518,7 @@ public class game_gameActivity extends Activity {
 		else 
 		{	
 			parent.getChildAt(position).startAnimation(animation_wrong_moovs);   
-			someText.setText("Этот ход недопустим..."); 	
+			someText.setText("Р­С‚РѕС‚ С…РѕРґ РЅРµРґРѕРїСѓСЃС‚РёРј..."); 	
 		}
 
 	}
@@ -532,9 +532,9 @@ public class game_gameActivity extends Activity {
 		switch (type) 
 		{
 		case 0:
-			// пишем общее кол-во ходов
+			// РїРёС€РµРј РѕР±С‰РµРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ
 			editor.putInt(APP_PREFERENCES_moovs_of_type1,moovs_counter_all);
-			// пишем в переменную текущего уровня кол-во ходов за которое прошел  
+			// РїРёС€РµРј РІ РїРµСЂРµРјРµРЅРЅСѓСЋ С‚РµРєСѓС‰РµРіРѕ СѓСЂРѕРІРЅСЏ РєРѕР»-РІРѕ С…РѕРґРѕРІ Р·Р° РєРѕС‚РѕСЂРѕРµ РїСЂРѕС€РµР»  
 			switch (level-1)		{
 				case 0:	editor.putInt(APP_PREFERENCES_levels_of_type1_1,	mooves);	break;
 				case 1:	editor.putInt(APP_PREFERENCES_levels_of_type1_2,	mooves);	break;
@@ -615,20 +615,20 @@ public class game_gameActivity extends Activity {
 	
 	public Integer NumberFromName(String name) 
 	{
-		name = name.replaceAll("[^0-9]+", " "); // Удаляем все символы кроме чисел
-		name = name.trim();						// убираем пробелы
-		return Integer.parseInt(name);			// возвращаем число
+		name = name.replaceAll("[^0-9]+", " "); // РЈРґР°Р»СЏРµРј РІСЃРµ СЃРёРјРІРѕР»С‹ РєСЂРѕРјРµ С‡РёСЃРµР»
+		name = name.trim();						// СѓР±РёСЂР°РµРј РїСЂРѕР±РµР»С‹
+		return Integer.parseInt(name);			// РІРѕР·РІСЂР°С‰Р°РµРј С‡РёСЃР»Рѕ
 	}
 	
 	
-	// функция которая убирает ходы из массива доступных ходов, на основании конца лабиринта или когда точки старта и финиши соприкасаются.
-	// эту проверку делать всегда после заполнения массива доступных ходов.
-	// т.е. из уже доступных ходов выкидывать те что противоречат правилам
+	// С„СѓРЅРєС†РёСЏ РєРѕС‚РѕСЂР°СЏ СѓР±РёСЂР°РµС‚ С…РѕРґС‹ РёР· РјР°СЃСЃРёРІР° РґРѕСЃС‚СѓРїРЅС‹С… С…РѕРґРѕРІ, РЅР° РѕСЃРЅРѕРІР°РЅРёРё РєРѕРЅС†Р° Р»Р°Р±РёСЂРёРЅС‚Р° РёР»Рё РєРѕРіРґР° С‚РѕС‡РєРё СЃС‚Р°СЂС‚Р° Рё С„РёРЅРёС€Рё СЃРѕРїСЂРёРєР°СЃР°СЋС‚СЃСЏ.
+	// СЌС‚Сѓ РїСЂРѕРІРµСЂРєСѓ РґРµР»Р°С‚СЊ РІСЃРµРіРґР° РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°СЃСЃРёРІР° РґРѕСЃС‚СѓРїРЅС‹С… С…РѕРґРѕРІ.
+	// С‚.Рµ. РёР· СѓР¶Рµ РґРѕСЃС‚СѓРїРЅС‹С… С…РѕРґРѕРІ РІС‹РєРёРґС‹РІР°С‚СЊ С‚Рµ С‡С‚Рѕ РїСЂРѕС‚РёРІРѕСЂРµС‡Р°С‚ РїСЂР°РІРёР»Р°Рј
 	public void Cheking_legal_moovs()
 	{
 		for (int i = 0; i < array_legal_moovs.length; i++) 
 		{
-			// Просматривая все возможные ходы мы выкидываем те которые находятся за рамками игрового массива
+			// РџСЂРѕСЃРјР°С‚СЂРёРІР°СЏ РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ С…РѕРґС‹ РјС‹ РІС‹РєРёРґС‹РІР°РµРј С‚Рµ РєРѕС‚РѕСЂС‹Рµ РЅР°С…РѕРґСЏС‚СЃСЏ Р·Р° СЂР°РјРєР°РјРё РёРіСЂРѕРІРѕРіРѕ РјР°СЃСЃРёРІР°
 			if ( (array_legal_moovs[i] <= arrayfromlevel.size()) & (array_legal_moovs[i] >= 0) )	
 			{									}			
 			else 
@@ -650,16 +650,16 @@ public class game_gameActivity extends Activity {
 	}
 	
 	
-	// Цель пройти лабиринт за строго определенное кол-во ходов
-	// Есть массив который содержит эти ходы, нужно его весь перебрать и проверить нет ли одинаковых ходов, таковых быть не должно!	
+	// Р¦РµР»СЊ РїСЂРѕР№С‚Рё Р»Р°Р±РёСЂРёРЅС‚ Р·Р° СЃС‚СЂРѕРіРѕ РѕРїСЂРµРґРµР»РµРЅРЅРѕРµ РєРѕР»-РІРѕ С…РѕРґРѕРІ
+	// Р•СЃС‚СЊ РјР°СЃСЃРёРІ РєРѕС‚РѕСЂС‹Р№ СЃРѕРґРµСЂР¶РёС‚ СЌС‚Рё С…РѕРґС‹, РЅСѓР¶РЅРѕ РµРіРѕ РІРµСЃСЊ РїРµСЂРµР±СЂР°С‚СЊ Рё РїСЂРѕРІРµСЂРёС‚СЊ РЅРµС‚ Р»Рё РѕРґРёРЅР°РєРѕРІС‹С… С…РѕРґРѕРІ, С‚Р°РєРѕРІС‹С… Р±С‹С‚СЊ РЅРµ РґРѕР»Р¶РЅРѕ!	
 	private boolean Test_to_MoovKvest(int kolvo_hodov, int kvest) 
 	{
-		// признак выполненного задания устанавливаем в false, и пытаемся его подтвердить
+		// РїСЂРёР·РЅР°Рє РІС‹РїРѕР»РЅРµРЅРЅРѕРіРѕ Р·Р°РґР°РЅРёСЏ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РІ false, Рё РїС‹С‚Р°РµРјСЃСЏ РµРіРѕ РїРѕРґС‚РІРµСЂРґРёС‚СЊ
 		if (kvest != kolvo_hodov)	{	return false;	}
 		else 
-		{	// Если кол-во ходов равное то проверяем на читерство!
+		{	// Р•СЃР»Рё РєРѕР»-РІРѕ С…РѕРґРѕРІ СЂР°РІРЅРѕРµ С‚Рѕ РїСЂРѕРІРµСЂСЏРµРј РЅР° С‡РёС‚РµСЂСЃС‚РІРѕ!
 			boolean local_bool = false;			
-			// В массиве всех ходов ищем частоту вхождния каждого элемента, если она больше 1 бьем тревогу!
+			// Р’ РјР°СЃСЃРёРІРµ РІСЃРµС… С…РѕРґРѕРІ РёС‰РµРј С‡Р°СЃС‚РѕС‚Сѓ РІС…РѕР¶РґРЅРёСЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р°, РµСЃР»Рё РѕРЅР° Р±РѕР»СЊС€Рµ 1 Р±СЊРµРј С‚СЂРµРІРѕРіСѓ!
 			for (int i = 0; i < array_all_moovs.size(); i++) 
 			{
 				if (Collections.frequency(array_all_moovs, array_all_moovs.get(i))	>	1) 
@@ -674,23 +674,23 @@ public class game_gameActivity extends Activity {
 	
 	private void ShowGameOver() {
 		 
-	    // Диалоговое окно
+	    // Р”РёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ
 	    AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 	 
-	    // Заголовок и текст
-	    alertbox.setTitle("Поздравляем!");
+	    // Р—Р°РіРѕР»РѕРІРѕРє Рё С‚РµРєСЃС‚
+	    alertbox.setTitle("РџРѕР·РґСЂР°РІР»СЏРµРј!");
 	        
-	    String TextToast = "Кол-во ходов: "+ Moovs_counter+ss+"Время: "+minutes+":"+seconds;
+	    String TextToast = "РљРѕР»-РІРѕ С…РѕРґРѕРІ: "+ Moovs_counter+ss+"Р’СЂРµРјСЏ: "+minutes+":"+seconds;
 	    alertbox.setMessage(TextToast);
 	 
-	    // Добавляем кнопку 
+	    // Р”РѕР±Р°РІР»СЏРµРј РєРЅРѕРїРєСѓ 
 	    alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 	      public void onClick(DialogInterface arg0, int arg1) {
-	        // закрываем текущюю Activity
+	        // Р·Р°РєСЂС‹РІР°РµРј С‚РµРєСѓС‰СЋСЋ Activity
 	        finish();
 	      }
 	    });
-	    // показываем окно
+	    // РїРѕРєР°Р·С‹РІР°РµРј РѕРєРЅРѕ
 	    alertbox.show();
 	  }
 	
@@ -711,10 +711,10 @@ public class game_gameActivity extends Activity {
 		overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
 		
 		switch (type_game_from) 	{
-		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// Активность уходит влево
-		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// Активность уходит вправо	
-		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
-		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
+		case 0:	overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);	break; 	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІР»РµРІРѕ
+		case 2:	overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРїСЂР°РІРѕ	
+		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРЅРёР·
+		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// РђРєС‚РёРІРЅРѕСЃС‚СЊ СѓС…РѕРґРёС‚ РІРІРµСЂС…
 		default:			break;
 							}    		 
 	}

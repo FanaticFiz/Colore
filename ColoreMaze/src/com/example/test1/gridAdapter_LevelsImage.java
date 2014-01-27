@@ -20,9 +20,9 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
     	array_of_P = pref_type_AllAboutLevels;
     }
     
-    // этом методе поидее надо смотреть чему равна переменная type_of_game и тогда уже брать длинну 
-    // соответсвующего массива mThumbIds[] 
-    // НО у меня поидее эти массивы будут одинаковый длинны все, поэтому мы берем длинну одного из них только.
+    // СЌС‚РѕРј РјРµС‚РѕРґРµ РїРѕРёРґРµРµ РЅР°РґРѕ СЃРјРѕС‚СЂРµС‚СЊ С‡РµРјСѓ СЂР°РІРЅР° РїРµСЂРµРјРµРЅРЅР°СЏ type_of_game Рё С‚РѕРіРґР° СѓР¶Рµ Р±СЂР°С‚СЊ РґР»РёРЅРЅСѓ 
+    // СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РµРіРѕ РјР°СЃСЃРёРІР° mThumbIds[] 
+    // РќРћ Сѓ РјРµРЅСЏ РїРѕРёРґРµРµ СЌС‚Рё РјР°СЃСЃРёРІС‹ Р±СѓРґСѓС‚ РѕРґРёРЅР°РєРѕРІС‹Р№ РґР»РёРЅРЅС‹ РІСЃРµ, РїРѕСЌС‚РѕРјСѓ РјС‹ Р±РµСЂРµРј РґР»РёРЅРЅСѓ РѕРґРЅРѕРіРѕ РёР· РЅРёС… С‚РѕР»СЊРєРѕ.
     public int getCount() 						{ 	return mThumbIds1.length-24;   }
     public Object getItem(int position) 		{ 	return null;				}
     public long getItemId(int position) 		{ 	return 0;	   				}
@@ -41,13 +41,13 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
             imageView = (SquareImageView) convertView;
         }
         
-        // Итак что я хотел этим сказать...
-        // Задача: показывать один графический ресурс если значение из преферанса равно 1 и другой если значение параметра 0
-        // поскольку все это дело отображается один раз при открытии активити уровней, то именно в getView я придумал вот такую хрень...
-        // поскольку я турок и незнаю как отойти от кода взятого в примере "private Integer[] mThumbIds" то я придумал следующее
-        // добавить в эти массивы избточные значения в моём случае 24 елемента которые отображают закрытое состояние уровня и еще +24 которые отображают открытое состояние
-        // и в зависимости от значения в преферансе брать либо 0,1,2... элементы, либо со сдвигом 0+24,1+24,2+24... элементы...
-        // возможно даже что так лучше в плане что ненужно в коде потом менять состояния или как то рисовать/перерисовывать что то
+        // РС‚Р°Рє С‡С‚Рѕ СЏ С…РѕС‚РµР» СЌС‚РёРј СЃРєР°Р·Р°С‚СЊ...
+        // Р—Р°РґР°С‡Р°: РїРѕРєР°Р·С‹РІР°С‚СЊ РѕРґРёРЅ РіСЂР°С„РёС‡РµСЃРєРёР№ СЂРµСЃСѓСЂСЃ РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ РёР· РїСЂРµС„РµСЂР°РЅСЃР° СЂР°РІРЅРѕ 1 Рё РґСЂСѓРіРѕР№ РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° 0
+        // РїРѕСЃРєРѕР»СЊРєСѓ РІСЃРµ СЌС‚Рѕ РґРµР»Рѕ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РѕРґРёРЅ СЂР°Р· РїСЂРё РѕС‚РєСЂС‹С‚РёРё Р°РєС‚РёРІРёС‚Рё СѓСЂРѕРІРЅРµР№, С‚Рѕ РёРјРµРЅРЅРѕ РІ getView СЏ РїСЂРёРґСѓРјР°Р» РІРѕС‚ С‚Р°РєСѓСЋ С…СЂРµРЅСЊ...
+        // РїРѕСЃРєРѕР»СЊРєСѓ СЏ С‚СѓСЂРѕРє Рё РЅРµР·РЅР°СЋ РєР°Рє РѕС‚РѕР№С‚Рё РѕС‚ РєРѕРґР° РІР·СЏС‚РѕРіРѕ РІ РїСЂРёРјРµСЂРµ "private Integer[] mThumbIds" С‚Рѕ СЏ РїСЂРёРґСѓРјР°Р» СЃР»РµРґСѓСЋС‰РµРµ
+        // РґРѕР±Р°РІРёС‚СЊ РІ СЌС‚Рё РјР°СЃСЃРёРІС‹ РёР·Р±С‚РѕС‡РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РІ РјРѕС‘Рј СЃР»СѓС‡Р°Рµ 24 РµР»РµРјРµРЅС‚Р° РєРѕС‚РѕСЂС‹Рµ РѕС‚РѕР±СЂР°Р¶Р°СЋС‚ Р·Р°РєСЂС‹С‚РѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СѓСЂРѕРІРЅСЏ Рё РµС‰Рµ +24 РєРѕС‚РѕСЂС‹Рµ РѕС‚РѕР±СЂР°Р¶Р°СЋС‚ РѕС‚РєСЂС‹С‚РѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
+        // Рё РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ Р·РЅР°С‡РµРЅРёСЏ РІ РїСЂРµС„РµСЂР°РЅСЃРµ Р±СЂР°С‚СЊ Р»РёР±Рѕ 0,1,2... СЌР»РµРјРµРЅС‚С‹, Р»РёР±Рѕ СЃРѕ СЃРґРІРёРіРѕРј 0+24,1+24,2+24... СЌР»РµРјРµРЅС‚С‹...
+        // РІРѕР·РјРѕР¶РЅРѕ РґР°Р¶Рµ С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ РІ РїР»Р°РЅРµ С‡С‚Рѕ РЅРµРЅСѓР¶РЅРѕ РІ РєРѕРґРµ РїРѕС‚РѕРј РјРµРЅСЏС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёСЏ РёР»Рё РєР°Рє С‚Рѕ СЂРёСЃРѕРІР°С‚СЊ/РїРµСЂРµСЂРёСЃРѕРІС‹РІР°С‚СЊ С‡С‚Рѕ С‚Рѕ
         switch (position) 
         {
 		case 0:	if (array_of_P[0]==0) 	{	ggggg = position+12;	}
@@ -55,68 +55,68 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
 				break;
 
 		case 1:
-			if 	(array_of_P[0]== 0) 					{  	ggggg = position;		}	// замочек
-			if ((array_of_P[0] > 0)&(array_of_P[1]==0)) {  	ggggg = position + 12;	}	// чисто
-			if  (array_of_P[1] > 0)						{	ggggg = position + 24;	}	// галочка			
+			if 	(array_of_P[0]== 0) 					{  	ggggg = position;		}	// Р·Р°РјРѕС‡РµРє
+			if ((array_of_P[0] > 0)&(array_of_P[1]==0)) {  	ggggg = position + 12;	}	// С‡РёСЃС‚Рѕ
+			if  (array_of_P[1] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°			
 			break;
 		case 2:	
 			if 	(array_of_P[1]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[1] > 0)&(array_of_P[2]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[2] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[2] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 3:				
 			if 	(array_of_P[2]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[2] > 0)&(array_of_P[3]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[3] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[3] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 4:	
 			if 	(array_of_P[3]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[3] > 0)&(array_of_P[4]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[4] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[4] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 5:	
 			if 	(array_of_P[4]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[4] > 0)&(array_of_P[5]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[5] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[5] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 6:	
 			if 	(array_of_P[5]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[5] > 0)&(array_of_P[6]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[6] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[6] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 7:	
 			if 	(array_of_P[6]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[6] > 0)&(array_of_P[7]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[7] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[7] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 8:	
 			if 	(array_of_P[7]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[7] > 0)&(array_of_P[8]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[8] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[8] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 9:	
 			if 	(array_of_P[8]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[8] > 0)&(array_of_P[9]==0)) {  	ggggg = position + 12;	}
-			if  (array_of_P[9] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[9] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 10:
 			if 	(array_of_P[9]== 0) 					{  	ggggg = position;		}
 			if ((array_of_P[9] > 0)&(array_of_P[10]==0)){  	ggggg = position + 12;	}
-			if  (array_of_P[10]> 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[10]> 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		case 11:
 			if 	(array_of_P[10]== 0) 						{  	ggggg = position;		}
 			if ((array_of_P[10] > 0)&(array_of_P[11]==0)) 	{  	ggggg = position + 12;	}
-			if  (array_of_P[11] > 0)						{	ggggg = position + 24;	}	// галочка				
+			if  (array_of_P[11] > 0)						{	ggggg = position + 24;	}	// РіР°Р»РѕС‡РєР°				
 			break;
 
 		default:
@@ -125,7 +125,7 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
 		}
         
         
-        // В зависимости от выбранного типа игры подгружается нужный массив с данными для отображения
+        // Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С‚РёРїР° РёРіСЂС‹ РїРѕРґРіСЂСѓР¶Р°РµС‚СЃСЏ РЅСѓР¶РЅС‹Р№ РјР°СЃСЃРёРІ СЃ РґР°РЅРЅС‹РјРё РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
         switch (grid_type_of_game) {
 		case 0:
 			imageView.setImageResource(mThumbIds1[ggggg]);	
@@ -147,19 +147,19 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
         return imageView;
     }
    
-    // Здесь обьявлены массивы в которых перечисляются графические ресурсы для отображения уровней 
-    // в активити levels. На данный момент я планирую 24 уровня на каждый тип игры.
+    // Р—РґРµСЃСЊ РѕР±СЊСЏРІР»РµРЅС‹ РјР°СЃСЃРёРІС‹ РІ РєРѕС‚РѕСЂС‹С… РїРµСЂРµС‡РёСЃР»СЏСЋС‚СЃСЏ РіСЂР°С„РёС‡РµСЃРєРёРµ СЂРµСЃСѓСЂСЃС‹ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СѓСЂРѕРІРЅРµР№ 
+    // РІ Р°РєС‚РёРІРёС‚Рё levels. РќР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ СЏ РїР»Р°РЅРёСЂСѓСЋ 24 СѓСЂРѕРІРЅСЏ РЅР° РєР°Р¶РґС‹Р№ С‚РёРї РёРіСЂС‹.
     private Integer[] mThumbIds1 = {
     		
-    		R.drawable.layer_of_levelsgrid1,	R.drawable.layer_of_levelsgrid2,	R.drawable.layer_of_levelsgrid3,	R.drawable.layer_of_levelsgrid4,		// замочек	
+    		R.drawable.layer_of_levelsgrid1,	R.drawable.layer_of_levelsgrid2,	R.drawable.layer_of_levelsgrid3,	R.drawable.layer_of_levelsgrid4,		// Р·Р°РјРѕС‡РµРє	
             R.drawable.layer_of_levelsgrid5,	R.drawable.layer_of_levelsgrid6,	R.drawable.layer_of_levelsgrid7,	R.drawable.layer_of_levelsgrid8,
             R.drawable.layer_of_levelsgrid9,	R.drawable.layer_of_levelsgrid10,	R.drawable.layer_of_levelsgrid11,	R.drawable.layer_of_levelsgrid12,
               
-    		R.drawable.type1_level1,			R.drawable.type1_level2,			R.drawable.type1_level3,			R.drawable.type1_level4,				// чисто
+    		R.drawable.type1_level1,			R.drawable.type1_level2,			R.drawable.type1_level3,			R.drawable.type1_level4,				// С‡РёСЃС‚Рѕ
     		R.drawable.type1_level5,			R.drawable.type1_level6,			R.drawable.type1_level7,			R.drawable.type1_level8,
     		R.drawable.type1_level9,			R.drawable.type1_level10,			R.drawable.type1_level11,			R.drawable.type1_level12,
     		
-    		R.drawable.layer_of_levelsgrid1_ok,	R.drawable.layer_of_levelsgrid2_ok,	R.drawable.layer_of_levelsgrid3_ok,	R.drawable.layer_of_levelsgrid4_ok,		// галочка
+    		R.drawable.layer_of_levelsgrid1_ok,	R.drawable.layer_of_levelsgrid2_ok,	R.drawable.layer_of_levelsgrid3_ok,	R.drawable.layer_of_levelsgrid4_ok,		// РіР°Р»РѕС‡РєР°
             R.drawable.layer_of_levelsgrid5_ok,	R.drawable.layer_of_levelsgrid6_ok,	R.drawable.layer_of_levelsgrid7_ok,	R.drawable.layer_of_levelsgrid8_ok,
             R.drawable.layer_of_levelsgrid9_ok,	R.drawable.layer_of_levelsgrid10_ok,R.drawable.layer_of_levelsgrid11_ok,R.drawable.layer_of_levelsgrid12_ok,
     };
