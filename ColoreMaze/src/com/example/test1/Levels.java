@@ -2,9 +2,7 @@ package com.example.test1;
 
 
 import java.util.ArrayList;
-
 import org.xmlpull.v1.XmlPullParser;
-
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -14,8 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -23,7 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Levels extends Activity {
 	
-	private Animation 			animation_wrong_moovs;
+//	private Animation 			animation_wrong_moovs;
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
 	private 	SoundPool 	soundPool;
 	private 	static int 	soundID1;
@@ -113,7 +109,7 @@ public class Levels extends Activity {
 
 		
 		// подключаем файл анимации
-		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+//		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
 		
 		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -164,7 +160,7 @@ public class Levels extends Activity {
 	        	}
 	        	else 
 	        	{
-	        		parent.getChildAt(position).startAnimation(animation_wrong_moovs);
+	        		//parent.getChildAt(position).startAnimation(animation_wrong_moovs);
 				}
 	        }
 	    });			

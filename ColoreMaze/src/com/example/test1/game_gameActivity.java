@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -13,7 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.Resources;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -209,7 +206,9 @@ public class game_gameActivity extends Activity {
 		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
 		Kvest_from_XMLFile	=	Integer.parseInt(getIntent().getExtras().getString("from_level_to_game_XMLgame_type"));
 		
-		RandomBackground();
+		
+//		Надоел рандомный фон... закоментирую пока...
+//		RandomBackground();
 		
 			
 		//Свяжемся со строкой текстовой на форме
@@ -637,6 +636,7 @@ public class game_gameActivity extends Activity {
 		}
 	}
 
+	/*
 	private void RandomBackground() 
 	{
 		LinearLayout LinLayout = (LinearLayout) findViewById(R.id.LinearLayout_of_Game);
@@ -648,7 +648,7 @@ public class game_gameActivity extends Activity {
 		Integer identifierID = mRes.getIdentifier(stringBG, "drawable", this.getPackageName());
 		LinLayout.setBackgroundResource(identifierID);
 	}
-	
+	*/
 	
 	// Цель пройти лабиринт за строго определенное кол-во ходов
 	// Есть массив который содержит эти ходы, нужно его весь перебрать и проверить нет ли одинаковых ходов, таковых быть не должно!	

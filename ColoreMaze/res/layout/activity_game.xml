@@ -2,7 +2,7 @@
     android:id="@+id/LinearLayout_of_Game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgstyle1"
+    android:background="@drawable/bgstyle24"
     android:orientation="vertical"
     android:weightSum="100" >
 
