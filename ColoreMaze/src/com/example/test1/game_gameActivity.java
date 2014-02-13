@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,7 +29,6 @@ public class game_gameActivity extends Activity {
 
 	private Animation			animation_wrong_moovs;
 	private GridView			mGrid;
-	// private Dialog dialog_end_of_game;
 	private gridadapter_Game	mAdapter;
 	private int					LastMoov, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
@@ -251,11 +252,11 @@ public class game_gameActivity extends Activity {
                  	if (NumberFromName(arrayfromlevel.get(position))==13) 
                  	{						}
                  	else 	{
-                 		game_move(parent, position, v);
+                   			game_move(parent, position, v);
                  		
-                 		someText.setText("Номер фона = "+randomBG);
-                 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
-
+                 			someText.setText("Номер фона = "+randomBG);
+                 			MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+               
                  			}
         		}                	             
         	});     
@@ -707,7 +708,9 @@ public class game_gameActivity extends Activity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		
+		Log.d("onBack", "нажали стрелку назад");
+		// Останавливаем таймер
+		timer.cancel();
 		overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
 		
 		switch (type_game_from) 	{
