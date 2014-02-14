@@ -3,8 +3,6 @@ package com.example.test1;
 
 import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -21,8 +19,6 @@ public class Levels extends Activity {
 	
 //	private Animation 			animation_wrong_moovs;
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
-	private 	SoundPool 	soundPool;
-	private 	static int 	soundID1;
 	private		int			counter_col;	// кол-во столбцов	
 	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
 	private		String		XMLgame_type="0";	// Типа усложнения игры из файла
@@ -109,12 +105,9 @@ public class Levels extends Activity {
 
 		
 		// подключаем файл анимации
-//		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+		//		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
-		
-		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-		//Загружаем звуки в память
-        soundID1 = soundPool.load(this, R.raw.btn1, 1);
+	
 
 		// получаем тип выбранной игры...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
@@ -137,7 +130,6 @@ public class Levels extends Activity {
 	        	if ( (pref_type_AllAboutLevels[position_of_array] > 0) | (position==0) ) 
 	        	{
      		        	
-	        		soundPool.play(soundID1, 1, 1, 1, 0, 1f);
 	        		ChoiseLevel(type_of_game, position);
 	        		// 	Прыгаем в Игру
 	        		Intent intentG = new Intent();

@@ -314,7 +314,8 @@ public class game_gameActivity extends Activity {
 	// Определяем дейсвтия при ходе...
 	public void game_move(AdapterView<?> parent, int position, View v) 
 	{
-		if ((array_legal_moovs[0] == position)| (array_legal_moovs[1] == position)| (array_legal_moovs[2] == position)| (array_legal_moovs[3] == position)) 
+		
+		if ((array_legal_moovs[0] == position) || (array_legal_moovs[1] == position) || (array_legal_moovs[2] == position) || (array_legal_moovs[3] == position)) 
 		{			
 			// -----------------------------------------------------------------------------------------------
 			// уменьшаем то что нажали и увеличиваем предыдущую картинку

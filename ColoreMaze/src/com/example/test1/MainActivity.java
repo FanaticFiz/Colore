@@ -1,7 +1,5 @@
 package com.example.test1;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -20,25 +18,21 @@ public class MainActivity extends Activity {
 
 	TextView textStartGame1,textStartGame2,textStartGame3,textStartGame4;
 	private Animation menu_animation;
-	public SoundPool soundPool;
-	private static int soundID1;
 	
-	private static float	volume;
-	//private static int 		Sound_on_of,fontBG;
 	
-    public static final String APP_PREFERENCES = "mysettings";  				// Имя файла настроек
+    public static final String APP_PREFERENCES = "mysettings";  				// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     
-    public static final String APP_PREFERENCES_FirstRun 	= "FirstRun";		// признак первого запуска
-    public static final String APP_PREFERENCES_menu_volume 	= "volume";			// Громкость музыки
-    public static final String APP_PREFERENCES_menu_sound	= "Sound_on_of";	// вкл/выкл звука
-    public static final String APP_PREFERENCES_menu_fonBG	= "fontBG";			// фон выбранный по умолчанию 
+    public static final String APP_PREFERENCES_FirstRun 	= "FirstRun";		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public static final String APP_PREFERENCES_menu_volume 	= "volume";			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public static final String APP_PREFERENCES_menu_sound	= "Sound_on_of";	// пїЅпїЅпїЅ/пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    public static final String APP_PREFERENCES_menu_fonBG	= "fontBG";			// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
     
     SharedPreferences mSettings;
     Editor preferences_editor;      
-    // Уровень 1 
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
-	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
+	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// пїЅпїЅпїЅпїЅпїЅпїЅ
+	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// пїЅпїЅпїЅпїЅпїЅпїЅ
 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_4	= 	"levels_of_type1_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_5	= 	"levels_of_type1_5";		// 
@@ -50,10 +44,10 @@ public class MainActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
 
-	// Уровень 2
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2
 	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type2_1	= 	"levels_of_type2_1";		// пїЅпїЅпїЅпїЅпїЅпїЅ
+	public static final String 	APP_PREFERENCES_levels_of_type2_2	= 	"levels_of_type2_2";		// пїЅпїЅпїЅпїЅпїЅпїЅ
 	public static final String 	APP_PREFERENCES_levels_of_type2_3	= 	"levels_of_type2_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_4	= 	"levels_of_type2_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_5	= 	"levels_of_type2_5";		// 
@@ -65,10 +59,10 @@ public class MainActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type2_11	= 	"levels_of_type2_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type2_12	= 	"levels_of_type2_12";		// 
     	
-	// Уровень 3
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3
 	public static final String 	APP_PREFERENCES_moovs_of_type3		= 	"moovs_of_type3";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type3_1	= 	"levels_of_type3_1";		// пїЅпїЅпїЅпїЅпїЅпїЅ
+	public static final String 	APP_PREFERENCES_levels_of_type3_2	= 	"levels_of_type3_2";		// пїЅпїЅпїЅпїЅпїЅпїЅ
 	public static final String 	APP_PREFERENCES_levels_of_type3_3	= 	"levels_of_type3_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_4	= 	"levels_of_type3_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_5	= 	"levels_of_type3_5";		// 
@@ -80,10 +74,10 @@ public class MainActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type3_11	= 	"levels_of_type3_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type3_12	= 	"levels_of_type3_12";		// 
 
-	// Уровень 4
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4
 	public static final String 	APP_PREFERENCES_moovs_of_type4		= 	"moovs_of_type4";		// 
-	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// Первый
-	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// второй
+	public static final String 	APP_PREFERENCES_levels_of_type4_1	= 	"levels_of_type4_1";		// пїЅпїЅпїЅпїЅпїЅпїЅ
+	public static final String 	APP_PREFERENCES_levels_of_type4_2	= 	"levels_of_type4_2";		// пїЅпїЅпїЅпїЅпїЅпїЅ
 	public static final String 	APP_PREFERENCES_levels_of_type4_3	= 	"levels_of_type4_3";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_4	= 	"levels_of_type4_4";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_5	= 	"levels_of_type4_5";		// 
@@ -103,19 +97,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		// Преференсес
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 		PreferencesInit();
 		
 		
 		
-		// ****************************************************************************
-		// *************************** работаем со звуком  ****************************
-		//Создаем soundPool. для коротких пуков
-        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-        soundID1 = soundPool.load(this, R.raw.btn2, 1);
-        
-        // Связываем кнопку громкости с приложением
+		/*
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      	this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         // 	Getting the user sound settings
         AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
@@ -126,9 +115,9 @@ public class MainActivity extends Activity {
         volume = actualVolume / maxVolume;
 		// ****************************************************************************
 		// ****************************************************************************
+        */
         
-        
-		// Установка шрифта текстовым полям
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		final TextView textColoremaze = (TextView)findViewById(R.id.game_up_text);
 		textColoremaze.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
@@ -141,7 +130,7 @@ public class MainActivity extends Activity {
 		textStartGame4 = (TextView)findViewById(R.id.textView11);
 		
 		/*
-		// Добавляем тени
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		textColoremaze.setShadowLayer(8f,4f,4f,0xFF000000);
 		textStartGame.setShadowLayer(8f,8f,8f,0xFF000000);
 		textStartGame1.setShadowLayer(8f,8f,8f,0xFF000000);
@@ -151,7 +140,7 @@ public class MainActivity extends Activity {
 		*/
 			
 		
-		// подключаем файл анимации для меню
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		menu_animation = AnimationUtils.loadAnimation(this, R.anim.menuanimation);
 		
 		//MyGetPreferences();
@@ -169,20 +158,18 @@ public class MainActivity extends Activity {
 
 	public void onPlayClick(View v) 
 	{
-		
-		soundPool.play(soundID1, volume, volume, 1, 0, 1f);		
-		// отсюда идем в окно выбора типа игры
+			
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		Intent intentG = new Intent();
 		intentG.setClass(MainActivity.this, Type.class);
 		startActivity(intentG);
-		// анимируем переход между активити
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
 		
 	}	
 	public void OnClickSettings(View v) 
 	{
 		textStartGame1.startAnimation(menu_animation);
-		soundPool.play(soundID1, volume, volume, 1, 0, 1f);
 		
 		Intent inten1 = new Intent();
 		inten1.setClass(MainActivity.this, SettingsActivity.class);
@@ -193,7 +180,6 @@ public class MainActivity extends Activity {
 	public void OnClickAbout(View v) 
 	{
 		textStartGame2.startAnimation(menu_animation);
-		soundPool.play(soundID1, volume, volume, 1, 0, 1f);
 		
 		Intent inten2 = new Intent();
 		inten2.setClass(MainActivity.this, AboutActivity.class);
@@ -204,10 +190,6 @@ public class MainActivity extends Activity {
 	public void OnClickExit(View v) 
 	{
 		textStartGame3.startAnimation(menu_animation);
-		soundPool.play(soundID1, volume, volume, 1, 0, 1f);
-		
-		soundPool.release();
-		soundPool = null;
 		finish();
 	}	
 
@@ -215,35 +197,35 @@ public class MainActivity extends Activity {
 	
 	public void PreferencesInit() 
 	{
-		// Если НЕ существует переменной FirstRun(да собственно как и любой другой) значит приложение еще не запускалось
-		// проводим инициализацию всех переменных в начальное положение
+		// пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FirstRun(пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if (!mSettings.contains(APP_PREFERENCES_FirstRun)) 
 		{ 
 			preferences_editor = mSettings.edit();
-			// Общие настройки
+			// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			preferences_editor.putInt(APP_PREFERENCES_FirstRun, 1);
-			preferences_editor.putInt(APP_PREFERENCES_menu_fonBG, 		0);	// Фон поумолчанию
-			preferences_editor.putInt(APP_PREFERENCES_menu_sound, 		1);	// Звуки нажатий включены
-			preferences_editor.putInt(APP_PREFERENCES_menu_volume, 		1);	// музыка ВКЛ
+			preferences_editor.putInt(APP_PREFERENCES_menu_fonBG, 		0);	// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_menu_sound, 		1);	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_menu_volume, 		1);	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 			
-			// Настройки игры
-			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type1, 	0);	// Общее кол-во ходов на легком (1) уровне игры
-			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type2, 	0);	// Общее кол-во ходов на среднем (2) уровне игры
-			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type3, 	0);	// Общее кол-во ходов на легком (3) уровне игры
-			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type4, 	0);	// Общее кол-во ходов на легком (4) уровне игры
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type1, 	0);	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (1) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type2, 	0);	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (2) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type3, 	0);	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (3) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+			preferences_editor.putInt(APP_PREFERENCES_moovs_of_type4, 	0);	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (4) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 			
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_1,	0);		//	Тип 1. Уровень 1
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_2,	0);		//	Тип 1. Уровень 2
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_3,	0);		//	Тип 1. Уровень 3
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_4,	0);		//	Тип 1. Уровень 4
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_5,	0);		//	Тип 1. Уровень 5
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_6,	0);		//	Тип 1. Уровень 6
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_7,	0);		//	Тип 1. Уровень 7
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_8,	0);		//	Тип 1. Уровень 8
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_9,	0);		//	Тип 1. Уровень 9
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_10,	0);		//	Тип 1. Уровень 10
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_11,	0);		//	Тип 1. Уровень 11
-			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_12,	0);		//	Тип 1. Уровень 12
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_1,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_2,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_3,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_4,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_5,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 5
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_6,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 6
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_7,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 7
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_8,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 8
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_9,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 9
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_10,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 10
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_11,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 11
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_12,	0);		//	пїЅпїЅпїЅ 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 12
 			
 			preferences_editor.apply();
 		}
@@ -274,8 +256,6 @@ public class MainActivity extends Activity {
 	{
 		super.onDestroy();
 		// TODO Auto-generated method stub
-		soundPool.release();
-		soundPool = null;
 		
 		finish();
 	}

@@ -1,7 +1,5 @@
 package com.example.test1;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,36 +11,28 @@ import android.widget.GridView;
 
 public class Type extends Activity {
 
-	private SoundPool soundPool;
-	private static int soundID1;
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_typeof_game);
 		
-		soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-		// Загружаем звуки в память
-		soundID1 = soundPool.load(this, R.raw.btn1, 1);
-
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		gridview.setAdapter(new gridAdapter_TypeImage(this));
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,	int position, long id) {
-				soundPool.play(soundID1, 1, 1, 1, 0, 1f);
-				// Переходим к выбору уровней
+				
 				Intent intentG = new Intent();
 				intentG.setClass(Type.this, Levels.class);
-				intentG.putExtra("from_type_tolevels_tog", position);// передаём в левел какой тип игры выбран
+				intentG.putExtra("from_type_tolevels_tog", position);
 				startActivity(intentG);
 
 				switch (position) {
-				case 0:	overridePendingTransition(R.anim.activity_slide_left_in,	R.anim.activity_slide_left_out);			break; // Активность уходит влево
-				case 2:	overridePendingTransition(R.anim.activity_slide_right_in,	R.anim.activity_slide_right_out);			break; // Активность уходит вправо
-				case 3:	overridePendingTransition(R.anim.activity_slide_up_in,		R.anim.activity_slide_up_out);				break; // Активность уходит вниз
-				case 1:	overridePendingTransition(R.anim.activity_slide_down_in,	R.anim.activity_slide_down_out);			break; // Активность уходит вверх
+				case 0:	overridePendingTransition(R.anim.activity_slide_left_in,	R.anim.activity_slide_left_out);			break; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+				case 2:	overridePendingTransition(R.anim.activity_slide_right_in,	R.anim.activity_slide_right_out);			break; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				case 3:	overridePendingTransition(R.anim.activity_slide_up_in,		R.anim.activity_slide_up_out);				break; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+				case 1:	overridePendingTransition(R.anim.activity_slide_down_in,	R.anim.activity_slide_down_out);			break; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				default:					break;
 				}
 			}
@@ -62,7 +52,6 @@ public class Type extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 
-		// Завершаем наше activity
 		this.finish();
 
 		overridePendingTransition(R.anim.activity_zoom_in,

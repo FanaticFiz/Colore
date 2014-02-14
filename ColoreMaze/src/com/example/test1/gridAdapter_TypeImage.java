@@ -28,9 +28,9 @@ public class gridAdapter_TypeImage extends BaseAdapter {
         return imageView;
     }
 
-    // Если хотим добавить элементов, то добавляем их сюда
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     private Integer[] mThumbIds = {
-            R.drawable.type1, R.drawable.type2,
+            R.drawable.rebenok, R.drawable.shkolnik,
             R.drawable.type3, R.drawable.type4,
     };
 }
