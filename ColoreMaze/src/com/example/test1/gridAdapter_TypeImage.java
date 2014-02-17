@@ -31,6 +31,6 @@ public class gridAdapter_TypeImage extends BaseAdapter {
     // ���� ����� �������� ���������, �� ��������� �� ����
     private Integer[] mThumbIds = {
             R.drawable.rebenok, R.drawable.shkolnik,
-            R.drawable.type3, R.drawable.type4,
+            R.drawable.student, R.drawable.type4,
     };
 }
