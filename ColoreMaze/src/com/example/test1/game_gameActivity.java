@@ -30,7 +30,7 @@ public class game_gameActivity extends Activity {
 	private Animation			animation_wrong_moovs;
 	private GridView			mGrid;
 	private gridadapter_Game	mAdapter;
-	private int					LastMoov, Moovs_counter, moovs_counter_all;
+	private int					EndPoint, LastMoov, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
 	public int[]				array_legal_moovs;									// массив-списокдоступныхходов
@@ -235,7 +235,7 @@ public class game_gameActivity extends Activity {
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov);
+        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov, EndPoint);
         mGrid.setAdapter(mAdapter);
                                
         Start_Time = System.currentTimeMillis();
@@ -253,7 +253,7 @@ public class game_gameActivity extends Activity {
                  			// Делаем ход
                    			game_move(parent, position, v);
                    			// Перерисовываем поле
-                   			mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov);
+                   			mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);
                  			someText.setText("Номер фона = "+randomBG);
                  			MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
                
@@ -305,6 +305,9 @@ public class game_gameActivity extends Activity {
 				// 	Убираем те что нельзя
 				Cheking_legal_moovs();
 				LastMoov = i;
+			}
+			else if (Integer.parseInt(arrayfromlevel.get(i)) == 0) {
+				EndPoint = i;
 			}
 		}  
 	}
