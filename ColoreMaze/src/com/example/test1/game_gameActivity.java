@@ -29,7 +29,7 @@ public class game_gameActivity extends Activity {
 
 	private Animation			animation_wrong_moovs;
 	private GridView			mGrid;
-	private gridadapter_Game	mAdapter;
+	private gridadapter_Game2	mAdapter;
 	private int					EndPoint, LastMoov, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
@@ -235,7 +235,7 @@ public class game_gameActivity extends Activity {
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov, EndPoint);
+        mAdapter = new gridadapter_Game2(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov, EndPoint);
         mGrid.setAdapter(mAdapter);
                                
         Start_Time = System.currentTimeMillis();
@@ -622,12 +622,12 @@ public class game_gameActivity extends Activity {
 		for (int i = 0; i < array_legal_moovs.length; i++) 
 		{
 			// Просматривая все возможные ходы мы выкидываем те которые находятся за рамками игрового массива
-			if ( (array_legal_moovs[i] <= arrayfromlevel.size()) & (array_legal_moovs[i] >= 0) )	
+			if ( (array_legal_moovs[i] <= arrayfromlevel.size()) && (array_legal_moovs[i] >= 0) )	
 			{									}			
 			else 
 			{	array_legal_moovs[i] = 10000;	}
-		
 		}
+		
 	}
 
 	/*

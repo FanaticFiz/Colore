@@ -2,7 +2,9 @@ package com.example.test1;
 
 
 import java.util.ArrayList;
+
 import org.xmlpull.v1.XmlPullParser;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -17,7 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Levels extends Activity {
 	
-//	private Animation 			animation_wrong_moovs;
+	private Animation 		animation_wrong_moovs;
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
 	private		int			counter_col;	// кол-во столбцов	
 	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
@@ -97,17 +101,14 @@ public class Levels extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
-			
-		
 		
 		//
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 		
 		// подключаем файл анимации
-		//		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
-	
 
 		// получаем тип выбранной игры...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
@@ -127,7 +128,7 @@ public class Levels extends Activity {
 	        	// нужно смотреть на элемент массива -1 (на предыдущий)
 	        	int position_of_array = position - 1;
 	        	if (position==0){	position_of_array=0;	}
-	        	if ( (pref_type_AllAboutLevels[position_of_array] > 0) | (position==0) ) 
+	        	if ( (pref_type_AllAboutLevels[position_of_array] > 0) || (position==0) ) 
 	        	{
      		        	
 	        		ChoiseLevel(type_of_game, position);
@@ -152,7 +153,7 @@ public class Levels extends Activity {
 	        	}
 	        	else 
 	        	{
-	        		//parent.getChildAt(position).startAnimation(animation_wrong_moovs);
+	        		parent.getChildAt(position).startAnimation(animation_wrong_moovs);
 				}
 	        }
 	    });			
