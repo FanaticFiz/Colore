@@ -16,7 +16,6 @@ public class gridadapter_Game extends BaseAdapter
 	private Resources 			mRes; 		   	// Ресурсы приложени
 	private int[] 				legal_moovs;	// Массив доступных ходов
 	private int 				SizeArray, LastMoov, EndPoint;
-	private int 				colvo=0;
 	
 	public gridadapter_Game(Context context, ArrayList<String> _arrayfromXML, int xMLgame_type, int[] _array_legal_moovs, int _LastMoov, int _EndPoint) 
 	{
@@ -86,7 +85,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 				
 			case 2:
@@ -96,7 +94,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 				
 			case 3:
@@ -106,7 +103,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 			case 4:
@@ -116,7 +112,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 				
 			case 5:
@@ -126,7 +121,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 			case 6:
@@ -136,7 +130,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 				
 			case 7:
@@ -146,7 +139,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 			case 8:
@@ -156,7 +148,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 				
 			case 9:
@@ -166,7 +157,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 
@@ -177,7 +167,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 			case 11:
@@ -187,7 +176,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 				
@@ -198,7 +186,6 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
 
 			case 14:
@@ -208,66 +195,8 @@ public class gridadapter_Game extends BaseAdapter
 				else {
 					arrayPicture.set(i, "ball15");
 				}
-
 				break;
-			/*
-			case 0:
-				arrayPicture.set(i, "ball92");
-				break;
-				
-			case 1:
-				// черное стартовое поле
-				arrayPicture.set(i, "ball92");
-				break;
-				
-			case 2:
-				arrayPicture.set(i, "ball52");	
-				break;
-				
-			case 3:
-				arrayPicture.set(i, "ball92");	
-				break;
-
-			case 4:
-				arrayPicture.set(i, "ball52");	
-				break;
-				
-			case 5:
-				arrayPicture.set(i, "ball52");	
-				break;
-
-			case 6:
-				arrayPicture.set(i, "ball52");	
-				break;
-				
-			case 7:
-				arrayPicture.set(i, "ball52");	
-				break;
-
-			case 8:
-				arrayPicture.set(i, "ball92");	
-				break;
-				
-			case 9:
-				arrayPicture.set(i, "ball92");	
-				break;
-
-			case 10:
-				arrayPicture.set(i, "ball92");	
-				break;
-
-			case 11:
-				arrayPicture.set(i, "ball92");	
-				break;
-				
-			case 12:
-				arrayPicture.set(i, "ball92");	
-				break;
-			case 14:
-				arrayPicture.set(i, "ball92");	
-				break;
-				*/
-				
+	
 			default:
 				arrayPicture.set(i, "ball13");
 				break;
@@ -300,11 +229,13 @@ public class gridadapter_Game extends BaseAdapter
 		view.setImageResource(drawableId);
 		
 		// место последнего хода уменьшаем
-		if (position == LastMoov)
-		{
-			Log.d("some", "qweqweqweqwwwwwwwwwwwwwwww");
+		if (position == LastMoov)	{
 			view.setScaleX((float) 0.7);
 			view.setScaleY((float) 0.7);
+		}
+		else {
+			view.setScaleX((float) 1);
+			view.setScaleY((float) 1);
 		}
 		return view;
 	}

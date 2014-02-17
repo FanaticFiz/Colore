@@ -244,7 +244,7 @@ public class game_gameActivity extends Activity {
         
         // Обработчик нажатий
         mGrid.setOnItemClickListener(new OnItemClickListener() 
-        	{
+        {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
             	{
                  	if (NumberFromName(arrayfromlevel.get(position))==13) 
@@ -259,7 +259,7 @@ public class game_gameActivity extends Activity {
                
                  			}
         		}                	             
-        	});     
+        });     
       
 	}
 
@@ -282,10 +282,9 @@ public class game_gameActivity extends Activity {
     	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
     	TimerField.setText(String.format("%d:%02d", minutes, seconds));
     	
-    	mGrid.setAdapter(mAdapter);
-    	
     	Find_Start_Point();
-		
+    	mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);
+    			
 	}
     
     
@@ -320,18 +319,8 @@ public class game_gameActivity extends Activity {
 		
 		if ((array_legal_moovs[0] == position) || (array_legal_moovs[1] == position) || (array_legal_moovs[2] == position) || (array_legal_moovs[3] == position)) 
 		{			
-			// -----------------------------------------------------------------------------------------------
-			// уменьшаем то что нажали и увеличиваем предыдущую картинку
-			parent.getChildAt(LastMoov).setScaleX((float) 1);
-			parent.getChildAt(LastMoov).setScaleY((float) 1);
-			LastMoov = position;
-			//v.setScaleX((float) 0.7);
-			//v.setScaleY((float) 0.7);
-			// -----------------------------------------------------------------------------------------------
-
 			//	Т.е. если мы сюда попали значит мы сделали легальный ход... т.е. мы уже тут можем считать счетчик ходов а не в каждом отдельном кайсе
 			Moovs_counter++;
-			
 			
 			// получаем имя файла ресурса по которому мы определим
 			// какие следующие ходы возможны
