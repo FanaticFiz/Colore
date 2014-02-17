@@ -29,14 +29,6 @@ public class gridadapter_Game extends BaseAdapter
 	    
 	}
 
-	
-	public Integer NumberFromName(String name) 
-	{
-		name = name.replaceAll("[^0-9]+", " "); // Удаляем все символы кроме чисел
-		name = name.trim();						// убираем пробелы
-		return Integer.parseInt(name);			// возвращаем число
-	}
-
 	public void BuilderField(ArrayList<String> _arrayfromXML, int[] _array_legal_moovs, int _LastMoov)
 	{
 		arrayPicture	=	(ArrayList<String>) _arrayfromXML.clone();
@@ -54,7 +46,7 @@ public class gridadapter_Game extends BaseAdapter
 	    // добавляем
 	    for (int i = 0; i<SizeArray; i++)
 	    {
-	    	int j = NumberFromName(arrayPicture.get(i));
+	    	int j = Integer.parseInt(arrayPicture.get(i));
 	    	// j это содержимае i ячейки массива
 	    	switch (j) 
 	    	{
