@@ -33,7 +33,7 @@ public class game_gameActivity extends Activity {
 	private int					LastMoov, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
-	int[]						array_legal_moovs;									// массив-списокдоступныхходов
+	public int[]				array_legal_moovs;									// массив-списокдоступныхходов
 	private String				ColorBall;											// XMLgame_type-прописанныйвXMLфайлевариантигры
 	int							Kvest_from_XMLFile;
 	private TextView			someText, TimerField, MoovField;					// поледлязаметоквнизу
@@ -226,20 +226,18 @@ public class game_gameActivity extends Activity {
 		dialog_end_of_game.setCancelable(false);
 		*/
 			
-			
+        // Находим стартовую точку
+        Find_Start_Point();     
+         
+		
 		////**************************************************	
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile);
+        mAdapter = new gridadapter_Game(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov);
         mGrid.setAdapter(mAdapter);
-        
-                
-        // Находим стартовую точку
-        Find_Start_Point();     
-         
-        
+                               
         Start_Time = System.currentTimeMillis();
         
         
@@ -252,8 +250,10 @@ public class game_gameActivity extends Activity {
                  	if (NumberFromName(arrayfromlevel.get(position))==13) 
                  	{						}
                  	else 	{
+                 			// Делаем ход
                    			game_move(parent, position, v);
-                 		
+                   			// Перерисовываем поле
+                   			mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov);
                  			someText.setText("Номер фона = "+randomBG);
                  			MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
                
@@ -295,7 +295,7 @@ public class game_gameActivity extends Activity {
 	{
 		for (int i=0; i<arrayfromlevel.size(); i++) 
 		{
-			if (arrayfromlevel.get(i)=="ball1") 
+			if ( Integer.parseInt(arrayfromlevel.get(i)) == 1 ) 
 			{
 				// определяем доступные ходы (со старта идем во всех 4 направлениях)
 				array_legal_moovs[0] = i-1;
@@ -322,8 +322,8 @@ public class game_gameActivity extends Activity {
 			parent.getChildAt(LastMoov).setScaleX((float) 1);
 			parent.getChildAt(LastMoov).setScaleY((float) 1);
 			LastMoov = position;
-			v.setScaleX((float) 0.7);
-			v.setScaleY((float) 0.7);
+			//v.setScaleX((float) 0.7);
+			//v.setScaleY((float) 0.7);
 			// -----------------------------------------------------------------------------------------------
 
 			//	Т.е. если мы сюда попали значит мы сделали легальный ход... т.е. мы уже тут можем считать счетчик ходов а не в каждом отдельном кайсе

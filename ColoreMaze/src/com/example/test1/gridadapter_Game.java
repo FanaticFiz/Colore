@@ -4,38 +4,57 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class gridadapter_Game extends BaseAdapter 
 {
-	private Context mContext;
-	private ArrayList<String> arrayPicture; // массив картинок
-	private Resources mRes; 		   		// Ресурсы приложени
-	private int SizeArray;
+	private Context 			mContext;
+	private ArrayList<String> 	arrayPicture; 	// массив картинок
+	private Resources 			mRes; 		   	// Ресурсы приложени
+	private int[] 				legal_moovs;	// Массив доступных ходов
+	private int 				SizeArray, LastMoov;
+	private int 				colvo=0;
 	
-	public gridadapter_Game(Context context, ArrayList<String> arrayfromXML, int xMLgame_type) 
+	public gridadapter_Game(Context context, ArrayList<String> _arrayfromXML, int xMLgame_type, int[] _array_legal_moovs, int _LastMoov) 
 	{
 		mContext = context;
-		arrayPicture = arrayfromXML;
-		SizeArray = arrayPicture.size();
-		
 	    // Получаем все ресурсы приложения
 	    mRes = mContext.getResources();
 	 
 	    // Метод заполняющий массив arrayPicture
-	    makePictArray();
-	        	    
+	    BuilderField(_arrayfromXML, _array_legal_moovs, _LastMoov);
+	    
 	}
 
 	
+	public Integer NumberFromName(String name) 
+	{
+		name = name.replaceAll("[^0-9]+", " "); // Удаляем все символы кроме чисел
+		name = name.trim();						// убираем пробелы
+		return Integer.parseInt(name);			// возвращаем число
+	}
+
+	public void BuilderField(ArrayList<String> _arrayfromXML, int[] _array_legal_moovs, int _LastMoov)
+	{
+		arrayPicture	=	(ArrayList<String>) _arrayfromXML.clone();
+		legal_moovs 	= 	_array_legal_moovs;
+		LastMoov		=	_LastMoov;	
+				
+		SizeArray = arrayPicture.size();
+		
+		makePictArray();
+		notifyDataSetChanged();
+	}
+	
 	private void makePictArray() 
-	{  	   
+	{  	
 	    // добавляем
 	    for (int i = 0; i<SizeArray; i++)
 	    {
-	    	int j = Integer.parseInt(arrayPicture.get(i));
+	    	int j = NumberFromName(arrayPicture.get(i));
 	    	// j это содержимае i ячейки массива
 	    	switch (j) 
 	    	{
@@ -59,59 +78,144 @@ public class gridadapter_Game extends BaseAdapter
 	    	//		
 	    	
 			case 0:
-				arrayPicture.set(i, "ball0");
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball0");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
 				break;
 				
 			case 1:
-				// черное стартовое поле
-				arrayPicture.set(i, "ball1");
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball1");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 				
 			case 2:
-				arrayPicture.set(i, "ball2");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball2");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 				
 			case 3:
-				arrayPicture.set(i, "ball3");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball3");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 
 			case 4:
-				arrayPicture.set(i, "ball4");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball4");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 				
 			case 5:
-				arrayPicture.set(i, "ball5");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball5");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 
 			case 6:
-				arrayPicture.set(i, "ball6");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball6");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 				
 			case 7:
-				arrayPicture.set(i, "ball7");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball7");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 
 			case 8:
-				arrayPicture.set(i, "ball8");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball8");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 				
 			case 9:
-				arrayPicture.set(i, "ball9");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball9");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 
+
 			case 10:
-				arrayPicture.set(i, "ball10");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball10");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 
 			case 11:
-				arrayPicture.set(i, "ball11");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball11");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
+
 				
 			case 12:
-				arrayPicture.set(i, "ball12");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball12");		
+				}
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
+
 			case 14:
-				arrayPicture.set(i, "ball14");	
+				if ((legal_moovs[0] == i) || (legal_moovs[1] == i) || (legal_moovs[2] == i) || (legal_moovs[3] == i) || (LastMoov == i))	{
+					arrayPicture.set(i, "ball14");		
+				}	
+				else {
+					arrayPicture.set(i, "ball13");
+				}
+
 				break;
 			/*
 			case 0:
@@ -202,13 +306,13 @@ public class gridadapter_Game extends BaseAdapter
 		Integer drawableId = mRes.getIdentifier(arrayPicture.get(position), "drawable", mContext.getPackageName());
 		view.setImageResource(drawableId);
 		
-		// Стартовую точку уменьшаем
-		if (arrayPicture.get(position)=="ball1") 
+		// место последнего хода уменьшаем
+		if (position == LastMoov)
 		{
+			Log.d("some", "qweqweqweqwwwwwwwwwwwwwwww");
 			view.setScaleX((float) 0.7);
 			view.setScaleY((float) 0.7);
 		}
-		
 		return view;
 	}
 }
