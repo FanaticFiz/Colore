@@ -198,6 +198,8 @@ public class game_gameActivity extends Activity {
 	
 		
 		LastMoov=0;
+		// Порядок присвоения в этом массиве ходов строг: сначала вверх потом по часово стрелке: право, низ лево.
+		// это из-за того что я не сделал массив уровня двухмерным...
 		array_legal_moovs = new int[4];
 		
 		// Получаем данные из предыдущей активити. Игровой массив и кол-во строк и столбцов в игровом поле 
@@ -297,10 +299,10 @@ public class game_gameActivity extends Activity {
 			if ( Integer.parseInt(arrayfromlevel.get(i)) == 1 ) 
 			{
 				// определяем доступные ходы (со старта идем во всех 4 направлениях)
-				array_legal_moovs[0] = i-1;
+				array_legal_moovs[0] = i-counter_col;
 				array_legal_moovs[1] = i+1;
-				array_legal_moovs[2] = i-counter_col;
-				array_legal_moovs[3] = i+counter_col;	
+				array_legal_moovs[2] = i+counter_col;
+				array_legal_moovs[3] = i-1;	
 				// 	Убираем те что нельзя
 				Cheking_legal_moovs();
 				LastMoov = i;
@@ -316,7 +318,7 @@ public class game_gameActivity extends Activity {
 	// Определяем дейсвтия при ходе...
 	public void game_move(AdapterView<?> parent, int position, View v) 
 	{
-		
+		// Будем делать ход только если нажали на разрешенное поле
 		if ((array_legal_moovs[0] == position) || (array_legal_moovs[1] == position) || (array_legal_moovs[2] == position) || (array_legal_moovs[3] == position)) 
 		{			
 			//	Т.е. если мы сюда попали значит мы сделали легальный ход... т.е. мы уже тут можем считать счетчик ходов а не в каждом отдельном кайсе
@@ -325,10 +327,8 @@ public class game_gameActivity extends Activity {
 			// Последний ход это тот на котором только что нажали...
 			LastMoov = position;
 			
-			// получаем имя файла ресурса по которому мы определим
 			// какие следующие ходы возможны
 			// например с красной позиции ход возможен только на верх и вправо
-			//
 			// На данный момент
 			// 0 - белый - Финиш
 			// 1 - Черный - Старт
@@ -351,7 +351,6 @@ public class game_gameActivity extends Activity {
 			switch (ert) {
 			case 0:
 				// Финиш	
-				
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
 				
 				// Пишем в преференсес
@@ -363,7 +362,6 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
-				
 				
 				// Проверка на выполнение задания поставленного на данном уровне
 				switch (number_of_level)	
@@ -382,112 +380,100 @@ public class game_gameActivity extends Activity {
 				// Со стартовой клетки возможен ход во всех неправлениях, потому что я буду менять положение стартовой клетки постоянно
 				// Сдесь мы в массив возможных ходов добвляем все варианты, а уже невозможность хода за пределы лабиринат
 				// надо осуществляеть в другом месте... А МОЖЕТ и не надо осуществлять вовсе, поскольку нажать на те поля все равно не получится...
-						
-				array_legal_moovs[0] = position - 1; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = position - counter_col;
-				array_legal_moovs[3] = position + counter_col; 
-				
+				array_legal_moovs[0] = position-counter_col;	// Строго в такой последовательности! ВВЕРХ 
+				array_legal_moovs[1] = position+1;				// ВПРАВО
+				array_legal_moovs[2] = position+counter_col;	// ВНИЗ
+				array_legal_moovs[3] = position-1;				// ВЛЕВО
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				
 				break;
 			case 2:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 1; 	// заносим в массив
-				array_legal_moovs[1] = position + 1; 	// координаты клеток куда доступен ход.
-				array_legal_moovs[2] = 10000;	 		// ненужный элемент массива
-				array_legal_moovs[3] = 10000;			// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = position+1;
+				array_legal_moovs[2] = 10000;	 
+				array_legal_moovs[3] = position-1;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 3:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = 10000;	 // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; 	// ненужный элемент массива
-				array_legal_moovs[3] = 10000; 	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = 10000;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 4:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = position+1;
+				array_legal_moovs[2] = 10000;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 5:
 				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 1; // заносим в массив
-				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = position + 1;
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 6:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = position - 1;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 7:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + counter_col; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 8:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + 1; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = position + 1;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 9:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - 1; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = 10000;
+				array_legal_moovs[3] = position - 1;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 10:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position + 1; // координаты клеток куда
-				array_legal_moovs[2] = position + counter_col; // ненужный элемент
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = position + 1;
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 11:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = 10000;
+				array_legal_moovs[3] = position - 1;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
 			case 12:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position - counter_col; // заносим в массив
-				array_legal_moovs[1] = position - 1; // координаты клеток куда доступен ход.										
-				array_legal_moovs[2] = position + counter_col; // ненужный элемент
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = position - counter_col;
+				array_legal_moovs[1] = 10000;										
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = position - 1;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
@@ -495,11 +481,10 @@ public class game_gameActivity extends Activity {
 				// СЮда поидее мы никогда не должны попасть, ход по клетке 13 отсеивается в Cheking_legal_moovs
 				break;
 			case 14:
-				// Определяем куда можно пойти, заносим в массив
-				array_legal_moovs[0] = position + counter_col; // заносим в массив
-				array_legal_moovs[1] = 10000; // координаты клеток куда доступен
-				array_legal_moovs[2] = 10000; // ненужный элемент массива
-				array_legal_moovs[3] = 10000;	// проставляем в 10000
+				array_legal_moovs[0] = 10000;
+				array_legal_moovs[1] = 10000;
+				array_legal_moovs[2] = position + counter_col;
+				array_legal_moovs[3] = 10000;
 				Cheking_legal_moovs();
 				array_all_moovs.add(position);
 				break;
@@ -509,17 +494,12 @@ public class game_gameActivity extends Activity {
 				someText.setText("Цвет = " + ColorBall);
 				break;
 			}
-
 		} 
-		else 
-		{	
-			parent.getChildAt(position).startAnimation(animation_wrong_moovs);   
-			someText.setText("Этот ход недопустим..."); 	
+		else	{	
+				parent.getChildAt(position).startAnimation(animation_wrong_moovs);   
+				someText.setText("Этот ход недопустим..."); 	
 		}
-
 	}
-	
-	
 	
 	
 	public void MySetPreferences(int type, int level, int mooves) 
@@ -616,7 +596,6 @@ public class game_gameActivity extends Activity {
 		return Integer.parseInt(name);			// возвращаем число
 	}
 	
-	
 	// функция которая убирает ходы из массива доступных ходов, на основании конца лабиринта или когда точки старта и финиши соприкасаются.
 	// эту проверку делать всегда после заполнения массива доступных ходов.
 	// т.е. из уже доступных ходов выкидывать те что противоречат правилам
@@ -630,9 +609,17 @@ public class game_gameActivity extends Activity {
 			else 
 			{	array_legal_moovs[i] = 10000;	}
 		}
-		
+		if (mySuperFitcha()) {
+			array_legal_moovs[3] = 10000;
+		}
 	}
 
+	// А есть ли остаток?	
+	public boolean mySuperFitcha()	{
+		if (LastMoov % counter_col == 0) 	{	return true;	}
+		else 								{	return false;	}
+	}
+	
 	/*
 	private void RandomBackground() 
 	{
