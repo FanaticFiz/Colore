@@ -609,6 +609,8 @@ public class game_gameActivity extends Activity {
 			else 
 			{	array_legal_moovs[i] = 10000;	}
 		}
+		// Я выстроил заполнение массива array_legal_moovs таким образом чтобы на 3 всегда был -1 элемент
+		// НО ПОПРЕЖНЕМУ НЕТ ЗАЩИТЫ ОТ РАСПОЛОЖЕНИЯ СТАРТОВОГО ПОЛЯ СПРАВА МАССИВА !!!
 		if (mySuperFitcha()) {
 			array_legal_moovs[3] = 10000;
 		}
