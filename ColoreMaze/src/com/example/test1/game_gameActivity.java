@@ -283,7 +283,7 @@ public class game_gameActivity extends Activity {
     	Moovs_counter=0;
     	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
     	TimerField.setText(String.format("%d:%02d", minutes, seconds));
-    	
+
     	Find_Start_Point();
     	mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);
     			
@@ -303,14 +303,14 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[1] = i+1;
 				array_legal_moovs[2] = i+counter_col;
 				array_legal_moovs[3] = i-1;	
-				// 	Убираем те что нельзя
-				Cheking_legal_moovs();
 				LastMoov = i;
 			}
 			else if (Integer.parseInt(arrayfromlevel.get(i)) == 0) {
 				EndPoint = i;
 			}
 		}  
+		// 	Убираем те что нельзя
+		Cheking_legal_moovs();
 	}
 	
 	
