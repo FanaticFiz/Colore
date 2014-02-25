@@ -1,5 +1,10 @@
 package com.example.test1;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import android.widget.Toast;
+
 public class XmlVidKvest
 {
 	String	vid;
@@ -22,7 +27,6 @@ public class XmlVidKvest
 	public void setVid(String vid)	{
 		this.vid = vid;
 	}
-
 	
 	public Integer getKvest()	{
 		return Integer.parseInt(kvest);
@@ -34,7 +38,7 @@ public class XmlVidKvest
 	
 	// Здесь мы проверяем на выполнения условия поставленного на уровне
 	// вид поставленной цели: ХОДЫ (отрицательное число) или ВРЕМЯ (положительное).
-	public Boolean kvest_TEST(int cel, int time, int kolvoHodov)
+	public Boolean kvest_TEST(int cel, int time, int kolvoHodov, ArrayList<Integer> array_all_moovs)
 	{
 		Boolean b=true;
 		if (kvest.equals("0")) {
@@ -47,7 +51,15 @@ public class XmlVidKvest
 			}else {
 			// 	Цель ХОДЫ
 				if (kolvoHodov == Math.abs(cel)) {
-					b = true;
+					// Если кол-во ходов равное то проверяем на читерство!
+					boolean local_bool = false;			
+					// В массиве всех ходов ищем частоту вхождния каждого элемента, если она больше 1 бьем тревогу!
+					for (int i = 0; i < array_all_moovs.size(); i++){
+						if (Collections.frequency(array_all_moovs, array_all_moovs.get(i))	>	1) 
+						{	local_bool = true;	break; }
+					}	
+					if (local_bool) { 	b=false;}
+					else 			{	b=true;	}
 				}else {
 					b = false;
 				}

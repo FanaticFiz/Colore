@@ -1,7 +1,6 @@
 package com.example.test1;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,8 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class game_gameActivity extends Activity {
 
@@ -189,26 +187,17 @@ public class game_gameActivity extends Activity {
 		// передаем оба параметра обьекту
 		myXML.setVid(vid);
 		myXML.setKvest(kvest);
-
+		// Покажем пользователю задание на текущий уровень 
+		StartMessadge(myXML.getKvest());
 		
-//		Надоел рандомный фон... закоментирую пока...
-//		RandomBackground();
-			
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
 		
 		someText = (TextView)findViewById(R.id.game_down_text);
 		someText.setText("Цель: пройти от черного поля к белому");
-		
-		/*// Описываю диалоговое окно, появляющееся при прохождении уровня 
-		dialog_end_of_game = new Dialog(game_gameActivity.this);
-		dialog_end_of_game.setContentView(R.layout.dialog_end_levels);
-		dialog_end_of_game.setTitle(R.string.Dialog_end_of_game_Title);
-		dialog_end_of_game.setCancelable(false);
-		*/
-			
-        // Находим стартовую точку
+
+		// Находим стартовую точку
         Find_Start_Point();     
 		
 		////**************************************************	
@@ -353,7 +342,7 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = 10000;
 				
 				// Проверка на выполнение задания поставленного на уровне	
-				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter)){	
+				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter, array_all_moovs)){	
 					timer.cancel();	ShowGameOver();							}
 				else	{				MyRestart_Level();					}
 				
@@ -609,45 +598,7 @@ public class game_gameActivity extends Activity {
 		else 								{	return false;	}
 	}
 	
-	
-	/*
-	private void RandomBackground() 
-	{
-		LinearLayout LinLayout = (LinearLayout) findViewById(R.id.LinearLayout_of_Game);
-		
-		randomBG = (int) (Math.random()*26);
-		String stringBG = "bgstyle"+randomBG;
-		
-		Resources mRes = this.getResources();
-		Integer identifierID = mRes.getIdentifier(stringBG, "drawable", this.getPackageName());
-		LinLayout.setBackgroundResource(identifierID);
-	}
-	*/
-	
-	// Цель пройти лабиринт за строго определенное кол-во ходов
-	// Есть массив который содержит эти ходы, нужно его весь перебрать и проверить нет ли одинаковых ходов, таковых быть не должно!	
-	private boolean Test_to_MoovKvest(int kolvo_hodov, int kvest) 
-	{
-		// признак выполненного задания устанавливаем в false, и пытаемся его подтвердить
-		if (kvest != kolvo_hodov)	{	return false;	}
-		else 
-		{	// Если кол-во ходов равное то проверяем на читерство!
-			boolean local_bool = false;			
-			// В массиве всех ходов ищем частоту вхождния каждого элемента, если она больше 1 бьем тревогу!
-			for (int i = 0; i < array_all_moovs.size(); i++) 
-			{
-				if (Collections.frequency(array_all_moovs, array_all_moovs.get(i))	>	1) 
-				{	local_bool = true;	break; }
-			}	
-			if (local_bool) { 	return false;	}
-			else 			{	return true;	}
-		}
-	}
-	
-	
-	
 	private void ShowGameOver() {
-		 
 	    // Диалоговое окно
 	    AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 	 
@@ -668,20 +619,23 @@ public class game_gameActivity extends Activity {
 	    alertbox.show();
 	  }
 	
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.game, menu);
-		return true;
-	}
+	public void StartMessadge(int kl)
+	{
+		if (kl == 0) {
 
+		}else {
+			if (kl > 0) {
+				Toast.makeText(getApplicationContext(), "На прохождение уровня дано: "+kl+"секунд.", Toast.LENGTH_LONG).show();
+			}else {
+				Toast.makeText(getApplicationContext(), "Пройди этот уровень за: "+kl+"ходов.", Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+	
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		Log.d("onBack", "нажали стрелку назад");
 		// Останавливаем таймер
 		timer.cancel();
 		overridePendingTransition(R.anim.activity_slide_right_in, R.anim.activity_slide_right_out);
@@ -692,7 +646,7 @@ public class game_gameActivity extends Activity {
 		case 3:	overridePendingTransition(R.anim.activity_slide_down_in, R.anim.activity_slide_down_out);		break;	// Активность уходит вниз
 		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
 		default:			break;
-							}    		 
+							}
 	}
 
 }

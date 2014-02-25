@@ -21,12 +21,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Levels extends Activity {
 	
-	private Animation 		animation_wrong_moovs;
-	ArrayList<String> 		list 		= 	new ArrayList<String>();
-	private		int			counter_col;	// кол-во столбцов	
-	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
-	private		String		XMLgame_vid="1";
-	private		String 		XMLgame_kvest="0";	// Типа усложнения игры из файла
+	private Animation 		anim_w_moovs;
+	ArrayList<String> 		list 			= 	new ArrayList<String>();
+	private		int			counter_col;				// кол-во столбцов	
+	private		int			type_of_game;				// пполучаем типа игры которую выбрали в Type.class]
+	private		String		XMLgame_vid		=	"1";
+	private		String 		XMLgame_kvest	=	"0";		// Типа усложнения игры из файла
 	
 	// Preferences
 	SharedPreferences mSettings;
@@ -102,12 +102,13 @@ public class Levels extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_levels);
-		
+		XMLgame_vid 	= "1";
+		XMLgame_kvest	= "0";
 		//
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
 		// подключаем файл анимации
-		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+		anim_w_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
 		// получаем тип выбранной игры...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
@@ -153,7 +154,7 @@ public class Levels extends Activity {
 	        	}
 	        	else 
 	        	{
-	        		parent.getChildAt(position).startAnimation(animation_wrong_moovs);
+	        		parent.getChildAt(position).startAnimation(anim_w_moovs);
 				}
 	        }
 	    });			
@@ -300,7 +301,9 @@ public class Levels extends Activity {
 	protected void onRestart() {
 		// TODO Auto-generated method stub
 		super.onRestart();
-		
+		XMLgame_vid 	= "1";
+		XMLgame_kvest	= "0";
+
 		MyGetPreferences(type_of_game);		
 		// передаём в класс грид: контекст, тип выбранный в предыдущей активности и массив из преферансес
 		GridView gridview = (GridView) findViewById(R.id.levelselect);
@@ -313,7 +316,7 @@ public class Levels extends Activity {
 		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
 		default:				break;
 								}    		 
-
+		Toast.makeText(getApplicationContext(), "onRestart", Toast.LENGTH_SHORT).show();
 	}
 	
 }
