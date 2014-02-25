@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
@@ -96,12 +97,11 @@ public class MainActivity extends Activity {
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		// �����������
+		Log.d("mainS", "Start pref");
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+		Log.d("mainS", "end mSeting");
 		PreferencesInit();
-		
-		
+		Log.d("mainS", "end Init");
 		
 		/*
         // ��������� ������ ��������� � �����������
@@ -117,30 +117,9 @@ public class MainActivity extends Activity {
 		// ****************************************************************************
         */
         
-		// ��������� ������ ��������� �����
 		final TextView textColoremaze = (TextView)findViewById(R.id.game_up_text);
 		textColoremaze.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
-		textStartGame1 = (TextView)findViewById(R.id.settings);
-		textStartGame1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
-		textStartGame2 = (TextView)findViewById(R.id.about);
-		textStartGame2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
-		textStartGame3 = (TextView)findViewById(R.id.exit);
-		textStartGame3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
-		textStartGame4 = (TextView)findViewById(R.id.textView11);
-		
-		/*
-		// ��������� ����
-		textColoremaze.setShadowLayer(8f,4f,4f,0xFF000000);
-		textStartGame.setShadowLayer(8f,8f,8f,0xFF000000);
-		textStartGame1.setShadowLayer(8f,8f,8f,0xFF000000);
-		textStartGame2.setShadowLayer(8f,8f,8f,0xFF000000);
-		textStartGame3.setShadowLayer(8f,4f,4f,0xFF000000);
-		textStartGame4.setShadowLayer(8f,4f,4f,0xFF000000);
-		*/
-			
-		
-		// ���������� ���� �������� ��� ����
 		menu_animation = AnimationUtils.loadAnimation(this, R.anim.menuanimation);
 		
 		//MyGetPreferences();
@@ -158,34 +137,25 @@ public class MainActivity extends Activity {
 
 	public void onPlayClick(View v) 
 	{
-			
-		// ������ ���� � ���� ������ ���� ����
 		Intent intentG = new Intent();
 		intentG.setClass(MainActivity.this, Type.class);
 		startActivity(intentG);
-		// ��������� ������� ����� ��������
 		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
-		
 	}	
 	public void OnClickSettings(View v) 
 	{
 		textStartGame1.startAnimation(menu_animation);
-		
 		Intent inten1 = new Intent();
 		inten1.setClass(MainActivity.this, SettingsActivity.class);
 		startActivity(inten1);
-		
 		overridePendingTransition(R.anim.activity_zoom_in, R.anim.activity_zoom_out);
 	}
 	public void OnClickAbout(View v) 
 	{
 		textStartGame2.startAnimation(menu_animation);
-		
 		Intent inten2 = new Intent();
 		inten2.setClass(MainActivity.this, AboutActivity.class);
 		startActivity(inten2);
-		
-		
 	};
 	public void OnClickExit(View v) 
 	{

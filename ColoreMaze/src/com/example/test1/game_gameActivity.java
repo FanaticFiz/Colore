@@ -29,13 +29,15 @@ public class game_gameActivity extends Activity {
 
 	private Animation			animation_wrong_moovs;
 	private GridView			mGrid;
-	private gridadapter_Game2	mAdapter;
+	private grdAd_Game_t1		mAdapter_t1;
+	private grdAd_Game_t2		mAdapter_t2;
+	private grdAd_Game_color1	mAdapter_t3;
 	private int					EndPoint, LastMoov, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
 	public int[]				array_legal_moovs;									// массив-списокдоступныхходов
 	private String				ColorBall;											// XMLgame_type-прописанныйвXMLфайлевариантигры
-	int							Kvest_from_XMLFile;
+	int							KFF_type=3,KFF_moovs,KFF_timer;						// KFF_type - пределяет типа адаптера
 	private TextView			someText, TimerField, MoovField;					// поледлязаметоквнизу
 	boolean						firstTouch							= true;
 	int							type_game_from, counter_col, number_of_level;
@@ -43,7 +45,7 @@ public class game_gameActivity extends Activity {
 	int							randomBG;
 	Boolean						Priznak_kvesta;
 	ImageButton					ImbuttonReset;
-	                                           
+	
 	String ss = System.getProperty("line.separator"); // строка разделитель
 	
 	// Preferences
@@ -128,36 +130,13 @@ public class game_gameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		 
-		
 		array_all_moovs = new ArrayList<Integer>();
-		//	
+			
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 		
-		if (mSettings.contains(APP_PREFERENCES_moovs_of_type1)) 
-		{	
+		if (mSettings.contains(APP_PREFERENCES_moovs_of_type1))	{
 			moovs_counter_all = mSettings.getInt(APP_PREFERENCES_moovs_of_type1, 0);	
 		}
-		
-		
-		// ------------------------------------------------------------------------------------------------		
-		// ---------------------- работает таймер и выводит в текстовое поле результат ---------------------
-		// ------------------------------------------------------------------------------------------------
-		
-		// Пример с гугла таймер отсчитывающий вниз в данном примере от 30 секунд до 0
-		/*
-		TimerField = (TextView)findViewById(R.id.textView2);		
-		 new CountDownTimer(30000, 1000) 
-		 {
-		     public void onTick(long millisUntilFinished) 
-		     {
-		    	 TimerField.setText("seconds remaining: " + millisUntilFinished / 1000);
-		     }
-		     public void onFinish() 
-		     {
-		    	 TimerField.setText("done!");
-		     }
-		 }.start();
-		*/
 
 		final Handler handlerUI = new Handler();
 		TimerField = (TextView)findViewById(R.id.game_up_text1);
@@ -184,7 +163,6 @@ public class game_gameActivity extends Activity {
 		       									});       
 		   }
 		}
-		
 		startTime = System.currentTimeMillis();
 		timer = new Timer();
 		timer.schedule(new UpdateTimeTask(), 0, 1000);
@@ -194,8 +172,7 @@ public class game_gameActivity extends Activity {
 		// ------------------------------------------------------------------------------------------------
 		
 		// подключаем файл анимации
-		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
-	
+		animation_wrong_moovs 	= 	AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 		
 		LastMoov=0;
 		// Порядок присвоения в этом массиве ходов строг: сначала вверх потом по часово стрелке: право, низ лево.
@@ -207,7 +184,7 @@ public class game_gameActivity extends Activity {
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
 		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
-		Kvest_from_XMLFile	=	Integer.parseInt(getIntent().getExtras().getString("from_level_to_game_XMLgame_type"));
+		KFF_moovs	=	Integer.parseInt(getIntent().getExtras().getString("from_level_to_game_XMLgame_type"));
 		
 		
 //		Надоел рандомный фон... закоментирую пока...
@@ -230,38 +207,44 @@ public class game_gameActivity extends Activity {
 			
         // Находим стартовую точку
         Find_Start_Point();     
-         
 		
 		////**************************************************	
 		// Привязываемся к грид на форме, стандартный грид нам не подходит, используем свой собственный 
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        mAdapter = new gridadapter_Game2(this, arrayfromlevel,Kvest_from_XMLFile,array_legal_moovs, LastMoov, EndPoint);
-        mGrid.setAdapter(mAdapter);
-                               
+        switch (KFF_type) {
+		case 1:		mAdapter_t1 = new grdAd_Game_t1(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+					mGrid.setAdapter(mAdapter_t1);			break;
+		case 2:		mAdapter_t2 = new grdAd_Game_t2(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+					mGrid.setAdapter(mAdapter_t2);			break;
+		case 3:		mAdapter_t3 = new grdAd_Game_color1(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+					mGrid.setAdapter(mAdapter_t3);			break;
+		default:											break;
+		}
         Start_Time = System.currentTimeMillis();
         
         
         
-        // Обработчик нажатий
+        // ----------------------   Обработчик нажатий	----------------------
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-            	{
-                 	if (NumberFromName(arrayfromlevel.get(position))==13) 
-                 	{						}
-                 	else 	{
-                 			// Делаем ход
-                   			game_move(parent, position, v);
-                   			// Перерисовываем поле
-                   			mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);
-                 			someText.setText("Номер фона = "+randomBG);
-                 			MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
-               
-                 			}
-        		}                	             
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)  	{
+              	if (NumberFromName(arrayfromlevel.get(position))==13)	{ 	}
+              	else{
+               		game_move(parent, position, v); 		// Делаем ход
+               		// Перерисовываем поле
+                    switch (KFF_type) {
+            			case 1:	mAdapter_t1.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
+            			case 2:	mAdapter_t2.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
+            			case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
+            			default:											break;
+            		}
+               		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+               		}
+        	}                	             
         });     
+        // ------------------------------------------------------------------
       
 	}
 
@@ -275,7 +258,6 @@ public class game_gameActivity extends Activity {
     
     private void MyRestart_Level() 
     {
-    	
     	startTime = System.currentTimeMillis();
     	
     	hours=0;minutes=0;seconds=0;
@@ -285,7 +267,13 @@ public class game_gameActivity extends Activity {
     	TimerField.setText(String.format("%d:%02d", minutes, seconds));
 
     	Find_Start_Point();
-    	mAdapter.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);
+    	
+    	switch (KFF_type) {
+		case 1:	mAdapter_t1.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
+		case 2:	mAdapter_t2.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
+		case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
+		default:	break;
+		}
     			
 	}
     
@@ -366,7 +354,7 @@ public class game_gameActivity extends Activity {
 				// Проверка на выполнение задания поставленного на данном уровне
 				switch (number_of_level)	
 				{
-				case 8:	if (Test_to_MoovKvest(Moovs_counter,Kvest_from_XMLFile)) 	{	timer.cancel();	ShowGameOver();	}
+				case 8:	if (Test_to_MoovKvest(Moovs_counter,KFF_moovs)) 	{	timer.cancel();	ShowGameOver();	}
 						else 														{	MyRestart_Level();				}
 						break;
 				default:	timer.cancel(); ShowGameOver();	break;

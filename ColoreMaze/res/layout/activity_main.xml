@@ -27,43 +27,17 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="center_horizontal"
+             android:layout_weight="50"
              android:background="#00000000"
              android:contentDescription="@string/app_name"
              android:onClick="onPlayClick"
              android:src="@drawable/imbuttonmain" />
 
-        <TextView
-            android:id="@+id/settings"
-            style="@style/MenuFont"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-        	android:layout_height="0dp"       
-            android:layout_weight="35"
-            android:onClick="OnClickSettings"
-            android:text="@string/menu_settings_game" />
-
-        <TextView
-            android:id="@+id/about"
-            style="@style/MenuFont"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_weight="35"
-            android:onClick="OnClickAbout"
-            android:text="@string/menu_about" />
-
-        <TextView
-            android:id="@+id/exit"
-            style="@style/ExitFont"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-        	android:layout_height="0dp"       
-            android:layout_weight="30"
-            android:onClick="OnClickExit"
-            android:text="@string/menu_exit" />
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="50" />
 
     </LinearLayout>
 
