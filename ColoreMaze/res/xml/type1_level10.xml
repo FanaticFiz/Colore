@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
-    <game-type	type="1">	Тип игры монохром	</game-type>
+    <game-vid	vid="1">	Тип игры монохром	</game-vid>
+    <game-kvest	kvest="0">	Тип игры монохром	</game-kvest>
     <array-list	A1="5"	A2="2"	A3="8"	A4="2"	A5="6"	>	1 строка	</array-list>
     <array-list	A1="11"	A2="10"	A3="4"	A4="4"	A5="11"	>	2 строка	</array-list>
     <array-list	A1="1"	A2="7"	A3="3"	A4="5"	A5="0"	>	3 строка	</array-list>

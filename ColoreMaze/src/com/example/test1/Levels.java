@@ -25,7 +25,8 @@ public class Levels extends Activity {
 	ArrayList<String> 		list 		= 	new ArrayList<String>();
 	private		int			counter_col;	// кол-во столбцов	
 	private		int			type_of_game;	// пполучаем типа игры которую выбрали в Type.class]
-	private		String		XMLgame_type="0";	// Типа усложнения игры из файла
+	private		String		XMLgame_vid="1";
+	private		String 		XMLgame_kvest="0";	// Типа усложнения игры из файла
 	
 	// Preferences
 	SharedPreferences mSettings;
@@ -105,11 +106,9 @@ public class Levels extends Activity {
 		//
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-		
 		// подключаем файл анимации
 		animation_wrong_moovs = AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 			
-
 		// получаем тип выбранной игры...
 		type_of_game =	getIntent().getExtras().getInt("from_type_tolevels_tog");
         
@@ -139,7 +138,8 @@ public class Levels extends Activity {
 	        		intentG.putExtra("from_level_to_game_col",  counter_col);	
 	        		intentG.putExtra("from_level_to_game_number_of_level",  position);		// Передаю номер уровня для отображения оного			
 	        		intentG.putExtra("from_level_to_game_type", type_of_game); 				// использую для анимации между активити
-	        		intentG.putExtra("from_level_to_game_XMLgame_type",  XMLgame_type);		// Передаем тип игры из XML файла
+	        		intentG.putExtra("from_level_to_game_XMLgame_vid",  XMLgame_vid);		// Передаем вид игры из XML файла
+	        		intentG.putExtra("from_level_to_game_XMLgame_kvest",  XMLgame_kvest);	// Передаем задание на этот уровень из XML файла
 	        		startActivity(intentG);
 	        		
 
@@ -194,103 +194,33 @@ public class Levels extends Activity {
 		}
 	}
 	
-	
-	
 	// Определяем какой файл xml подгрузить в зависимости от выбора уровня...
-	public void ChoiseLevel(int type, int NP) 
-	{
+	public void ChoiseLevel(int type, int NP) 	{
 		String String_of_type;
-		switch (type) 	{
+		switch (type) 								{
 		case 0:	String_of_type = "type1_";	break;
 		case 1:	String_of_type = "type2_";	break;
 		case 2:	String_of_type = "type3_";	break;
 		case 3:	String_of_type = "type4_";	break;
-		default:String_of_type = "type1_";	break;
-						}
+		default:String_of_type = "type1_";	break;	}
 		
 		String StringNP;
 		int i;
 		switch (NP) {
-		case 0:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);
-			break;
-			
-		case 1:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);		
-			break;
-
-		case 2:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 3:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 4:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 5:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 6:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 7:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 8:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 9:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 10:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 11:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		case 12:
-			i = NP+1;
-			StringNP = String_of_type+"level"+i;
-			ParserXML(StringNP);			
-			break;
-
-		default:
-			break;
+		case 0:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 1:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 2:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 3:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 4:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 5:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 6:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 7:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 8:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 9:	i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 10:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 11:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 12:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		default:		break;
 		}
 	}
 	
@@ -307,28 +237,27 @@ public class Levels extends Activity {
         try 
         {
         XmlPullParser parser = getResources().getXml(XMLFileID);
-
-        	while (parser.getEventType()!= XmlPullParser.END_DOCUMENT) 
-        	{
+        	while (parser.getEventType()!= XmlPullParser.END_DOCUMENT)	{
         		if (parser.getEventType() == XmlPullParser.START_TAG
-                        && parser.getName().equals("game-type"))
-        		{
-        			for (int i = 0; i < parser.getAttributeCount(); i++)
-        			{
-        				XMLgame_type = parser.getAttributeValue(i);
+                        && parser.getName().equals("game-vid"))       		{
+        			for (int i = 0; i < parser.getAttributeCount(); i++)	{
+        				XMLgame_vid = parser.getAttributeValue(i);
+        			}
+        		}
+        		if (parser.getEventType() == XmlPullParser.START_TAG
+                        && parser.getName().equals("game-kvest"))      		{
+        			for (int i = 0; i < parser.getAttributeCount(); i++)	{
+        				XMLgame_kvest = parser.getAttributeValue(i);
         			}
         		}
         		
         		if (parser.getEventType() == XmlPullParser.START_TAG
-                    && parser.getName().equals("array-list")) 
-        		{
-        			for (int i = 0; i < parser.getAttributeCount(); i++)
-        			{
+                    && parser.getName().equals("array-list"))      			{
+        			for (int i = 0; i < parser.getAttributeCount(); i++)  	{
         				list.add(parser.getAttributeValue(i));
         			}
         			counter_col = parser.getAttributeCount();
         		}
-        		
         	parser.next();
         	}
         }

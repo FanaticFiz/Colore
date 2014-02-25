@@ -16,7 +16,7 @@ public class grdAd_Game_t2 extends BaseAdapter
 	private int 				LastMoov, EndPoint;
 	
 	// Конструктор
-	public grdAd_Game_t2(Context context, ArrayList<String> _arrayfromXML, int xMLgame_type, int[] _array_legal_moovs, int _LastMoov, int _EndPoint) 
+	public grdAd_Game_t2(Context context, ArrayList<String> _arrayfromXML, int[] _array_legal_moovs, int _LastMoov, int _EndPoint) 
 	{
 		mContext = context;
 	    mRes = mContext.getResources();

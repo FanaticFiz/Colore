@@ -24,20 +24,20 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
 public class game_gameActivity extends Activity {
 
+	private	XmlVidKvest			myXML;
+	private	String	 			vid,kvest;
 	private Animation			animation_wrong_moovs;
 	private GridView			mGrid;
 	private grdAd_Game_t1		mAdapter_t1;
 	private grdAd_Game_t2		mAdapter_t2;
 	private grdAd_Game_color1	mAdapter_t3;
-	private int					EndPoint, LastMoov, Moovs_counter, moovs_counter_all;
+	private int					EndPoint, LastMoov=0, Moovs_counter, moovs_counter_all;
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
 	public int[]				array_legal_moovs;									// массив-списокдоступныхходов
 	private String				ColorBall;											// XMLgame_type-прописанныйвXMLфайлевариантигры
-	int							KFF_type=3,KFF_moovs,KFF_timer;						// KFF_type - пределяет типа адаптера
 	private TextView			someText, TimerField, MoovField;					// поледлязаметоквнизу
 	boolean						firstTouch							= true;
 	int							type_game_from, counter_col, number_of_level;
@@ -129,11 +129,11 @@ public class game_gameActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		 
+		
+		myXML = new XmlVidKvest();
 		array_all_moovs = new ArrayList<Integer>();
 			
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-		
 		if (mSettings.contains(APP_PREFERENCES_moovs_of_type1))	{
 			moovs_counter_all = mSettings.getInt(APP_PREFERENCES_moovs_of_type1, 0);	
 		}
@@ -174,7 +174,6 @@ public class game_gameActivity extends Activity {
 		// подключаем файл анимации
 		animation_wrong_moovs 	= 	AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
 		
-		LastMoov=0;
 		// Порядок присвоения в этом массиве ходов строг: сначала вверх потом по часово стрелке: право, низ лево.
 		// это из-за того что я не сделал массив уровня двухмерным...
 		array_legal_moovs = new int[4];
@@ -184,12 +183,16 @@ public class game_gameActivity extends Activity {
 		counter_col		=	getIntent().getExtras().getInt("from_level_to_game_col");
 		type_game_from	=	getIntent().getExtras().getInt("from_level_to_game_type");
 		number_of_level =	1 + getIntent().getExtras().getInt("from_level_to_game_number_of_level");
-		KFF_moovs	=	Integer.parseInt(getIntent().getExtras().getString("from_level_to_game_XMLgame_type"));
-		
+		// получаем два параметра определяющие вид игры и задание на уровень
+		vid		=	getIntent().getExtras().getString("from_level_to_game_XMLgame_vid");
+		kvest	=	getIntent().getExtras().getString("from_level_to_game_XMLgame_kvest");
+		// передаем оба параметра обьекту
+		myXML.setVid(vid);
+		myXML.setKvest(kvest);
+
 		
 //		Надоел рандомный фон... закоментирую пока...
 //		RandomBackground();
-		
 			
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
@@ -213,12 +216,12 @@ public class game_gameActivity extends Activity {
 		mGrid = (GridView)findViewById(R.id.field);
         mGrid.setNumColumns(counter_col);					// Задаем кол-во колонок в отображении
         mGrid.setEnabled(true);
-        switch (KFF_type) {
-		case 1:		mAdapter_t1 = new grdAd_Game_t1(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+        switch (myXML.getVid()) {
+		case 1:		mAdapter_t1 = new grdAd_Game_t1(this, arrayfromlevel, array_legal_moovs, LastMoov, EndPoint);
 					mGrid.setAdapter(mAdapter_t1);			break;
-		case 2:		mAdapter_t2 = new grdAd_Game_t2(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+		case 2:		mAdapter_t2 = new grdAd_Game_t2(this, arrayfromlevel, array_legal_moovs, LastMoov, EndPoint);
 					mGrid.setAdapter(mAdapter_t2);			break;
-		case 3:		mAdapter_t3 = new grdAd_Game_color1(this, arrayfromlevel,KFF_moovs,array_legal_moovs, LastMoov, EndPoint);
+		case 3:		mAdapter_t3 = new grdAd_Game_color1(this, arrayfromlevel, array_legal_moovs, LastMoov, EndPoint);
 					mGrid.setAdapter(mAdapter_t3);			break;
 		default:											break;
 		}
@@ -234,7 +237,7 @@ public class game_gameActivity extends Activity {
               	else{
                		game_move(parent, position, v); 		// Делаем ход
                		// Перерисовываем поле
-                    switch (KFF_type) {
+                    switch (myXML.getVid()) {
             			case 1:	mAdapter_t1.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
             			case 2:	mAdapter_t2.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
             			case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
@@ -268,7 +271,7 @@ public class game_gameActivity extends Activity {
 
     	Find_Start_Point();
     	
-    	switch (KFF_type) {
+    	switch (myXML.getVid()) {
 		case 1:	mAdapter_t1.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
 		case 2:	mAdapter_t2.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
 		case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
@@ -354,7 +357,7 @@ public class game_gameActivity extends Activity {
 				// Проверка на выполнение задания поставленного на данном уровне
 				switch (number_of_level)	
 				{
-				case 8:	if (Test_to_MoovKvest(Moovs_counter,KFF_moovs)) 	{	timer.cancel();	ShowGameOver();	}
+				case 8:	if (Test_to_MoovKvest(Moovs_counter, myXML.getKvest())) 	{	timer.cancel();	ShowGameOver();	}
 						else 														{	MyRestart_Level();				}
 						break;
 				default:	timer.cancel(); ShowGameOver();	break;

@@ -15,7 +15,7 @@ public class grdAd_Game_color1 extends BaseAdapter
 	private int 				LastMoov;
 
 	// Конструктор
-	public grdAd_Game_color1(Context context, ArrayList<String> _arrayfromXML, int xMLgame_type, int[] _array_legal_moovs, int _LastMoov, int _EndPoint) 
+	public grdAd_Game_color1(Context context, ArrayList<String> _arrayfromXML, int[] _array_legal_moovs, int _LastMoov, int _EndPoint) 
 	{
 		mContext = context;
 	    mRes = mContext.getResources();
