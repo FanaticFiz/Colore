@@ -339,8 +339,7 @@ public class game_gameActivity extends Activity {
 			// выдергиваем число из названия файла
 			Integer ert = NumberFromName(arrayfromlevel.get(position));			
 			switch (ert) {
-			case 0:
-				// Финиш	
+			case 0:		// Финиш
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
 				
 				// Пишем в преференсес
@@ -353,15 +352,10 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
 				
-				
 				// Проверка на выполнение задания поставленного на уровне	
-				
 				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter)){	
-					timer.cancel();	ShowGameOver();	
-				}
-				else	{
-					MyRestart_Level();				
-				}
+					timer.cancel();	ShowGameOver();							}
+				else	{				MyRestart_Level();					}
 				
 				break;
 			case 1:

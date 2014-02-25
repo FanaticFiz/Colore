@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
+    <game-kvest	kvest="30">	Задание пройти уровень за 30сек.	</game-kvest>
     <array-list	A1="1"	A2="6"	A3="14"	A4="2"	A5="8"	A6="0" 	>	1 строка	</array-list>
     <array-list	A1="7"	A2="4"	A3="12"	A4="11"	A5="2"	A6="14" >	2 строка	</array-list>
     <array-list	A1="4"	A2="6"	A3="10"	A4="6"	A5="4"	A6="6" 	>	3 строка	</array-list>

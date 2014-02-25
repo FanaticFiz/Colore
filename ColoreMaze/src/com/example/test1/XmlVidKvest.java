@@ -38,7 +38,8 @@ public class XmlVidKvest
 	{
 		Boolean b=true;
 		if (kvest.equals("0")) {
-			
+			// Если не было задано ничего, то возвращаем true
+			// т.е. никакой проверки делать ненадо дошли до финиша и все...
 		}else {
 			if (cel > 0) {
 			//  Цель ВРЕМЯ
