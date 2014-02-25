@@ -228,7 +228,6 @@ public class game_gameActivity extends Activity {
         Start_Time = System.currentTimeMillis();
         
         
-        
         // ----------------------   Обработчик нажатий	----------------------
         mGrid.setOnItemClickListener(new OnItemClickListener() 
         {
@@ -354,13 +353,14 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[2] = 10000;
 				array_legal_moovs[3] = 10000;
 				
-				// Проверка на выполнение задания поставленного на данном уровне
-				switch (number_of_level)	
-				{
-				case 8:	if (Test_to_MoovKvest(Moovs_counter, myXML.getKvest())) 	{	timer.cancel();	ShowGameOver();	}
-						else 														{	MyRestart_Level();				}
-						break;
-				default:	timer.cancel(); ShowGameOver();	break;
+				
+				// Проверка на выполнение задания поставленного на уровне	
+				
+				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter)){	
+					timer.cancel();	ShowGameOver();	
+				}
+				else	{
+					MyRestart_Level();				
 				}
 				
 				break;
