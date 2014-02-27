@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -204,8 +206,8 @@ public class game_gameActivity extends Activity {
 		myXML.setVid(vid);
 		myXML.setKvest(kvest);
 		// Покажем пользователю задание на текущий уровень
-		if (myXML.getKvest() == 0) {}
-		else {		StartMessadge(myXML.getKvest());	}
+		if (myXML.getKvest() == 0) {		}
+		else {	StartMessadge(myXML.getKvest());		}
 		
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
@@ -359,9 +361,9 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = 10000;
 				
 				// Проверка на выполнение задания поставленного на уровне	
-				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter, array_all_moovs)){	
-					timer.cancel();	ShowGameOverD();							}
-				else	{				MyRestart_Level();					}
+				if (myXML.kvest_TEST(myXML.getKvest(), Moovs_counter, array_all_moovs)){	
+					timer.cancel();	ShowGameEnd();							}
+				else	{			ShowGameOver();							}
 				
 				break;
 			case 1:
@@ -616,13 +618,30 @@ public class game_gameActivity extends Activity {
 	}
 	
 
+	private void ShowGameOver() {
+		cDial_GamaeOver.setCancelable(false);
+		cDial_GamaeOver.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		cDial_GamaeOver.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
+		ImageButton imb_dial = (ImageButton) cDial_GamaeOver.findViewById(R.id.imageButton1);
+		imb_dial.setOnClickListener(new OnClickListener() {
+			@ Override
+			public void onClick(View v)	{
+				cDial_GamaeOver.dismiss();
+				MyRestart_Level();
+			}
+		});		
+		cDial_GamaeOver.show();
+	}
 	
-	private void ShowGameOverD() {
+	private void ShowGameEnd() {
 		cDial_EndLevel.setCancelable(false);
+		cDial_EndLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		cDial_EndLevel.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
 		TextView textMove = (TextView) cDial_EndLevel.findViewById(R.id.game_up_text);
 		TextView textTime = (TextView) cDial_EndLevel.findViewById(R.id.textView3);
-		textMove.setText("Ходов: "+ Moovs_counter);
-		textTime.setText("Время: "+minutes+":"+seconds);
+		
+		textMove.setText(String.format("Ходов: %02d", Moovs_counter));
+		textTime.setText(String.format("Время: %d:%02d", minutes, seconds));
 		
 		ImageButton imb_dial = (ImageButton) cDial_EndLevel.findViewById(R.id.imageButton1);
 		imb_dial.setOnClickListener(new OnClickListener() {
@@ -639,14 +658,16 @@ public class game_gameActivity extends Activity {
 	public void StartMessadge(int kl)
 	{
 		cDial_Messges.setCancelable(false);
+		cDial_Messges.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		cDial_Messges.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
 		TextView text = (TextView) cDial_Messges.findViewById(R.id.textView1);
 
 		if (kl == 0) {
 		}else {
 			if (kl > 0) {
-				text.setText("На прохождение уровня дано: "+kl+"секунд.");
+				text.setText("На прохождение уровня дано: "+kl+" секунд.");
 			}else {
-				text.setText("Пройди этот уровень за: "+Math.abs(kl)+"ходов.");
+				text.setText("Пройди этот уровень за: "+Math.abs(kl)+" ходов.");
 			}
 		}
 		
@@ -655,6 +676,7 @@ public class game_gameActivity extends Activity {
 			@ Override
 			public void onClick(View v)	{
 				cDial_Messges.dismiss();
+				startTime = System.currentTimeMillis();
 			}
 		});		
 		cDial_Messges.show();

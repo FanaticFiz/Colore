@@ -74,6 +74,12 @@
     <style name="NoTitleDialog" parent="android:style/Theme.Dialog">
    		<item name="android:windowNoTitle">true</item>
    		<item name="android:windowBackground">@null</item>
+   		<item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
 	</style>
     
+    <style name="PauseDialogAnimation">
+    	<item name="android:windowEnterAnimation">@anim/fadein</item>
+    	<item name="android:windowExitAnimation">@anim/fadeout</item>
+	</style>
+	
 </resources>

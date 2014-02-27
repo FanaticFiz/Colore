@@ -33,7 +33,7 @@ public class XmlVidKvest
 	
 	// Здесь мы проверяем на выполнения условия поставленного на уровне
 	// вид поставленной цели: ХОДЫ (отрицательное число) или ВРЕМЯ (положительное).
-	public Boolean kvest_TEST(int cel, int time, int kolvoHodov, ArrayList<Integer> array_all_moovs)
+	public Boolean kvest_TEST(int cel, int kolvoHodov, ArrayList<Integer> array_all_moovs)
 	{
 		Boolean b=true;
 		if (kvest.equals("0")) {
@@ -42,7 +42,7 @@ public class XmlVidKvest
 		}else {
 			if (cel > 0) {
 			//  Цель ВРЕМЯ
-				b = false;	
+				b = true;	
 			}else {
 			// 	Цель ХОДЫ
 				if (kolvoHodov == Math.abs(cel)) {
