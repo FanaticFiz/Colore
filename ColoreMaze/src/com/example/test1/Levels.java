@@ -316,7 +316,6 @@ public class Levels extends Activity {
 		case 1:	overridePendingTransition(R.anim.activity_slide_up_in, R.anim.activity_slide_up_out);	break;	// Активность уходит вверх
 		default:				break;
 								}    		 
-		Toast.makeText(getApplicationContext(), "onRestart", Toast.LENGTH_SHORT).show();
 	}
 	
 }

@@ -3,15 +3,10 @@ package com.example.test1;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.widget.Toast;
-
 public class XmlVidKvest
 {
 	String	vid;
 	String	kvest;
-	
-	Integer nomerUrov;
-	Integer kolvoHodov;
 	
 
 	public XmlVidKvest()	{

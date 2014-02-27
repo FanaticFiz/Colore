@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
-    <game-vid	vid="2">	Тип игры монохром	</game-vid>
-    <game-kvest	kvest="-19">	Тип игры монохром	</game-kvest>
-	<array-list	A1="5"	A2="6"	A3="2"	A4="8"	A5="6" 	>	1 строка	</array-list>
+    <game-kvest	kvest="-19">	Подсчет ходов	</game-kvest>
+ 	<array-list	A1="5"	A2="6"	A3="2"	A4="8"	A5="6" 	>	1 строка	</array-list>
 	<array-list	A1="4"	A2="3"	A3="1"	A4="14"	A5="12" >	2 строка	</array-list>
 	<array-list	A1="10"	A2="6"	A3="7"	A4="7"	A5="7" 	>	3 строка	</array-list>
     <array-list	A1="14"	A2="4"	A3="11"	A4="9"	A5="12" >	4 строка	</array-list>
     <array-list	A1="4"	A2="8"	A3="4"	A4="12"	A5="7" 	>	5 строка    </array-list>
     <array-list A1="5"  A2="2"  A3="2"  A4="9"  A5="12" >	6 строка    </array-list>
-    <array-list A1="10" A2="4"  A3="0"  A4="6"  A5="11" >	7 строка    </array-list>
+    <array-list A1="8" 	A2="4"  A3="0"  A4="9"  A5="11" >	7 строка    </array-list>
 </level>

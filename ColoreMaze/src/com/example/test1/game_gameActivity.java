@@ -136,6 +136,9 @@ public class game_gameActivity extends Activity {
 			moovs_counter_all = mSettings.getInt(APP_PREFERENCES_moovs_of_type1, 0);	
 		}
 
+		
+		
+		
 		final Handler handlerUI = new Handler();
 		TimerField = (TextView)findViewById(R.id.game_up_text1);
 		
@@ -157,15 +160,14 @@ public class game_gameActivity extends Activity {
 		       public void run()    			{
 		    	    if (hours>0)  	{	TimerField.setText(String.format("%d:%02d:%02d", hours, minutes, seconds));	} 
 		    	    else 			{	TimerField.setText(String.format("%d:%02d", minutes, seconds));	} 
-		    	   								}
-		       									});       
+		       }
+		       });       
 		   }
 		}
 		startTime = System.currentTimeMillis();
 		timer = new Timer();
 		timer.schedule(new UpdateTimeTask(), 0, 1000);
-
-		// ------------------------------------------------------------------------------------------------		
+		
 		// ------------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------------
 		

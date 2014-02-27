@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
+    <game-vid	vid="2">	Скрытое поле	</game-vid>
     <array-list	A1="1"	A2="2"	A3="5"	A4="6"	A5="9"	>	1 строка	</array-list>
     <array-list A1="10"	A2="11"	A3="10"	A4="8"	A5="11" >	2 строка	</array-list>
     <array-list A1="7"	A2="5"	A3="11"	A4="5"	A5="6" 	>	3 строка    </array-list>

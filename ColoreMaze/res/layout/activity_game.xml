@@ -14,12 +14,13 @@
         
         <TextView
             android:id="@+id/game_up_text1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:gravity="left|center_vertical"
             android:paddingLeft="2dp"
-            android:textColor="#FF007700"
+            android:text="0:43"
+            android:textColor="#FF777777"
             android:textSize="22sp" />
 			
          <ImageButton
@@ -27,7 +28,7 @@
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_gravity="center_horizontal"
-             android:background="#00000000"
+             android:background="@null"
              android:contentDescription="@string/app_name"
              android:onClick="onResetClick"
              android:paddingBottom="1dp"
@@ -41,7 +42,8 @@
              android:layout_gravity="right|center_vertical"
              android:gravity="right"
              android:paddingRight="2dp"
-             android:textColor="#FF007700"
+             android:text="25"
+             android:textColor="#FF777777"
              android:textSize="22sp" />
          
     </FrameLayout>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
+    <game-vid	vid="2">	Скрытое поле	</game-vid>
+    <game-kvest	kvest="30">	Таймер на 30 секунд	</game-kvest>
     <array-list	A1="5"	A2="2"	A3="2"	A4="6"	A5="9"	>	1 строка	</array-list>
     <array-list	A1="11"	A2="4"	A3="6"	A4="4"	A5="12"	>	2 строка	</array-list>
     <array-list	A1="7"	A2="7"	A3="10"	A4="5"	A5="7"	>	3 строка	</array-list>
