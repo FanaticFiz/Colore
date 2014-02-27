@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -43,6 +45,7 @@ public class game_gameActivity extends Activity {
 	int							randomBG;
 	Boolean						Priznak_kvesta;
 	ImageButton					ImbuttonReset;
+	Dialog 						cDial_Messges,cDial_GamaeOver,cDial_EndLevel;
 	
 	String ss = System.getProperty("line.separator"); // строка разделитель
 	
@@ -130,7 +133,18 @@ public class game_gameActivity extends Activity {
 		
 		myXML = new XmlVidKvest();
 		array_all_moovs = new ArrayList<Integer>();
-			
+		
+		// Мои диалоги
+		cDial_Messges = new Dialog(this,R.style.NoTitleDialog);
+		cDial_Messges.setContentView(R.layout.dialog_messages);
+		
+		cDial_GamaeOver = new Dialog(this,R.style.NoTitleDialog);
+		cDial_GamaeOver.setContentView(R.layout.dialog_game_over);
+
+		cDial_EndLevel = new Dialog(this,R.style.NoTitleDialog);
+		cDial_EndLevel.setContentView(R.layout.dialog_end_levels);
+
+		
 		mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 		if (mSettings.contains(APP_PREFERENCES_moovs_of_type1))	{
 			moovs_counter_all = mSettings.getInt(APP_PREFERENCES_moovs_of_type1, 0);	
@@ -189,8 +203,9 @@ public class game_gameActivity extends Activity {
 		// передаем оба параметра обьекту
 		myXML.setVid(vid);
 		myXML.setKvest(kvest);
-		// Покажем пользователю задание на текущий уровень 
-		StartMessadge(myXML.getKvest());
+		// Покажем пользователю задание на текущий уровень
+		if (myXML.getKvest() == 0) {}
+		else {		StartMessadge(myXML.getKvest());	}
 		
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
@@ -345,7 +360,7 @@ public class game_gameActivity extends Activity {
 				
 				// Проверка на выполнение задания поставленного на уровне	
 				if (myXML.kvest_TEST(myXML.getKvest(), 5000, Moovs_counter, array_all_moovs)){	
-					timer.cancel();	ShowGameOver();							}
+					timer.cancel();	ShowGameOverD();							}
 				else	{				MyRestart_Level();					}
 				
 				break;
@@ -600,39 +615,51 @@ public class game_gameActivity extends Activity {
 		else 								{	return false;	}
 	}
 	
-	private void ShowGameOver() {
-	    // Диалоговое окно
-	    AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-	 
-	    // Заголовок и текст
-	    alertbox.setTitle("Поздравляем!");
-	        
-	    String TextToast = "Кол-во ходов: "+ Moovs_counter+ss+"Время: "+minutes+":"+seconds;
-	    alertbox.setMessage(TextToast);
-	 
-	    // Добавляем кнопку 
-	    alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-	      public void onClick(DialogInterface arg0, int arg1) {
-	        // закрываем текущюю Activity
-	        finish();
-	      }
-	    });
-	    // показываем окно
-	    alertbox.show();
-	  }
+
+	
+	private void ShowGameOverD() {
+		cDial_EndLevel.setCancelable(false);
+		TextView textMove = (TextView) cDial_EndLevel.findViewById(R.id.game_up_text);
+		TextView textTime = (TextView) cDial_EndLevel.findViewById(R.id.textView3);
+		textMove.setText("Ходов: "+ Moovs_counter);
+		textTime.setText("Время: "+minutes+":"+seconds);
+		
+		ImageButton imb_dial = (ImageButton) cDial_EndLevel.findViewById(R.id.imageButton1);
+		imb_dial.setOnClickListener(new OnClickListener() {
+			@ Override
+			public void onClick(View v)	{
+				cDial_EndLevel.dismiss();
+				finish();
+			}
+		});		
+		cDial_EndLevel.show();
+	}
+	
 	
 	public void StartMessadge(int kl)
 	{
-		if (kl == 0) {
+		cDial_Messges.setCancelable(false);
+		TextView text = (TextView) cDial_Messges.findViewById(R.id.textView1);
 
+		if (kl == 0) {
 		}else {
 			if (kl > 0) {
-				Toast.makeText(getApplicationContext(), "На прохождение уровня дано: "+kl+"секунд.", Toast.LENGTH_LONG).show();
+				text.setText("На прохождение уровня дано: "+kl+"секунд.");
 			}else {
-				Toast.makeText(getApplicationContext(), "Пройди этот уровень за: "+kl+"ходов.", Toast.LENGTH_LONG).show();
+				text.setText("Пройди этот уровень за: "+Math.abs(kl)+"ходов.");
 			}
 		}
+		
+		ImageButton imb_dial = (ImageButton) cDial_Messges.findViewById(R.id.imageButton1);
+		imb_dial.setOnClickListener(new OnClickListener() {
+			@ Override
+			public void onClick(View v)	{
+				cDial_Messges.dismiss();
+			}
+		});		
+		cDial_Messges.show();
 	}
+	
 	
 	@Override
 	public void onBackPressed() {

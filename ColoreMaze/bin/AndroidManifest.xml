@@ -15,7 +15,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
-        
         <service android:enabled="true" android:name=".MusicService" />
         
         <activity
@@ -58,8 +57,17 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" 
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name="com.example.test1.dialog_end_levels"
+            android:label="@string/title_activity_game" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.example.test1.dialog_messages"
+            android:label="@string/title_activity_game" 
+            android:screenOrientation="portrait">
+        </activity>
         
-         
     </application>
 
     
