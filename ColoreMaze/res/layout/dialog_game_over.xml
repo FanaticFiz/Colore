@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_container2" >
+    android:background="@drawable/dialog_gameover" >
 
     <TextView
         android:id="@+id/text"
@@ -12,7 +12,7 @@
         android:text="Sorry! Try again..."
         android:textColor="#FFF"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
 
     <ImageButton
         android:id="@+id/imageButton1"

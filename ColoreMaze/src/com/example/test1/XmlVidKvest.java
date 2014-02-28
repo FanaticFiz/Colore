@@ -27,6 +27,15 @@ public class XmlVidKvest
 		return Integer.parseInt(kvest);
 	}
 
+	public Integer getTimeKvest()	{
+		if (Integer.parseInt(kvest) > 0) {
+			return Integer.parseInt(kvest);
+		}else {
+			return 100;
+		}
+	}
+
+	
 	public Integer getVid()	{
 		return Integer.parseInt(vid);
 	}

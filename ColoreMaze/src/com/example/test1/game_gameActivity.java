@@ -6,15 +6,15 @@ import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -24,7 +24,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class game_gameActivity extends Activity {
 
@@ -48,8 +47,6 @@ public class game_gameActivity extends Activity {
 	Boolean						Priznak_kvesta;
 	ImageButton					ImbuttonReset;
 	Dialog 						cDial_Messges,cDial_GamaeOver,cDial_EndLevel;
-	
-	String ss = System.getProperty("line.separator"); // строка разделитель
 	
 	// Preferences
 	SharedPreferences mSettings;
@@ -124,9 +121,14 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
 	
 	// Таймер
-	private int seconds,minutes,hours;
-	private Timer timer    = null;
-	private long startTime;
+	private int 	seconds,minutes,hours;
+	private Timer 	timer				= null;
+	private long 	startTime;
+	private Boolean	paused				= false;	
+	private	long 	timeSwapBuff 		= 0;
+	private	long 	timeInMilliseconds 	= 0;
+	private	long 	updatedTime 		= 0;
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -153,32 +155,37 @@ public class game_gameActivity extends Activity {
 		}
 
 		
-		
-		
 		final Handler handlerUI = new Handler();
 		TimerField = (TextView)findViewById(R.id.game_up_text1);
 		
 		class UpdateTimeTask extends TimerTask 
 		{
-		   public void run() 
-		   {
-			   long millis = System.currentTimeMillis() - startTime;
-		       seconds 	= 	(int) (millis / 1000);
-		       minutes 	= 	seconds / 60;
-		       hours	=	minutes	/ 60;
-		       
-		       minutes	=	minutes % 60;
-		       seconds  = 	seconds % 60;
-		       
-		       // Нельзя обращаться к элементам UI(user interf.) потока из другого потока.
-		       // Поэтому пользуемся handler 
-		       handlerUI.post(new Runnable()	{
-		       public void run()    			{
-		    	    if (hours>0)  	{	TimerField.setText(String.format("%d:%02d:%02d", hours, minutes, seconds));	} 
-		    	    else 			{	TimerField.setText(String.format("%d:%02d", minutes, seconds));	} 
-		       }
-		       });       
-		   }
+			public void run() 
+			{
+				if (!paused) {
+					timeInMilliseconds = System.currentTimeMillis() - startTime;
+					updatedTime = timeSwapBuff + timeInMilliseconds;
+
+					seconds = (int) (updatedTime / 1000);
+					minutes = seconds / 60;
+					hours = minutes / 60;
+
+					minutes = minutes % 60;
+					seconds = seconds % 60;
+
+					// Нельзя обращаться к элементам UI(user interf.) потока из
+					// другого потока. Поэтому пользуемся handler
+					handlerUI.post(new Runnable() {
+						public void run()						{
+							if (seconds + 11 > myXML.getTimeKvest()) {	TimerField.setTextColor(Color.RED);					}
+							if (hours > 0) 	{	TimerField.setText(String.format("%d:%02d:%02d", hours, minutes,seconds));	}
+							else 			{	TimerField.setText(String.format("%d:%02d",minutes, seconds));				}
+						}
+					});
+				}else {
+					// на паузе
+				}
+			}
 		}
 		startTime = System.currentTimeMillis();
 		timer = new Timer();
@@ -269,6 +276,7 @@ public class game_gameActivity extends Activity {
     private void MyRestart_Level() 
     {
     	startTime = System.currentTimeMillis();
+    	paused = false;
     	
     	hours=0;minutes=0;seconds=0;
     	array_all_moovs.clear();
@@ -284,7 +292,6 @@ public class game_gameActivity extends Activity {
 		case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint); break;
 		default:	break;
 		}
-    			
 	}
     
     
@@ -361,9 +368,9 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = 10000;
 				
 				// Проверка на выполнение задания поставленного на уровне	
-				if (myXML.kvest_TEST(myXML.getKvest(), Moovs_counter, array_all_moovs)){	
-					timer.cancel();	ShowGameEnd();							}
-				else	{			ShowGameOver();							}
+				if 		(myXML.kvest_TEST(myXML.getKvest(), Moovs_counter, array_all_moovs))	
+						{	ShowGameEnd();	}
+				else	{	ShowGameOver();	}
 				
 				break;
 			case 1:
@@ -619,6 +626,7 @@ public class game_gameActivity extends Activity {
 	
 
 	private void ShowGameOver() {
+		paused = true;
 		cDial_GamaeOver.setCancelable(false);
 		cDial_GamaeOver.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		cDial_GamaeOver.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
@@ -634,6 +642,7 @@ public class game_gameActivity extends Activity {
 	}
 	
 	private void ShowGameEnd() {
+		paused = true;
 		cDial_EndLevel.setCancelable(false);
 		cDial_EndLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		cDial_EndLevel.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
@@ -657,6 +666,7 @@ public class game_gameActivity extends Activity {
 	
 	public void StartMessadge(int kl)
 	{
+		paused = true;
 		cDial_Messges.setCancelable(false);
 		cDial_Messges.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		cDial_Messges.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
@@ -677,6 +687,7 @@ public class game_gameActivity extends Activity {
 			public void onClick(View v)	{
 				cDial_Messges.dismiss();
 				startTime = System.currentTimeMillis();
+				paused = false;
 			}
 		});		
 		cDial_Messges.show();
@@ -700,4 +711,23 @@ public class game_gameActivity extends Activity {
 							}
 	}
 
+	
+	@ Override
+	protected void onPause()	{
+		super.onPause();
+		
+		paused = true;
+		timeSwapBuff += timeInMilliseconds;
+	}
+	
+	@ Override
+	protected void onResume()	{
+		super.onResume();
+		
+		startTime = System.currentTimeMillis();
+		paused = false;
+		
+		if (myXML.getKvest() == 0) {		}
+		else {	StartMessadge(myXML.getKvest());		}
+	}
 }
