@@ -162,7 +162,7 @@ public class game_gameActivity extends Activity {
 		{
 			public void run() 
 			{
-				if (!paused) {
+				if ( (!paused) && (seconds < myXML.getTimeKvest()) ) {
 					timeInMilliseconds = System.currentTimeMillis() - startTime;
 					updatedTime = timeSwapBuff + timeInMilliseconds;
 
@@ -184,6 +184,15 @@ public class game_gameActivity extends Activity {
 					});
 				}else {
 					// на паузе
+					if (seconds >= myXML.getTimeKvest()) {
+						// время вышло
+						handlerUI.post(new Runnable() {
+							public void run()	{
+								TimerField.setTextColor(Color.GRAY);
+								ShowGameOver();
+							}
+						});
+					}
 				}
 			}
 		}
@@ -212,9 +221,10 @@ public class game_gameActivity extends Activity {
 		// передаем оба параметра обьекту
 		myXML.setVid(vid);
 		myXML.setKvest(kvest);
-		// Покажем пользователю задание на текущий уровень
-		if (myXML.getKvest() == 0) {		}
-		else {	StartMessadge(myXML.getKvest());		}
+        // Покажем пользователю задание на текущий уровень
+     	if (myXML.getKvest() == 0) {		}
+     	else {	StartMessadge(myXML.getKvest());		}
+
 		
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
@@ -275,7 +285,9 @@ public class game_gameActivity extends Activity {
     
     private void MyRestart_Level() 
     {
-    	startTime = System.currentTimeMillis();
+
+    	startTime 		= System.currentTimeMillis();
+    	timeSwapBuff	= 0; 
     	paused = false;
     	
     	hours=0;minutes=0;seconds=0;
@@ -710,24 +722,21 @@ public class game_gameActivity extends Activity {
 		default:			break;
 							}
 	}
-
+	
 	
 	@ Override
-	protected void onPause()	{
-		super.onPause();
+	protected void onStop()	{
+		super.onStop();
 		
 		paused = true;
 		timeSwapBuff += timeInMilliseconds;
 	}
 	
 	@ Override
-	protected void onResume()	{
-		super.onResume();
+	protected void onRestart()	{
+		super.onRestart();
 		
 		startTime = System.currentTimeMillis();
 		paused = false;
-		
-		if (myXML.getKvest() == 0) {		}
-		else {	StartMessadge(myXML.getKvest());		}
 	}
 }

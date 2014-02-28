@@ -20,8 +20,9 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="2dp"
             android:text="0:00"
-            android:textColor="#FF777777"
-            android:textSize="22sp" />
+            android:textColor="#FF999999"
+            android:textSize="22sp"
+            android:textStyle="bold|italic" />
 			
          <ImageButton
              android:id="@+id/imbuttonreset"
@@ -40,11 +41,12 @@
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_gravity="right|center_vertical"
-             android:gravity="right"
+             android:gravity="right|center_vertical"
              android:paddingRight="2dp"
-             android:text="25"
-             android:textColor="#FF777777"
-             android:textSize="22sp" />
+             android:text="000"
+             android:textColor="#FF999999"
+             android:textSize="22sp"
+             android:textStyle="bold|italic" />
          
     </FrameLayout>
 
