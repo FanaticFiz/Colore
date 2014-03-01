@@ -203,13 +203,13 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
 			imageView.setImageResource(mThumbIds1[ggggg]);	
 			break;
 		case 1:
-			imageView.setImageResource(mThumbIds2[ggggg]);	
+//			imageView.setImageResource(mThumbIds2[ggggg]);	
 			break;
 		case 2:
-			imageView.setImageResource(mThumbIds3[ggggg]);	
+//			imageView.setImageResource(mThumbIds3[ggggg]);	
 			break;
 		case 3:
-			imageView.setImageResource(mThumbIds4[ggggg]);	
+//			imageView.setImageResource(mThumbIds4[ggggg]);	
 			break;
 		default:
 			//imageView.setImageResource(mThumbIds1[position]);	
@@ -247,7 +247,7 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
             R.drawable.layer_of_levelsgrid21_ok,R.drawable.layer_of_levelsgrid22_ok,R.drawable.layer_of_levelsgrid23_ok,R.drawable.layer_of_levelsgrid24_ok,
 
     };
-    
+  /*  
     private Integer[] mThumbIds2 = {
             R.drawable.type2_level1, R.drawable.type2_level2, R.drawable.type2_level3, R.drawable.type2_level4,
             R.drawable.type2_level5, R.drawable.type2_level6, R.drawable.type2_level7, R.drawable.type2_level8,
@@ -265,5 +265,5 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
             R.drawable.type4_level5, R.drawable.type4_level6, R.drawable.type4_level7, R.drawable.type4_level8,
             R.drawable.type4_level9, R.drawable.type4_level10,R.drawable.type4_level11,R.drawable.type4_level12,
     };
-
+*/
 }
