@@ -6,7 +6,6 @@ import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -59,7 +57,7 @@ public class game_gameActivity extends Activity {
 	// Причем наличие люой цифры большей чем 0 автоматически означает что уровень был пройден! (это справедливо для всех уровней кроме первого)
 	// последний параметр это общее кол-во ходов
 	//private static int[] 		pref_type1_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";			// Общее кол-во ходов 
 	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
 	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
@@ -72,6 +70,18 @@ public class game_gameActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_13	= 	"levels_of_type1_13";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_14	= 	"levels_of_type1_14";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_15	= 	"levels_of_type1_15";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_16	= 	"levels_of_type1_16";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_17	= 	"levels_of_type1_17";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_18	= 	"levels_of_type1_18";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_19	= 	"levels_of_type1_19";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_20	= 	"levels_of_type1_20";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_21	= 	"levels_of_type1_21";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_22	= 	"levels_of_type1_22";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_23	= 	"levels_of_type1_23";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_24	= 	"levels_of_type1_24";		// 
 
 	// Уровень 2
 	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
@@ -368,11 +378,7 @@ public class game_gameActivity extends Activity {
 			switch (ert) {
 			case 0:		// Финиш
 				moovs_counter_all = moovs_counter_all + Moovs_counter;
-				
-				// Пишем в преференсес
-				//передаю тип игры, уровень и сделанное кол-во ходов
-				MySetPreferences(type_game_from, number_of_level,Moovs_counter);
-				
+						
 				// Массив ходов заполняем фигней
 				array_legal_moovs[0] = 10000; // Конец игры
 				array_legal_moovs[1] = 10000; // Ходить никуда нельзя
@@ -380,8 +386,13 @@ public class game_gameActivity extends Activity {
 				array_legal_moovs[3] = 10000;
 				
 				// Проверка на выполнение задания поставленного на уровне	
-				if 		(myXML.kvest_TEST(myXML.getKvest(), Moovs_counter, array_all_moovs))	
-						{	ShowGameEnd();	}
+				if 		(myXML.kvest_TEST(myXML.getKvest(), Moovs_counter, array_all_moovs))	{
+					// Пишем в преференсес
+					//передаю тип игры, уровень и сделанное кол-во ходов
+					MySetPreferences(type_game_from, number_of_level,Moovs_counter);
+
+					ShowGameEnd();	
+				}
 				else	{	ShowGameOver();	}
 				
 				break;
@@ -536,6 +547,19 @@ public class game_gameActivity extends Activity {
 				case 9:	editor.putInt(APP_PREFERENCES_levels_of_type1_10,	mooves);	break;
 				case 10:editor.putInt(APP_PREFERENCES_levels_of_type1_11,	mooves);	break;
 				case 11:editor.putInt(APP_PREFERENCES_levels_of_type1_12,	mooves);	break;
+				case 12:editor.putInt(APP_PREFERENCES_levels_of_type1_13,	mooves);	break;
+				case 13:editor.putInt(APP_PREFERENCES_levels_of_type1_14,	mooves);	break;
+				case 14:editor.putInt(APP_PREFERENCES_levels_of_type1_15,	mooves);	break;
+				case 15:editor.putInt(APP_PREFERENCES_levels_of_type1_16,	mooves);	break;
+				case 16:editor.putInt(APP_PREFERENCES_levels_of_type1_17,	mooves);	break;
+				case 17:editor.putInt(APP_PREFERENCES_levels_of_type1_18,	mooves);	break;
+				case 18:editor.putInt(APP_PREFERENCES_levels_of_type1_19,	mooves);	break;
+				case 19:editor.putInt(APP_PREFERENCES_levels_of_type1_20,	mooves);	break;
+				case 20:editor.putInt(APP_PREFERENCES_levels_of_type1_21,	mooves);	break;
+				case 21:editor.putInt(APP_PREFERENCES_levels_of_type1_22,	mooves);	break;
+				case 22:editor.putInt(APP_PREFERENCES_levels_of_type1_23,	mooves);	break;
+				case 23:editor.putInt(APP_PREFERENCES_levels_of_type1_24,	mooves);	break;
+
 				default:	break;	}
 		break;
 

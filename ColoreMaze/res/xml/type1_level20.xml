@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level1>
-    <array-list	A1="1"	A2="6"	A3="14"	A4="2"	A5="8"	A6="2"	A7="1"	A8="6"	>	1 строка	</array-list>
-    <array-list	A1="11"	A2="6"	A3="14"	A4="2"	A5="8"	A6="9"	A7="1"	A8="6"	>	2 строка	</array-list>
-    <array-list	A1="4"	A2="6"	A3="14"	A4="2"	A5="8"	A6="7"	A7="1"	A8="6"	>	3 строка	</array-list>
-    <array-list	A1="7"	A2="6"	A3="14"	A4="2"	A5="8"	A6="4"	A7="1"	A8="6"	>	4 строка	</array-list>
-    <array-list	A1="10"	A2="6"	A3="14"	A4="2"	A5="8"	A6="12"	A7="1"	A8="6"	>	5 строка	</array-list>
-    <array-list	A1="9"	A2="6"	A3="14"	A4="2"	A5="8"	A6="11"	A7="1"	A8="6"	>	6 строка	</array-list>
-    <array-list	A1="2"	A2="6"	A3="14"	A4="2"	A5="8"	A6="3"	A7="1"	A8="6" 	>	7 строка	</array-list>
-    <array-list	A1="5"	A2="6"	A3="14"	A4="2"	A5="8"	A6="5"	A7="1"	A8="6" 	>	8 строка	</array-list>
-</level1>
+<level>
+    <game-vid	vid="2">	Скрытое поле	</game-vid>
+    <array-list	A1="5"	A2="7"	A3="9"	A4="2"	A5="2"	A6="6"	>	1 строка	</array-list>
+    <array-list	A1="4"	A2="12"	A3="10"	A4="11"	A5="5"	A6="12"	>	2 строка	</array-list>
+    <array-list	A1="5"	A2="11"	A3="4"	A4="6"	A5="12"	A6="14"	>	3 строка	</array-list>
+    <array-list	A1="7"	A2="8"	A3="9"	A4="12"	A5="10"	A6="3"	>	4 строка	</array-list>
+    <array-list	A1="4"	A2="12"	A3="5"	A4="11"	A5="4"	A6="6"	>	5 строка	</array-list>
+    <array-list	A1="10"	A2="11"	A3="10"	A4="6"	A5="5"	A6="11"	>	6 строка	</array-list>
+    <array-list	A1="1"	A2="2"	A3="11"	A4="9"	A5="4"	A6="0"	>	7 строка	</array-list>
+</level>

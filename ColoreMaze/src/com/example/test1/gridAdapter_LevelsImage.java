@@ -119,6 +119,78 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
 			if  (array_of_P[11] > 0)						{	ggggg = position + 48;	}	// галочка				
 			break;
 
+		case 12:
+			if 	(array_of_P[11]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[11] > 0)&(array_of_P[12]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[12] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 13:
+			if 	(array_of_P[12]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[12] > 0)&(array_of_P[13]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[13] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 14:
+			if 	(array_of_P[13]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[13] > 0)&(array_of_P[14]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[14] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 15:
+			if 	(array_of_P[14]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[14] > 0)&(array_of_P[15]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[15] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 16:
+			if 	(array_of_P[15]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[15] > 0)&(array_of_P[16]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[16] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 17:
+			if 	(array_of_P[16]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[16] > 0)&(array_of_P[17]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[17] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 18:
+			if 	(array_of_P[17]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[17] > 0)&(array_of_P[18]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[18] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 19:
+			if 	(array_of_P[18]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[18] > 0)&(array_of_P[19]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[19] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 20:
+			if 	(array_of_P[19]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[19] > 0)&(array_of_P[20]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[20] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 21:
+			if 	(array_of_P[20]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[20] > 0)&(array_of_P[21]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[21] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 22:
+			if 	(array_of_P[21]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[21] > 0)&(array_of_P[22]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[22] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
+		case 23:
+			if 	(array_of_P[22]== 0) 						{  	ggggg = position;		}
+			if ((array_of_P[22] > 0)&(array_of_P[23]==0)) 	{  	ggggg = position + 24;	}
+			if  (array_of_P[23] > 0)						{	ggggg = position + 48;	}	// галочка				
+			break;
+
 		default:
 			ggggg = position;
 			break;

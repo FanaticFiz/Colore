@@ -34,7 +34,7 @@ public class Levels extends Activity {
 	// массив заполненный из преференсес
 	private static int[] 		pref_type_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,	0};
 
-	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";		// Общее кол-во ходов 
+	public static final String 	APP_PREFERENCES_moovs_of_type1		= 	"moovs_of_type1";			// Общее кол-во ходов 
 	public static final String 	APP_PREFERENCES_levels_of_type1_1	= 	"levels_of_type1_1";		// Первый
 	public static final String 	APP_PREFERENCES_levels_of_type1_2	= 	"levels_of_type1_2";		// второй
 	public static final String 	APP_PREFERENCES_levels_of_type1_3	= 	"levels_of_type1_3";		// 
@@ -47,6 +47,18 @@ public class Levels extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_13	= 	"levels_of_type1_13";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_14	= 	"levels_of_type1_14";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_15	= 	"levels_of_type1_15";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_16	= 	"levels_of_type1_16";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_17	= 	"levels_of_type1_17";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_18	= 	"levels_of_type1_18";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_19	= 	"levels_of_type1_19";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_20	= 	"levels_of_type1_20";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_21	= 	"levels_of_type1_21";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_22	= 	"levels_of_type1_22";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_23	= 	"levels_of_type1_23";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_24	= 	"levels_of_type1_24";		// 
 
 	// Уровень 2
 	//private static int[] 		pref_type2_AllAboutLevels 			=	{1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0};
@@ -179,6 +191,18 @@ public class Levels extends Activity {
 			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_10))	{	pref_type_AllAboutLevels[9]	= mSettings.getInt(APP_PREFERENCES_levels_of_type1_10,0);	}
 			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_11))	{	pref_type_AllAboutLevels[10]= mSettings.getInt(APP_PREFERENCES_levels_of_type1_11,0);	}
 			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_12))	{	pref_type_AllAboutLevels[11]= mSettings.getInt(APP_PREFERENCES_levels_of_type1_12,0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_13))	{	pref_type_AllAboutLevels[12] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_13, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_14))	{	pref_type_AllAboutLevels[13] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_14, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_15))	{	pref_type_AllAboutLevels[14] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_15, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_16))	{	pref_type_AllAboutLevels[15] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_16, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_17))	{	pref_type_AllAboutLevels[16] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_17, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_18))	{	pref_type_AllAboutLevels[17] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_18, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_19))	{	pref_type_AllAboutLevels[18] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_19, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_20))	{	pref_type_AllAboutLevels[19] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_20, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_21))	{	pref_type_AllAboutLevels[20] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_21, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_22))	{	pref_type_AllAboutLevels[21] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_22, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_23))	{	pref_type_AllAboutLevels[22] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_23, 0);	}
+			if (mSettings.contains(APP_PREFERENCES_levels_of_type1_24))	{	pref_type_AllAboutLevels[23] = mSettings.getInt(APP_PREFERENCES_levels_of_type1_24, 0);	}
 		break;
 
 		case 1:	

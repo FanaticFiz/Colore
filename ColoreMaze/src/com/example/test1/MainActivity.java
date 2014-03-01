@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -44,6 +43,18 @@ public class MainActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type1_10	= 	"levels_of_type1_10";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_11	= 	"levels_of_type1_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type1_12	= 	"levels_of_type1_12";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_13	= 	"levels_of_type1_13";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_14	= 	"levels_of_type1_14";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_15	= 	"levels_of_type1_15";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_16	= 	"levels_of_type1_16";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_17	= 	"levels_of_type1_17";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_18	= 	"levels_of_type1_18";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_19	= 	"levels_of_type1_19";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_20	= 	"levels_of_type1_20";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_21	= 	"levels_of_type1_21";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_22	= 	"levels_of_type1_22";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_23	= 	"levels_of_type1_23";		// 
+	public static final String 	APP_PREFERENCES_levels_of_type1_24	= 	"levels_of_type1_24";		// 
 
 	// ������� 2
 	public static final String 	APP_PREFERENCES_moovs_of_type2		= 	"moovs_of_type2";		// 
@@ -90,8 +101,6 @@ public class MainActivity extends Activity {
 	public static final String 	APP_PREFERENCES_levels_of_type4_11	= 	"levels_of_type4_11";		// 
 	public static final String 	APP_PREFERENCES_levels_of_type4_12	= 	"levels_of_type4_12";		// 
 	
-	
-    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -124,16 +133,6 @@ public class MainActivity extends Activity {
 		
 		//MyGetPreferences();
 	}
-
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
 
 	public void onPlayClick(View v) 
 	{
@@ -196,6 +195,18 @@ public class MainActivity extends Activity {
 			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_10,	0);		//	��� 1. ������� 10
 			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_11,	0);		//	��� 1. ������� 11
 			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_12,	0);		//	��� 1. ������� 12
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_13,	0);		//	��� 1. ������� 1
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_14,	0);		//	��� 1. ������� 2
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_15,	0);		//	��� 1. ������� 3
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_16,	0);		//	��� 1. ������� 4
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_17,	0);		//	��� 1. ������� 5
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_18,	0);		//	��� 1. ������� 6
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_19,	0);		//	��� 1. ������� 7
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_20,	0);		//	��� 1. ������� 8
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_21,	0);		//	��� 1. ������� 9
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_22,	0);		//	��� 1. ������� 10
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_23,	0);		//	��� 1. ������� 11
+			preferences_editor.putInt(APP_PREFERENCES_levels_of_type1_24,	0);		//	��� 1. ������� 12
 			
 			preferences_editor.apply();
 		}
