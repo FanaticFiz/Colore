@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class game_gameActivity extends Activity {
 
@@ -36,8 +37,7 @@ public class game_gameActivity extends Activity {
 	ArrayList<String>			arrayfromlevel;										// массивпереданныйизпредыдущейактивностисодержитописаниеигровогополя
 	ArrayList<Integer>			array_all_moovs;									// массиввсехсделаныхходов...пригодится))
 	public int[]				array_legal_moovs;									// массив-списокдоступныхходов
-	private String				ColorBall;											// XMLgame_type-прописанныйвXMLфайлевариантигры
-	private TextView			someText, TimerField, MoovField;					// поледлязаметоквнизу
+	private TextView			TimerField, MoovField;								// поледлязаметоквнизу
 	boolean						firstTouch							= true;
 	int							type_game_from, counter_col, number_of_level;
 	long						Start_Time, End_Time;
@@ -240,9 +240,6 @@ public class game_gameActivity extends Activity {
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
 		
-		someText = (TextView)findViewById(R.id.game_down_text);
-		someText.setText("Цель: пройти от черного поля к белому");
-
 		// Находим стартовую точку
         Find_Start_Point();     
 		
@@ -398,8 +395,6 @@ public class game_gameActivity extends Activity {
 				break;
 			case 1:
 				// Старт
-				ColorBall = "Пройдите до белой точки...";
-				someText.setText("Цвет = " + ColorBall);
 				// Со стартовой клетки возможен ход во всех неправлениях, потому что я буду менять положение стартовой клетки постоянно
 				// Сдесь мы в массив возможных ходов добвляем все варианты, а уже невозможность хода за пределы лабиринат
 				// надо осуществляеть в другом месте... А МОЖЕТ и не надо осуществлять вовсе, поскольку нажать на те поля все равно не получится...
@@ -513,14 +508,12 @@ public class game_gameActivity extends Activity {
 				break;
 
 			default:
-				ColorBall = "Херня случилась )))";
-				someText.setText("Цвет = " + ColorBall);
+				Toast.makeText(getApplicationContext(), "Для разработчика: game_move/switch/defoult-value", Toast.LENGTH_LONG).show();
 				break;
 			}
 		} 
 		else	{	
 				parent.getChildAt(position).startAnimation(animation_wrong_moovs);   
-				someText.setText("Этот ход недопустим..."); 	
 		}
 	}
 	

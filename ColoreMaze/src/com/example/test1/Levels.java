@@ -245,6 +245,18 @@ public class Levels extends Activity {
 		case 10:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
 		case 11:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
 		case 12:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 13:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 14:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 15:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 16:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 17:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 18:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 19:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 20:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 21:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 22:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 23:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
+		case 24:i = NP+1;	StringNP = String_of_type+"level"+i;	ParserXML(StringNP);	break;
 		default:		break;
 		}
 	}
