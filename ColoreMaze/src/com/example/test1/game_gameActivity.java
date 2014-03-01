@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -167,6 +168,7 @@ public class game_gameActivity extends Activity {
 		
 		final Handler handlerUI = new Handler();
 		TimerField = (TextView)findViewById(R.id.game_up_text1);
+		TimerField.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
 		class UpdateTimeTask extends TimerTask 
 		{
@@ -239,6 +241,7 @@ public class game_gameActivity extends Activity {
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
 		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+		MoovField.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
 		// Находим стартовую точку
         Find_Start_Point();     
