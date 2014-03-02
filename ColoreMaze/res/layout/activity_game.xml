@@ -7,10 +7,13 @@
     android:weightSum="100" >
 
     <FrameLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"          >
+        android:layout_weight="12"
+        android:background="@drawable/bgstyle20"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp" >
         
         <TextView
             android:id="@+id/game_up_text1"
@@ -18,10 +21,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:gravity="left|center_vertical"
-            android:paddingLeft="2dp"
+            android:paddingLeft="10dp"
             android:text="0:00"
-            android:textColor="#FF999999"
-            android:textSize="22sp"
+            android:textColor="#FF396D59"
+            android:textSize="40sp"
             android:textStyle="bold|italic" />
 			
          <ImageButton
@@ -31,6 +34,7 @@
              android:layout_gravity="center_horizontal"
              android:background="@null"
              android:contentDescription="@string/app_name"
+             android:keepScreenOn="true"
              android:onClick="onResetClick"
              android:paddingBottom="1dp"
              android:paddingTop="1dp"
@@ -42,10 +46,10 @@
              android:layout_height="match_parent"
              android:layout_gravity="right|center_vertical"
              android:gravity="right|center_vertical"
-             android:paddingRight="2dp"
+             android:paddingRight="10dp"
              android:text="000"
-             android:textColor="#FF999999"
-             android:textSize="22sp"
+             android:textColor="#FF396D59"
+             android:textSize="40sp"
              android:textStyle="bold|italic" />
          
     </FrameLayout>

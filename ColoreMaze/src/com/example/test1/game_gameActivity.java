@@ -240,7 +240,7 @@ public class game_gameActivity extends Activity {
 		
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
-		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+		MoovField.setText(String.format("%03d", Moovs_counter));
 		MoovField.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sketchRockwell-Bold.ttf"));
 		
 		// Находим стартовую точку
@@ -277,7 +277,7 @@ public class game_gameActivity extends Activity {
             			case 3:	mAdapter_t3.BuilderField(arrayfromlevel,array_legal_moovs, LastMoov, EndPoint);	break;
             			default:											break;
             		}
-               		MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+               		MoovField.setText(String.format("%03d", Moovs_counter));
                		}
         	}                	             
         });     
@@ -303,7 +303,7 @@ public class game_gameActivity extends Activity {
     	hours=0;minutes=0;seconds=0;
     	array_all_moovs.clear();
     	Moovs_counter=0;
-    	MoovField.setText(String.format("Level:%02d  %03d", number_of_level, Moovs_counter));
+    	MoovField.setText(String.format("%03d", Moovs_counter));
     	TimerField.setText(String.format("%d:%02d", minutes, seconds));
 
     	Find_Start_Point();
