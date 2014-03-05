@@ -10,8 +10,6 @@ public class gridAdapter_LevelsImage extends BaseAdapter {
     private int 			grid_type_of_game;
     private static int[] 	array_of_P;	
     private int 			ggggg;
-    
-	
  	
     public gridAdapter_LevelsImage(Context c, int type_of_game_from_levels, int[] pref_type_AllAboutLevels) 	
     { 
