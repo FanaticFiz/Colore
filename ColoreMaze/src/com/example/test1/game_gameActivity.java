@@ -139,7 +139,7 @@ public class game_gameActivity extends Activity {
 	private	long 	timeSwapBuff 		= 0;
 	private	long 	timeInMilliseconds 	= 0;
 	private	long 	updatedTime 		= 0;
-
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
