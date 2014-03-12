@@ -33,7 +33,7 @@
     </style>
     
     <style name="DialogAnimationLoose">
-        <item name="android:windowEnterAnimation">	@anim/fadein			</item>
+        <item name="android:windowEnterAnimation">	@anim/fadein3			</item>
         <item name="android:windowExitAnimation">	@android:anim/fade_out	</item>
     </style>
     
