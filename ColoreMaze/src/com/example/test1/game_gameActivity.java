@@ -661,7 +661,7 @@ public class game_gameActivity extends Activity {
 		paused = true;
 		cDial_GamaeOver.setCancelable(false);
 		cDial_GamaeOver.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		cDial_GamaeOver.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
+		cDial_GamaeOver.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationLoose;
 		ImageButton imb_dial = (ImageButton) cDial_GamaeOver.findViewById(R.id.imageButton1);
 		imb_dial.setOnClickListener(new OnClickListener() {
 			@ Override
@@ -677,7 +677,7 @@ public class game_gameActivity extends Activity {
 		paused = true;
 		cDial_EndLevel.setCancelable(false);
 		cDial_EndLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		cDial_EndLevel.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
+		cDial_EndLevel.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationWin;
 		TextView textMove = (TextView) cDial_EndLevel.findViewById(R.id.game_up_text);
 		TextView textTime = (TextView) cDial_EndLevel.findViewById(R.id.textView3);
 		
@@ -701,7 +701,7 @@ public class game_gameActivity extends Activity {
 		paused = true;
 		cDial_Messges.setCancelable(false);
 		cDial_Messges.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		cDial_Messges.getWindow().getAttributes().windowAnimations = R.anim.old_typeofgamepopin;
+		cDial_Messges.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationMessadges;
 		TextView text = (TextView) cDial_Messges.findViewById(R.id.textView1);
 
 		if (kl == 0) {
