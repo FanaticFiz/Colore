@@ -29,7 +29,7 @@ public class game_gameActivity extends Activity {
 
 	private	XmlVidKvest			myXML;
 	private	String	 			vid,kvest;
-	private Animation			animation_wrong_moovs;
+	private Animation			animation_wrong_moovs,anim_TD1,anim_TD2,anim_TD3;
 	private GridView			mGrid;
 	private grdAd_Game_t1		mAdapter_t1;
 	private grdAd_Game_t2		mAdapter_t2;
@@ -217,6 +217,9 @@ public class game_gameActivity extends Activity {
 		
 		// подключаем файл анимации
 		animation_wrong_moovs 	= 	AnimationUtils.loadAnimation(this, R.anim.game_animation_wrongmoov);
+		anim_TD1 	= 	AnimationUtils.loadAnimation(this, R.anim.dialog_text_anim);
+		anim_TD2 	= 	AnimationUtils.loadAnimation(this, R.anim.dialog_text_anim2);
+		anim_TD3 	= 	AnimationUtils.loadAnimation(this, R.anim.dialog_but_anim);
 		
 		// Порядок присвоения в этом массиве ходов строг: сначала вверх потом по часово стрелке: право, низ лево.
 		// это из-за того что я не сделал массив уровня двухмерным...
@@ -233,10 +236,8 @@ public class game_gameActivity extends Activity {
 		// передаем оба параметра обьекту
 		myXML.setVid(vid);
 		myXML.setKvest(kvest);
-        // Покажем пользователю задание на текущий уровень
-     	if (myXML.getKvest() == 0) {		}
-     	else {	StartMessadge(myXML.getKvest());		}
 
+		
 		
 		//Свяжемся со строкой текстовой на форме
 		MoovField = (TextView)findViewById(R.id.game_up_text2);
@@ -678,13 +679,26 @@ public class game_gameActivity extends Activity {
 		cDial_EndLevel.setCancelable(false);
 		cDial_EndLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		cDial_EndLevel.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationWin;
+		TextView textMain = (TextView) cDial_EndLevel.findViewById(R.id.textView1);
 		TextView textMove = (TextView) cDial_EndLevel.findViewById(R.id.game_up_text);
 		TextView textTime = (TextView) cDial_EndLevel.findViewById(R.id.textView3);
+		TextView textM	= 	(TextView) cDial_EndLevel.findViewById(R.id.textView2);
+		TextView textT 	= 	(TextView) cDial_EndLevel.findViewById(R.id.textView4);
 		
-		textMove.setText(String.format("Ходов: %02d", Moovs_counter));
-		textTime.setText(String.format("Время: %d:%02d", minutes, seconds));
+		textM.setTypeface(Typeface.createFromAsset(getAssets(), 	"fonts/sketchRockwell-Bold.ttf"));
+		textT.setTypeface(Typeface.createFromAsset(getAssets(), 	"fonts/sketchRockwell-Bold.ttf"));
+		textMain.setTypeface(Typeface.createFromAsset(getAssets(), 	"fonts/mbrody.ttf"));
+		textMove.setTypeface(Typeface.createFromAsset(getAssets(), 	"fonts/mbrody.ttf"));
+		textTime.setTypeface(Typeface.createFromAsset(getAssets(), 	"fonts/mbrody.ttf"));
+		
+		textM.setAnimation(anim_TD1);
+		textT.setAnimation(anim_TD2);
+		
+		textM.setText(String.format("%02d", Moovs_counter));
+		textT.setText(String.format("%d:%02d", minutes, seconds));
 		
 		ImageButton imb_dial = (ImageButton) cDial_EndLevel.findViewById(R.id.imageButton1);
+		imb_dial.setAnimation(anim_TD3);
 		imb_dial.setOnClickListener(new OnClickListener() {
 			@ Override
 			public void onClick(View v)	{
@@ -743,7 +757,6 @@ public class game_gameActivity extends Activity {
 							}
 	}
 	
-	
 	@ Override
 	protected void onStop()	{
 		super.onStop();
@@ -758,5 +771,15 @@ public class game_gameActivity extends Activity {
 		
 		startTime = System.currentTimeMillis();
 		paused = false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Покажем пользователю задание на текущий уровень
+     	if (myXML.getKvest() == 0) {		}
+     	else {	StartMessadge(myXML.getKvest());		}
+		
 	}
 }

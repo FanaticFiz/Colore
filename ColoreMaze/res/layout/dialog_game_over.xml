@@ -21,6 +21,6 @@
         android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
         android:background="@null"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon" />
 
 </RelativeLayout>

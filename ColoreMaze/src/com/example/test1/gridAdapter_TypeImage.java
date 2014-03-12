@@ -16,7 +16,7 @@ public class gridAdapter_TypeImage extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
     	SquareImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
+        if (convertView == null) {
             imageView = new SquareImageView(mContext);
             //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //imageView.setPadding(8, 8, 8, 8);            

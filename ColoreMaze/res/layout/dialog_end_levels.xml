@@ -5,26 +5,29 @@
     android:background="@drawable/dialog_endlevel" >
 
     <TextView
-        android:id="@+id/game_up_text"
-        android:layout_width="match_parent"
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moves"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold|italic" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:text="@string/Dialog_end_of_game_Title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/game_up_text"
+        android:layout_alignLeft="@+id/imageButton1"
+        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/game_up_text"
-        android:text="@string/Dialog_end_of_game_Time"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold|italic" />
+        android:gravity="center_vertical|center_horizontal"
+        android:text="00:15"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFCC2255"
+        android:textSize="32sp" />
 
     <ImageButton
         android:id="@+id/imageButton1"
@@ -33,6 +36,43 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:background="@null"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:id="@+id/game_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="@string/Dialog_end_of_game_Moovs"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/game_up_text"
+        android:layout_below="@+id/game_up_text"
+        android:text="@string/Dialog_end_of_game_Time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignTop="@+id/game_up_text"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="20"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFCC2255"
+        android:textSize="32sp" />
 
 </RelativeLayout>
